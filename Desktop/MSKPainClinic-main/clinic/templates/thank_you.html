@@ -1,0 +1,266 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Эрус Центр лечения боли | Спасибо за заявку{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Thank You Page Styles */
+    .thank-you-section {
+        min-height: 50vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 60px 0;
+        background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    }
+    
+    .thank-you-container {
+        max-width: 600px;
+        margin: 0 auto;
+        text-align: center;
+        padding: 40px 30px;
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .thank-you-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 20px;
+        background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 40px;
+        animation: scaleIn 0.5s ease-out;
+    }
+    
+    @keyframes scaleIn {
+        from {
+            transform: scale(0);
+            opacity: 0;
+        }
+        to {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+    
+    .thank-you-title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--text-color);
+        margin-bottom: 15px;
+        animation: fadeInUp 0.6s ease-out 0.2s both;
+    }
+    
+    .thank-you-message {
+        font-size: 1rem;
+        color: var(--text-light);
+        line-height: 1.6;
+        margin-bottom: 20px;
+        animation: fadeInUp 0.6s ease-out 0.4s both;
+    }
+    
+    .thank-you-details {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 25px 0;
+        text-align: left;
+        animation: fadeInUp 0.6s ease-out 0.6s both;
+    }
+    
+    .thank-you-details h3 {
+        font-size: 1.1rem;
+        color: var(--primary-color);
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .thank-you-details ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .thank-you-details li {
+        padding: 8px 0;
+        border-bottom: 1px solid #e9ecef;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--text-color);
+        font-size: 0.95rem;
+    }
+    
+    .thank-you-details li:last-child {
+        border-bottom: none;
+    }
+    
+    .thank-you-details li i {
+        color: var(--primary-color);
+        font-size: 1rem;
+        width: 20px;
+    }
+    
+    .action-buttons {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 25px;
+        animation: fadeInUp 0.6s ease-out 0.8s both;
+    }
+    
+    .btn-thank-you {
+        padding: 10px 24px;
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: 6px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+    }
+    
+    .btn-thank-you-primary {
+        background: var(--primary-color);
+        color: white;
+    }
+    
+    .btn-thank-you-primary:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px var(--primary-medium);
+        color: white;
+    }
+    
+    .btn-thank-you-secondary {
+        background: white;
+        color: var(--primary-color);
+        border: 2px solid var(--primary-color);
+    }
+    
+    .btn-thank-you-secondary:hover {
+        background: var(--primary-color);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px var(--primary-medium);
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .thank-you-section {
+            padding: 40px 0;
+        }
+        
+        .thank-you-container {
+            padding: 30px 20px;
+            margin: 15px;
+        }
+        
+        .thank-you-title {
+            font-size: 1.7rem;
+        }
+        
+        .thank-you-message {
+            font-size: 0.95rem;
+        }
+        
+        .thank-you-icon {
+            width: 70px;
+            height: 70px;
+            font-size: 35px;
+        }
+        
+        .thank-you-details {
+            padding: 15px;
+        }
+        
+        .action-buttons {
+            flex-direction: column;
+            margin-top: 20px;
+        }
+        
+        .btn-thank-you {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+</style>
+{% endblock extra_css %}
+
+{% block content %}
+<section class="thank-you-section">
+    <div class="container">
+        <div class="thank-you-container">
+            <div class="thank-you-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            
+            <h1 class="thank-you-title">Спасибо за вашу заявку!</h1>
+            
+            <p class="thank-you-message">
+                Ваша заявка успешно отправлена. Наш медицинский секретарь свяжется с вами в течение 48 часов для организации консультации со специалистом.
+            </p>
+            
+            <div class="thank-you-details">
+                <h3>
+                    <i class="fas fa-info-circle"></i>
+                    Что дальше?
+                </h3>
+                <ul>
+                    <li>
+                        <i class="fas fa-clock"></i>
+                        <span>Наш медицинский секретарь свяжется с вами в течение 48 часов</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-user-md"></i>
+                        <span>Мы подберём подходящего специалиста для вашего случая</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Согласуем удобное время для консультации</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-file-medical"></i>
+                        <span>Специалист разработает оптимальный план лечения</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="action-buttons">
+                <a href="{% url 'home' %}" class="btn-thank-you btn-thank-you-primary">
+                    <i class="fas fa-home"></i>
+                    <span>На главную</span>
+                </a>
+                <a href="{% url 'contacts' %}" class="btn-thank-you btn-thank-you-secondary">
+                    <i class="fas fa-phone"></i>
+                    <span>Контакты</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+

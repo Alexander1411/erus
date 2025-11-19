@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+
+{% block title %}Эрус Центр лечения боли | Политика конфиденциальности{% endblock %}
+
+{% block extra_css %}
+<style>
+    .privacy-policy-section {
+        padding: 80px 0;
+    }
+    
+    .privacy-policy-header {
+        margin-bottom: 50px;
+        text-align: center;
+    }
+    
+    .privacy-policy-header h1 {
+        color: var(--secondary-color);
+        margin-bottom: 20px;
+        font-weight: 700;
+        position: relative;
+        display: inline-block;
+    }
+    
+    .privacy-policy-header h1:after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: -15px;
+        width: 80px;
+        height: 3px;
+        background: var(--primary-color);
+        transform: translateX(-50%);
+    }
+    
+    .privacy-policy-header p {
+        color: #777;
+        font-size: 1.1rem;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+    
+    .privacy-card {
+        background-color: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+        padding: 40px;
+        margin-bottom: 30px;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.8;
+    }
+    
+    .privacy-card p {
+        margin-bottom: 20px;
+        color: #555;
+    }
+    
+    .privacy-card p:last-child {
+        margin-bottom: 0;
+    }
+    
+    .back-link {
+        display: inline-flex;
+        align-items: center;
+        color: var(--primary-color);
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        margin-top: 30px;
+    }
+    
+    .back-link i {
+        margin-right: 8px;
+        transition: transform 0.3s ease;
+    }
+    
+    .back-link:hover {
+        color: var(--secondary-color);
+    }
+    
+    .back-link:hover i {
+        transform: translateX(-3px);
+    }
+    
+    @media (max-width: 768px) {
+        .privacy-policy-section {
+            padding: 50px 0;
+        }
+        
+        .privacy-policy-header {
+            margin-bottom: 30px;
+        }
+        
+        .privacy-card {
+            padding: 25px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="privacy-policy-section">
+    <div class="container">
+        <div class="privacy-policy-header">
+            <h1>Политика конфиденциальности</h1>
+            <p>Настоящая Политика конфиденциальности определяет порядок обработки и защиты персональных данных пользователей сайта Группы Лечения Хронической Боли в соответствии с Федеральным законом от 27.07.2006 г. №152-ФЗ «О персональных данных».</p>
+        </div>
+        
+        <div class="privacy-card">
+            <p><strong>Какие данные мы собираем</strong></p>
+            <p>При заполнении формы на сайте мы собираем следующие данные: фамилию, имя, отчество, контактный телефон, адрес электронной почты, а также информацию о состоянии здоровья, необходимую для подбора подходящего специалиста. Также мы автоматически собираем технические данные: IP-адрес, тип браузера, время посещения сайта.</p>
+            
+            <p><strong>Зачем мы собираем данные</strong></p>
+            <p>Мы используем ваши персональные данные для организации записи на консультацию к специалисту, связи с вами для уточнения деталей, подбора наиболее подходящего врача для вашего случая и информирования о наших услугах.</p>
+            
+            <p><strong>Где хранятся данные</strong></p>
+            <p>Все персональные данные хранятся на серверах, расположенных на территории Российской Федерации, в соответствии с требованиями Федерального закона №152-ФЗ «О персональных данных».</p>
+            
+            <p><strong>Кто имеет доступ к данным</strong></p>
+            <p>К вашим персональным данным имеют доступ только сотрудники нашей организации, непосредственно участвующие в организации вашей консультации: медицинский секретарь для связи с вами и записи на приём, а также врач, который будет проводить консультацию, для подготовки к приёму.</p>
+            
+            <p><strong>Ваше согласие и право на отзыв</strong></p>
+            <p>Заполняя форму на сайте и отмечая согласие на обработку персональных данных, вы даете согласие на их обработку. Вы можете отозвать свое согласие в любое время, направив запрос по электронной почте info@erusmedical.ru или связавшись с нами по телефону.</p>
+            
+            <p><strong>Срок хранения данных</strong></p>
+            <p>Мы храним ваши персональные данные в течение 5 лет с момента последнего обращения или до момента отзыва вашего согласия на обработку данных, если иное не предусмотрено законодательством Российской Федерации.</p>
+            
+            <p><strong>Безопасность данных</strong></p>
+            <p>Мы принимаем необходимые технические и организационные меры для защиты ваших персональных данных от несанкционированного доступа, изменения, распространения или уничтожения.</p>
+            
+            <p><strong>Контакты для вопросов</strong></p>
+            <p>По всем вопросам, связанным с обработкой ваших персональных данных, вы можете обратиться к нам по электронной почте: info@erusmedical.ru или по адресу: 3-я Тверская-Ямская улица 44, Москва.</p>
+        </div>
+        
+        <div style="text-align: center;">
+            <a href="{% url 'home' %}" class="back-link"><i class="fas fa-arrow-left"></i> Вернуться на главную</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

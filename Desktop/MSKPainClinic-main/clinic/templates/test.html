@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Улучшенная карта боли тела</title>
+    <style>
+        :root {
+            --primary-color: #0066a4;
+            --primary-light: rgba(0, 102, 164, 0.1);
+            --primary-medium: rgba(0, 102, 164, 0.3);
+            --accent-color: #a02300;
+            --accent-light: rgba(255, 126, 0, 0.5);
+            --text-color: #333;
+            --text-light: #666;
+            --bg-color: #f7f7f7;
+            --card-bg: #fff;
+            --section-bg: #f5f5f5;
+            --shadow: 0 2px 8px rgba(0,0,0,0.1);
+            --border-radius: 10px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            background: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .body-map-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .diagram-title {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .diagram-instruction {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            font-size: 16px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .diagram-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1.5rem;
+        }
+
+        .body-views {
+            width: 800px;
+            height: 600px;
+            position: relative;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        @media (max-width: 850px) {
+            .body-views {
+                width: 100%;
+                height: 500px;
+            }
+        }
+
+        .body-map {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .body-map .body-part {
+            fill: var(--primary-light);
+            stroke: var(--primary-color);
+            stroke-width: 1;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .body-map .body-part:hover {
+            fill: var(--primary-medium);
+            stroke-width: 2;
+            filter: drop-shadow(0 0 3px rgba(0, 102, 164, 0.5));
+        }
+
+        .body-map .body-part.selected {
+            fill: var(--accent-light);
+            stroke: var(--accent-color);
+            stroke-width: 2;
+        }
+
+        .body-map .body-part:focus {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 2px;
+        }
+
+        .body-map-labels {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            font-size: 1.2rem;
+            color: var(--text-color);
+            margin-top: -8rem;
+            font-weight: 500;
+        }
+
+        .selected-parts-container {
+            margin-top: 20px;
+            padding: 15px;
+            background: var(--section-bg);
+            border-radius: var(--border-radius);
+            transition: all 0.3s ease;
+        }
+
+        .selected-parts-container h3 {
+            margin: 0 0 15px 0;
+            color: var(--primary-color);
+            font-size: 18px;
+        }
+
+        .selected-parts-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            min-height: 40px;
+        }
+
+        .selected-part-tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 14px;
+            background: var(--card-bg);
+            border: 1px solid var(--accent-color);
+            border-radius: 20px;
+            font-size: 14px;
+            color: var(--accent-color);
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .selected-part-tag:hover {
+            background: rgba(255, 126, 0, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .remove-part {
+            margin-left: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+        }
+
+        .remove-part:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .empty-selection-message {
+            color: var(--text-light);
+            font-style: italic;
+            padding: 10px 0;
+        }
+        
+        .clear-all-button {
+            margin-left: 10px;
+            padding: 5px 10px;
+            background: var(--accent-light);
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .clear-all-button:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .tooltip {
+            position: absolute;
+            padding: 5px 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border-radius: 4px;
+            font-size: 12px;
+            pointer-events: none;
+            z-index: 100;
+            display: none;
+        }
+
+        .submit-button {
+            margin-top: 25px;
+            padding: 12px 24px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+        }
+
+        .submit-button:hover {
+            background: #005590;
+            transform: translateY(-2px);
+        }
+
+        .submit-button:active {
+            transform: translateY(0);
+        }
+
+        /* Responsive styles */
+        @media (max-width: 950px) {
+            .body-map-container {
+                padding: 15px;
+            }
+            
+            .diagram-wrapper {
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .diagram-title {
+                font-size: 24px;
+            }
+            
+            .diagram-instruction {
+                font-size: 14px;
+            }
+            
+            .body-views {
+                height: 400px;
+            }
+            
+            .body-map-labels {
+                margin-top: -6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="body-map-container">
+        <h2 class="diagram-title">Карта боли тела</h2>
+        <p class="diagram-instruction">Выберите области, где вы испытываете боль или дискомфорт</p>
+        
+
+        <div class="diagram-wrapper">
+            <div class="body-views">
+                <div class="tooltip"></div>
+                <svg class="body-map" version="1.0" xmlns="http://www.w3.org/2000/svg"
+                    width="630.000000pt" height="667.000000pt" viewBox="0 0 630.000000 667.000000"
+                    preserveAspectRatio="xMidYMid meet">
+                    <g transform="translate(0.00000,667.000000) scale(0.050000,-0.050000)">
+                        <g id="front-view" transform="translate(-400,0)">
+                          <!-- Front figure paths -->
+                        
+                        <!-- Head (Голова) -->
+                        <path class="body-part" data-name="Голова" 
+                            d="M2068 13189 c-319 -162 -293 -862 40 -1068 401 -248 760 763 370
+                            1041 -87 62 -314 77 -410 27z"/>
+                        
+                        <!-- Neck (Шея) -->
+                        <path class="body-part" data-name="Шея" 
+                            d="M1980 11953 c0 -191 186 -352 325 -281 174 88 195 117 195 270 l0
+                            141 -63 -45 c-98 -70 -244 -74 -362 -10 l-95 51 0 -126z"/>
+                        
+                        <!-- Left Shoulder (Левое плечо) -->
+                        <path class="body-part" data-name="Левое плечо" 
+                            d="M1730 11760 c-55 -21 -174 -58 -265 -81 -377 -99 -480 -228 -505
+                            -636 -8 -139 -13 -256 -10 -259 3 -4 86 38 183 93 l177 100 37 225 c54 332 22
+                            299 370 377 l302 67 -65 75 c-74 87 -89 90 -224 39z"/>
+                        
+                        <!-- Right Shoulder (Правое плечо) -->
+                        <path class="body-part" data-name="Правое плечо" 
+                            d="M2544 11722 l-63 -79 274 -64 c336 -79 345 -83 346 -165 1 -35 17
+                            -149 35 -252 l34 -189 160 -95 c88 -53 165 -97 172 -97 7 -1 17 73 24 164 31
+                            457 -95 632 -538 745 -109 28 -232 64 -273 81 -102 39 -100 40 -171 -49z"/>
+                            
+                        <!-- Left Upper Chest (Левая верхняя часть груди) -->
+                        <path class="body-part" data-name="Левая верхняя часть груди" 
+                            d="M1940 11540 c-532 -116 -471 -66 -520 -430 l-24 -180 74 -235 c85
+                            -270 71 -259 200 -153 151 125 214 153 475 207 l55 12 0 389 c0 391 -11 448
+                            -84 428 -3 -1 -82 -18 -176 -38z"/>
+                        
+                        <!-- Right Upper Chest (Правая верхняя часть груди) -->
+                        <path class="body-part" data-name="Правая верхняя часть груди" 
+                            d="M2313 11555 c-30 -22 -33 -69 -28 -415 l5 -390 60 -5 c184 -17 337
+                            -83 477 -206 95 -84 132 -86 133 -6 0 12 28 108 62 214 l62 191 -40 243 c-22
+                            133 -43 245 -47 249 -6 5 -393 95 -609 140 -23 5 -57 -2 -75 -15z"/>
+                        
+                        <!-- Left Arm (Левая рука) -->
+                        <path class="body-part" data-name="Левая рука" 
+                            d="M1125 10766 l-185 -111 0 -255 c0 -209 6 -258 30 -267 17 -7 30 -35
+                            30 -64 0 -127 94 -170 178 -81 101 108 186 554 149 785 l-17 103 -185 -110z"/>
+                        
+                        <!-- Right Arm (Правая рука) -->
+                        <path class="body-part" data-name="Правая рука" 
+                            d="M3160 10873 c-45 -352 -42 -385 53 -708 49 -164 95 -225 170 -225 49
+                            0 97 55 97 110 0 26 14 61 30 77 23 24 30 84 30 277 l0 246 -190 113 c-105 62
+                            -190 111 -190 110z"/>
+                            
+                        <!-- Abdomen (Живот) -->
+                        <path class="body-part" data-name="Живот" 
+                            d="M2015 10640 c-126 -32 -220 -91 -330 -207 l-104 -111 44 -136 c59
+                            -183 58 -396 -3 -544 l-43 -107 92 -91 c106 -105 189 -259 240 -444 127 -466
+                            496 -486 630 -35 65 217 164 398 267 489 l91 80 -42 108 c-50 130 -43 426 14
+                            585 l34 97 -117 120 c-184 188 -494 266 -773 196z"/>
+                            
+                        <!-- Left Wrist (Левое запястье) -->
+                        <path class="body-part" data-name="Левое запястье" 
+                            d="M840 8515 c0 -251 17 -314 113 -422 148 -166 251 -174 133 -10 -88
+                            122 -123 327 -55 314 25 -5 44 -38 61 -105 30 -115 57 -151 91 -117 27 27 1
+                            174 -64 370 -22 63 -39 129 -39 145 0 23 -27 30 -120 30 l-120 0 0 -205z"/>
+                        
+                        <!-- Right Wrist (Правое запястье) -->
+                        <path class="body-part" data-name="Правое запястье" 
+                            d="M3364 8585 c-57 -190 -89 -362 -75 -398 19 -52 65 4 93 114 20 76 35
+                            99 64 99 65 0 38 -197 -43 -311 -89 -128 -79 -167 26 -98 138 91 198 233 207
+                            490 l9 239 -121 0 -120 0 -40 -135z"/>
+                            
+                        <!-- Left Forearm (Левое предплечье) -->
+                        <path class="body-part" data-name="Левое предплечье" 
+                            d="M862 9891 c-17 -74 -22 -263 -18 -590 l6 -481 115 0 115 0 0 75 c0
+                            68 50 291 130 584 47 172 42 429 -9 402 -101 -55 -281 3 -281 90 0 69 -36 20
+                            -58 -80z"/>
+                        
+                        <!-- Right Forearm (Правое предплечье) -->
+                        <path class="body-part" data-name="Правое предплечье" 
+                            d="M3536 9939 c-48 -83 -117 -105 -219 -70 l-82 28 10 -194 c7 -139 29
+                            -265 82 -453 40 -143 73 -298 73 -345 l0 -85 107 0 107 0 15 475 c17 576 -13
+                            784 -93 644z"/>
+                            
+                        <!-- Left Thigh (Левое бедро) -->
+                        <path class="body-part" data-name="Левое бедро" 
+                            d="M1536 9429 c-21 -35 -133 -477 -167 -659 -51 -271 -14 -796 93 -1319
+                            22 -110 46 -264 52 -341 7 -79 23 -146 37 -155 13 -8 30 -45 37 -82 19 -102
+                            93 -161 184 -147 168 28 214 139 268 656 21 202 57 490 79 638 22 149 41 330
+                            41 403 l0 133 -85 50 c-145 86 -192 151 -241 337 -59 219 -261 548 -298 486z"/>
+                            
+                        <!-- Right Thigh (Правое бедро) -->
+                        <path class="body-part" data-name="Правое бедро" 
+                            d="M2846 9354 c-116 -125 -178 -243 -223 -422 -44 -172 -107 -258 -248
+                            -337 -41 -23 -75 -52 -74 -64 0 -31 70 -655 128 -1148 66 -572 89 -628 261
+                            -652 136 -20 239 137 269 409 9 83 47 299 84 480 64 314 67 351 67 750 -1 436
+                            -8 497 -104 850 -66 240 -64 238 -160 134z"/>
+                            
+                        <!-- Left Lower Leg (Левая голень) -->
+                        <path class="body-part" data-name="Левая голень" 
+                            d="M1484 6723 c-92 -314 -79 -618 45 -1109 89 -352 144 -683 125 -756
+                            -9 -35 2 -38 135 -38 l144 0 -1 335 c-2 307 3 355 57 575 72 289 74 432 13
+                            690 -24 105 -49 211 -54 237 -7 33 -17 41 -34 27 -108 -85 -261 -63 -357 52
+                            l-52 61 -21 -74z"/>
+                            
+                        <!-- Right Lower Leg (Правая голень) -->
+                        <path class="body-part" data-name="Правая голень" 
+                            d="M2924 6756 c-65 -105 -176 -146 -289 -107 -104 36 -99 43 -153 -199
+                            -61 -277 -58 -453 11 -711 52 -193 56 -236 56 -571 l0 -362 80 18 c45 11 106
+                            15 136 11 54 -8 55 -7 55 103 0 146 40 366 128 712 121 476 134 786 46 1092
+                            l-25 87 -45 -73z"/>
+                            
+                        <!-- Left Foot (Левая стопа) -->
+                        <path class="body-part" data-name="Левая стопа" 
+                            d="M1586 4548 c-85 -256 -63 -288 203 -288 186 0 192 10 175 260 l-14
+                            210 -150 5 -150 5 -64 -192z"/>
+                            
+                        <!-- Right Foot (Правая стопа) -->
+                        <path class="body-part" data-name="Правая стопа" 
+                            d="M2610 4733 l-80 -24 -15 -208 c-18 -250 -22 -246 199 -236 240 11
+                            286 74 181 242 -15 24 -39 82 -55 129 -39 124 -81 142 -230 97z"/>
+
+                        </g>
+
+                        <g id="back-view" transform="translate(4200,0)">
+                            <!-- Back figure paths -->
+                             
+                        <!-- Back Head (Затылок) -->
+                        <path class="body-part" data-name="Затылок" 
+                            d="M6651 13218 c-192 -46 -294 -202 -293 -444 1 -79 -4 -187 -10 -239
+                            -11 -86 -7 -99 50 -156 61 -61 62 -65 62 -261 l0 -199 -215 -102 c-118 -55
+                            -237 -110 -265 -121 l-50 -21 70 -30 c112 -48 418 -104 565 -105 l135 0 0 65
+                            c1 104 21 155 62 155 33 0 38 -16 38 -110 l0 -110 65 0 c247 2 695 92 695 141
+                            0 10 -11 19 -25 20 -14 0 -128 52 -255 115 l-230 114 7 200 c4 110 16 203 26
+                            207 87 32 139 196 88 274 -21 33 -31 96 -31 204 0 296 -211 470 -489 403z"/>
+                            
+                        <!-- Upper Back Left (Верхняя левая часть спины) -->
+                        <path class="body-part" data-name="Верхняя левая часть спины" 
+                            d="M5700 11594 c-224 -117 -269 -206 -272 -534 -2 -166 -14 -286 -35
+                            -359 -48 -157 -47 -525 1 -517 24 4 38 -14 50 -70 26 -122 52 -157 112 -150
+                            149 17 292 593 223 894 -15 63 -14 95 2 110 36 36 74 -37 100 -195 26 -157 95
+                            -415 116 -438 42 -44 485 309 626 499 l77 104 0 261 0 261 -149 0 c-218 0
+                            -434 35 -622 101 -194 69 -167 65 -229 33z"/>
+                            
+                        <!-- Upper Back Right (Верхняя правая часть спины) -->
+                        <path class="body-part" data-name="Верхняя правая часть спины" 
+                            d="M7598 11568 c-146 -61 -420 -108 -631 -108 l-167 0 0 -248 0 -248
+                            123 -163 c143 -190 257 -295 437 -402 l129 -78 25 47 c26 49 89 287 126 477
+                            19 95 30 115 64 115 34 0 39 -9 28 -55 -77 -335 49 -896 213 -953 73 -26 93
+                            -3 108 125 10 83 20 103 50 103 44 0 56 393 14 494 -13 32 -25 173 -26 326 -5
+                            484 -189 696 -493 568z"/>
+                            
+                        <!-- Lower Back (Поясница) -->
+                        <path class="body-part" data-name="Поясница" 
+                            d="M6800 10243 l0 -603 -50 0 -50 0 0 582 0 582 -77 -97 c-148 -187
+                            -339 -352 -509 -439 -70 -37 -94 -59 -86 -84 99 -343 104 -499 24 -685 -11
+                            -25 11 -30 143 -30 192 0 275 -28 433 -147 l124 -94 79 58 c182 133 308 181
+                            474 183 85 0 155 2 155 3 0 2 -14 42 -31 90 -39 110 -39 306 0 488 41 191 44
+                            183 -74 242 -118 60 -407 331 -496 466 l-59 89 0 -604z"/>
+                            
+                        <!-- Left Arm (Back) (Левая рука сзади) -->
+                        <path class="body-part" data-name="Левая рука сзади" 
+                            d="M5299 9949 c-45 -132 -48 -170 -55 -769 -4 -346 -8 -712 -10 -813 -4
+                            -203 32 -277 186 -382 144 -98 191 -55 100 93 -70 113 -96 312 -40 312 20 0
+                            34 -30 43 -94 15 -108 29 -136 66 -136 76 0 69 265 -12 425 -79 157 -80 274
+                            -6 525 111 373 128 460 129 638 0 168 -2 176 -35 147 -94 -84 -214 -44 -273
+                            90 l-46 103 -47 -139z"/>
+                            
+                        <!-- Right Arm (Back) (Правая рука сзади) -->
+                        <path class="body-part" data-name="Правая рука сзади" 
+                            d="M8140 10044 c-1 -158 -167 -237 -291 -140 l-55 44 12 -209 c9 -162
+                            33 -281 103 -529 108 -380 112 -450 33 -606 -66 -130 -90 -261 -66 -364 24
+                            -109 70 -89 101 45 19 78 37 115 58 115 55 0 21 -214 -53 -330 -97 -153 -38
+                            -185 121 -65 160 121 183 197 164 535 -9 160 -14 502 -11 760 6 431 3 481 -34
+                            600 -51 158 -81 212 -82 144z"/>
+                            
+                        <!-- Left Thigh (Back) (Левое бедро сзади) -->
+                        <path class="body-part" data-name="Левое бедро сзади" 
+                            d="M6004 9334 c-135 -161 -239 -1216 -167 -1674 38 -235 103 -705 103
+                            -739 0 -7 65 -9 145 -5 112 6 169 -2 249 -33 122 -49 106 -72 164 237 136 726
+                            202 1134 202 1251 l0 47 -125 -59 c-138 -65 -296 -78 -438 -36 -125 38 -80 63
+                            104 59 160 -4 177 0 319 72 l150 76 -6 300 c-7 344 -16 363 -214 466 -125 64
+                            -444 90 -486 38z"/>
+                            
+                        <!-- Right Thigh (Back) (Правое бедро сзади) -->
+                        <path class="body-part" data-name="Правое бедро сзади" 
+                            d="M7068 9319 c-56 -22 -141 -78 -190 -126 l-88 -87 6 -292 6 -293 134
+                            -65 c118 -58 156 -66 322 -70 216 -5 236 -14 133 -57 -139 -58 -358 -36 -504
+                            50 -38 23 -73 41 -78 41 -32 0 24 -460 89 -743 21 -92 68 -315 103 -497 77
+                            -391 54 -352 171 -299 80 36 122 42 251 35 l155 -9 12 111 c6 62 38 310 71
+                            552 55 408 58 458 39 689 -42 511 -133 988 -204 1076 -34 40 -308 30 -428 -16z"/>
+                            
+                        <!-- Left Lower Leg (Back) (Левая голень сзади) -->
+                        <path class="body-part" data-name="Левая голень сзади" 
+                            d="M5997 6827 c-49 -9 -56 -22 -85 -173 -18 -90 -47 -231 -64 -314 -39
+                            -189 -28 -349 53 -770 126 -660 119 -931 -27 -1055 -109 -92 -118 -141 -35
+                            -184 92 -48 326 -82 415 -60 l76 19 -6 230 c-3 127 -16 298 -27 380 -30 207
+                            -8 482 53 660 112 329 131 530 79 829 -19 107 -26 217 -19 274 l13 95 -75 32
+                            c-81 33 -262 53 -351 37z"/>
+                            
+                        <!-- Right Lower Leg (Back) (Правая голень сзади) -->
+                        <path class="body-part" data-name="Правая голень сзади" 
+                            d="M7150 6785 c-59 -34 -60 -38 -64 -215 -2 -99 -7 -297 -10 -440 -6
+                            -249 -3 -269 63 -480 79 -252 88 -444 46 -1030 -27 -395 19 -430 421 -311 156
+                            46 161 73 37 195 -157 156 -167 433 -37 1076 103 509 103 502 53 740 -25 116
+                            -54 273 -67 350 l-22 140 -180 5 c-140 3 -193 -4 -240 -30z"/>
+                        </g>
+                    </g>
+                </svg>
+            </div>
+            
+            <div class="body-map-labels">
+                <div>Вид спереди</div>
+                <div>Вид сзади</div>
+            </div>
+        </div>
+        
+        <div class="selected-parts-container">
+            <h3>Выбранные области <button id="clearAllButton" class="clear-all-button">Очистить все</button></h3>
+            <div class="selected-parts-list" id="selectedParts">
+                <!-- Selected body parts will appear here as tags -->
+            </div>
+        </div>
+        
+        <button class="submit-button" id="submitForm">Сохранить информацию</button>
+        
+        <input type="hidden" name="pain_locations" id="painLocations" value="">
+        <input type="hidden" name="pain_data" id="painData" value="">
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const bodyParts = document.querySelectorAll('.body-part');
+        const selectedPartsContainer = document.getElementById('selectedParts');
+        const painLocationsInput = document.getElementById('painLocations');
+        const painDataInput = document.getElementById('painData');
+        const submitButton = document.getElementById('submitForm');
+        const tooltip = document.querySelector('.tooltip');
+        
+        const selectedParts = new Set();
+        const painData = {};
+        
+        // Add clear all functionality
+        document.getElementById('clearAllButton').addEventListener('click', function() {
+            // Clear all selected parts
+            selectedParts.clear();
+            
+            // Clear pain data
+            Object.keys(painData).forEach(key => {
+                delete painData[key];
+            });
+            
+            // Remove selected class from all body parts
+            document.querySelectorAll('.body-part.selected').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            // Update UI
+            updateSelectedParts();
+            updatePainDataInput();
+        });
+        
+        // Update the list of selected body parts
+        function updateSelectedParts() {
+            selectedPartsContainer.innerHTML = '';
+            painLocationsInput.value = Array.from(selectedParts).join(',');
+
+            if (selectedParts.size === 0) {
+                selectedPartsContainer.innerHTML = '<div class="empty-selection-message">Области еще не выбраны</div>';
+                return;
+            }
+
+            selectedParts.forEach(part => {
+                const tag = document.createElement('div');
+                tag.className = 'selected-part-tag';
+                tag.innerHTML = `${part} <span class="remove-part" role="button" tabindex="0" aria-label="Удалить ${part}">×</span>`;
+                
+                tag.querySelector('.remove-part').addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    selectedParts.delete(part);
+                    delete painData[part];
+                    
+                    document.querySelectorAll(`.body-part[data-name="${part}"]`).forEach(el => {
+                        el.classList.remove('selected');
+                    });
+                    
+                    updateSelectedParts();
+                    updatePainDataInput();
+                });
+                
+                selectedPartsContainer.appendChild(tag);
+            });
+        }
+        
+        // Update the hidden input with pain data
+        function updatePainDataInput() {
+            painDataInput.value = JSON.stringify(painData);
+        }
+        
+        // Handle body part selection
+        bodyParts.forEach(part => {
+            if (!part.dataset.name) return;
+            
+            part.setAttribute('role', 'button');
+            part.setAttribute('aria-label', `Выбрать область: ${part.dataset.name}`);
+            part.setAttribute('tabindex', '0');
+            
+            // Show tooltip on hover
+            part.addEventListener('mouseover', (e) => {
+                tooltip.textContent = part.dataset.name;
+                tooltip.style.display = 'block';
+                tooltip.style.left = `${e.pageX + 10}px`;
+                tooltip.style.top = `${e.pageY + 10}px`;
+            });
+            
+            part.addEventListener('mousemove', (e) => {
+                tooltip.style.left = `${e.pageX + 10}px`;
+                tooltip.style.top = `${e.pageY + 10}px`;
+            });
+            
+            part.addEventListener('mouseout', () => {
+                tooltip.style.display = 'none';
+            });
+            
+            const toggleSelection = (e) => {
+                e.preventDefault();
+                const partName = part.dataset.name;
+                
+                if (part.classList.contains('selected')) {
+                    part.classList.remove('selected');
+                    selectedParts.delete(partName);
+                    delete painData[partName];
+                } else {
+                    part.classList.add('selected');
+                    selectedParts.add(partName);
+                    // Initialize basic data for this part
+                    painData[partName] = {
+                        selected: true
+                    };
+                }
+                
+                updateSelectedParts();
+                updatePainDataInput();
+            };
+            
+            part.addEventListener('click', toggleSelection);
+            part.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    toggleSelection(e);
+                }
+            });
+        });
+        
+        // Handle form submission
+        submitButton.addEventListener('click', function() {
+            if (selectedParts.size === 0) {
+                alert('Пожалуйста, выберите хотя бы одну область боли');
+                return;
+            }
+            
+            // Prepare the data to save
+            const allData = {
+                bodyParts: Array.from(selectedParts),
+                painDetails: painData
+            };
+            
+            // Here you would typically submit this data to your server
+            // For now, we'll just alert the JSON data
+            alert('Информация сохранена: ' + JSON.stringify(allData));
+            
+            // In a real application, you might do:
+            // const form = document.getElementById('painMapForm');
+            // form.submit();
+        });
+        
+        // Initialize empty selection message
+        updateSelectedParts();
+        
+        // Add responsive behavior for mobile devices
+        function handleResponsiveLayout() {
+            const container = document.querySelector('.body-map-container');
+            if (window.innerWidth < 800) {
+                container.style.padding = '10px';
+            } else {
+                container.style.padding = '20px';
+            }
+        }
+        
+        // Call once and add event listener for resize
+        handleResponsiveLayout();
+        window.addEventListener('resize', handleResponsiveLayout);
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,2408 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="geo.region" content="RU-MOW" />
+    <meta name="geo.placename" content="Москва" />
+    <meta name="geo.position" content="55.7558;37.6173" />
+    <!-- <meta name="yandex-verification" content="YOUR_CODE_HERE" /> -->
+    {% block meta %}
+    <meta name="keywords" content="клиника боли, лечение боли, Москва, медицинские услуги, хроническая боль, подбор врача, консультация, специалисты" />
+    <meta name="description" content="Эрус Центр лечения боли — профессиональная помощь пациентам с хронической болью в Москве. Подбор специалистов, консультации, современные методы лечения." />
+    {% endblock %}
+    
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), camera=(), microphone=()">
+    
+    <title>{% block title %}Эрус Центр лечения боли{% endblock %}</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/static/img/favicon.png">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" as="script">
+    
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    {% block extra_head %}{% endblock %}
+
+    <style>
+        /* Global variables */
+        :root {
+            --primary-color: #7FBCE3;
+            --primary-dark: #6BA8D6;
+            --primary-light: #9DD0F0;
+            --primary-medium: rgba(127, 188, 227, 0.3);
+            --accent-color: #5BA3D0;
+            --accent-light: rgba(231, 76, 60, 0.5);
+            --secondary-color: #2c3e50;
+            --text-dark: #2C3E50;
+            --text-muted: #6C757D;
+            --text-color: #333;
+            --text-light: #666;
+            --bg-white: #FFFFFF;
+            --bg-light: #F8FAFB;
+            --bg-tertiary: #EEF2F5;
+            --bg-color: #f7f7f7;
+            --card-bg: #fff;
+            --section-bg: #f5f5f5;
+            --border-color: #E1E8ED;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --border-radius: 8px;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --shadow: 0 2px 8px rgba(0,0,0,0.1);
+            --transition-speed: 0.3s ease;
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+            --shadow-xl: 0 12px 48px rgba(0, 0, 0, 0.16);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            --font-family: 'Montserrat', sans-serif;
+            --footer-bg: #f8f9fa;
+            --footer-text: #555;
+            --footer-link: #7FBCE3;
+            --footer-link-hover: #6BA8D6;
+            --banner-height: 36px;
+            --navbar-height: 72px;
+            --navbar-mobile-height: 64px;
+            --banner-height-mobile: 32px;
+            --touch-target: 44px;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #59A1CE;
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4A8FB8;
+        }
+        
+        /* Firefox scrollbar */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: #59A1CE #f1f1f1;
+        }
+        
+        /* Base styles */
+        body {
+            font-family: var(--font-family);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        main {
+            flex: 1 0 auto;
+            padding-top: calc(var(--banner-height) + var(--navbar-height));
+        }
+        
+        @media (max-width: 768px) {
+            main {
+                padding-top: calc(var(--banner-height-mobile) + var(--navbar-mobile-height));
+            }
+        }
+        
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+        
+        /* ============================================
+           CONTACT BANNER STYLES
+           ============================================ */
+        .contact-banner {
+            background: #6BA8D6;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            color: white;
+            z-index: 2000;
+            height: var(--banner-height);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            will-change: transform;
+            transform: translateZ(0);
+        }
+        
+        .banner-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 24px;
+            padding: 0 24px;
+            height: 100%;
+            flex-wrap: nowrap;
+        }
+        
+        .banner-hours-desktop {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
+            font-size: 13px;
+            font-weight: 500;
+            opacity: 0.95;
+            white-space: nowrap;
+            min-width: fit-content;
+        }
+        
+        @media (max-width: 768px) {
+            .banner-hours-desktop {
+                display: none;
+            }
+        }
+        
+        .banner-contact, .banner-hours {
+            color: white;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition-fast);
+            cursor: pointer;
+            opacity: 0.95;
+            white-space: nowrap;
+            min-width: fit-content;
+        }
+        
+        .banner-hours-desktop i {
+            font-size: 12px;
+            opacity: 0.9;
+            min-width: 12px;
+            text-align: center;
+        }
+        
+        .banner-contact:hover, .banner-hours:hover {
+            opacity: 1;
+            transform: translateY(-1px) translateZ(0);
+        }
+        
+        .banner-contact i, .banner-hours i {
+            font-size: 12px;
+            opacity: 0.9;
+            min-width: 12px;
+            text-align: center;
+        }
+        
+        /* Progress Bar */
+        .scroll-progress {
+            position: fixed;
+            top: var(--banner-height);
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: var(--primary-color);
+            z-index: 2001;
+            transition: width 0.15s ease-out;
+            box-shadow: 0 1px 4px rgba(127, 188, 227, 0.4);
+            will-change: width;
+            transform: translateZ(0);
+        }
+        
+        /* ============================================
+           NAVBAR STYLES
+           ============================================ */
+        .navbar {
+            background: #ffffff;
+            backdrop-filter: blur(12px) saturate(180%);
+            border-bottom: 1px solid rgba(225, 232, 237, 0.8);
+            position: fixed;
+            top: var(--banner-height);
+            width: 100%;
+            z-index: 1500;
+            height: var(--navbar-height);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        background 0.3s ease,
+                        box-shadow 0.3s ease;
+            transform: translateY(0) translateZ(0);
+            will-change: transform, background, box-shadow;
+        }
+        
+        .navbar.scrolled {
+            background: #ffffff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            backdrop-filter: blur(20px) saturate(200%);
+            border-bottom-color: rgba(225, 232, 237, 0.6);
+        }
+        
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1280px;
+            height: 100%;
+            margin: 0 auto;
+            padding: 0 24px;
+            gap: 40px;
+        }
+        
+        .logo-section {
+            flex: 0 0 auto;
+        }
+        
+        .nav-content {
+            flex: 1 1 auto;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .mobile-controls {
+            flex: 0 0 auto;
+        }
+        
+        /* Logo Styles */
+        .logo {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            transition: var(--transition);
+            padding: 8px 0;
+            position: relative;
+            will-change: transform;
+            transform: translateZ(0);
+        }
+        
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: white;
+            border: 1px solid rgba(225, 232, 237, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(127, 188, 227, 0.05), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .logo:hover .logo-icon {
+            transform: scale(1.05) translateZ(0);
+            box-shadow: 0 4px 16px rgba(127, 188, 227, 0.15);
+            border-color: rgba(127, 188, 227, 0.3);
+        }
+        
+        .logo:hover .logo-icon::before {
+            opacity: 1;
+        }
+        
+        .logo-img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+            transition: var(--transition);
+            display: block;
+        }
+        
+        .logo-fallback {
+            display: none;
+            width: 32px;
+            height: 32px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .logo-img:not([src]), 
+        .logo-img[src=""] {
+            display: none;
+        }
+        
+        .logo-img:not([src]) ~ .logo-fallback,
+        .logo-img[src=""] ~ .logo-fallback {
+            display: flex;
+        }
+        
+        .logo:hover .logo-img {
+            transform: scale(1.08) translateZ(0);
+        }
+        
+        .logo-text-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        
+        .logo-text {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            letter-spacing: -0.5px;
+            line-height: 1;
+            transition: var(--transition);
+        }
+        
+        .logo:hover .logo-text {
+            color: var(--primary-color);
+        }
+        
+        .logo-subtitle {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #333333;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.9;
+        }
+        
+        /* Desktop Navigation */
+        .nav-links {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+        
+        .nav-links-inner {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            height: 100%;
+        }
+        
+        .nav-link {
+            color: #1a1a1a;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            padding: 10px 18px;
+            position: relative;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            border-radius: 8px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            gap: 6px;
+            min-height: 40px;
+            min-width: fit-content;
+            white-space: nowrap;
+            will-change: color, background, transform;
+            transform: translateZ(0);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 6px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: var(--transition);
+            transform: translateX(-50%) translateZ(0);
+            border-radius: 2px;
+            opacity: 0.8;
+            will-change: width, opacity;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color);
+            background: rgba(127, 188, 227, 0.08);
+        }
+        
+        .nav-link:hover::after {
+            width: 28px;
+            opacity: 1;
+        }
+        
+        .nav-link.active {
+            color: var(--primary-color);
+            background: rgba(127, 188, 227, 0.1);
+        }
+        
+        .nav-link.active::after {
+            width: 28px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+            opacity: 1;
+        }
+        
+        /* Contact Button */
+        .contact-button {
+            background: #59A1CE;
+            color: white;
+            padding: 10px 24px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: 0 4px 14px rgba(89, 161, 206, 0.3);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border: none;
+            position: relative;
+            overflow: hidden;
+            will-change: transform, box-shadow;
+            transform: translateZ(0);
+            min-width: fit-content;
+            min-height: 40px;
+            white-space: nowrap;
+        }
+        
+        .contact-button:hover {
+            background: #4A8FB8;
+            transform: translateY(-2px) translateZ(0);
+            box-shadow: 0 6px 20px rgba(89, 161, 206, 0.4);
+        }
+        
+        .button-text,
+        .button-icon {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .button-icon {
+            font-size: 13px;
+            transition: transform var(--transition);
+            will-change: transform;
+            transform: translateZ(0);
+            min-width: 13px;
+            text-align: center;
+        }
+        
+        .contact-button:hover .button-icon {
+            transform: translateX(2px) translateZ(0);
+        }
+        
+        /* Mobile Controls */
+        .mobile-controls {
+            display: none;
+            align-items: center;
+            height: 100%;
+        }
+        
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
+            padding: 10px 12px;
+            transition: var(--transition);
+            border-radius: 10px;
+            gap: 3px;
+            min-width: 48px;
+            min-height: 42px;
+            will-change: transform, background, border-color;
+            transform: translateZ(0);
+        }
+        
+        .hamburger:hover {
+            background: linear-gradient(135deg, rgba(127, 188, 227, 0.1), rgba(127, 188, 227, 0.05));
+            border-color: var(--primary-color);
+            transform: scale(1.05) translateZ(0);
+        }
+        
+        .hamburger-icon {
+            width: 22px;
+            height: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .hamburger-line {
+            height: 2.5px;
+            width: 100%;
+            background: var(--primary-color);
+            border-radius: 2px;
+            transition: var(--transition);
+            transform-origin: center;
+            will-change: transform, opacity;
+            transform: translateZ(0);
+        }
+        
+        .hamburger-text {
+            font-size: 9px;
+            font-weight: 600;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 2px;
+        }
+        
+        .hamburger.active .hamburger-line:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px) translateZ(0);
+        }
+        
+        .hamburger.active .hamburger-line:nth-child(2) {
+            opacity: 0;
+            transform: scale(0) translateZ(0);
+        }
+        
+        .hamburger.active .hamburger-line:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -5px) translateZ(0);
+        }
+        
+        /* Mobile Navigation Panel */
+        .mobile-nav-links {
+            position: fixed;
+            top: calc(var(--banner-height) + var(--navbar-mobile-height));
+            left: 0;
+            width: 280px;
+            max-width: 85vw;
+            height: calc(100vh - var(--banner-height) - var(--navbar-mobile-height));
+            background: white;
+            transform: translateX(-100%) translateZ(0);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 999;
+            overflow-y: auto;
+            box-shadow: 4px 0 24px rgba(0, 0, 0, 0.12);
+            -webkit-overflow-scrolling: touch;
+            will-change: transform, opacity, visibility;
+        }
+        
+        .mobile-nav-links.active {
+            transform: translateX(0) translateZ(0);
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .mobile-nav-inner {
+            display: flex;
+            flex-direction: column;
+            padding: 24px 20px;
+            gap: 6px;
+        }
+        
+        .mobile-nav-link {
+            width: 100%;
+            font-size: 15px;
+            padding: 14px 18px;
+            border-radius: 10px;
+            color: var(--text-dark);
+            background: var(--bg-light);
+            border: 1px solid transparent;
+            min-height: 48px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            will-change: transform, background, color, border-color;
+            transform: translateZ(0);
+        }
+        
+        .mobile-nav-link:hover,
+        .mobile-nav-link.active {
+            color: var(--primary-color);
+            background: rgba(127, 188, 227, 0.1);
+            border-color: rgba(127, 188, 227, 0.3);
+            transform: translateX(4px) translateZ(0);
+        }
+        
+        .mobile-contact-button {
+            background: #59A1CE;
+            color: white;
+            margin: 20px 0 0 0;
+            padding: 14px 24px;
+            width: 100%;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 48px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: var(--transition);
+            border: none;
+            box-shadow: 0 4px 14px rgba(89, 161, 206, 0.3);
+            will-change: transform, box-shadow;
+            transform: translateZ(0);
+        }
+        
+        .mobile-contact-button:hover {
+            background: #4A8FB8;
+            transform: translateY(-2px) translateZ(0);
+            box-shadow: 0 6px 20px rgba(89, 161, 206, 0.4);
+        }
+        
+        /* Mobile Overlay */
+        .mobile-overlay {
+            position: fixed;
+            top: calc(var(--banner-height) + var(--navbar-mobile-height));
+            left: 0;
+            width: 100%;
+            height: calc(100vh - var(--banner-height) - var(--navbar-mobile-height));
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            will-change: opacity, visibility;
+        }
+        
+        .mobile-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, var(--primary-color, #7FBCE3), var(--primary-dark, #6BA8D6));
+            color: white;
+            width: 3.5rem;
+            height: 3.5rem;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px) scale(0.8);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            overflow: hidden;
+            text-decoration: none;
+        }
+        
+        .back-to-top::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, var(--primary-light, #9DD0F0), var(--primary-color, #7FBCE3));
+            border-radius: 50%;
+            transform: scale(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+            cursor: pointer;
+        }
+        
+        .back-to-top:hover::before {
+            transform: scale(1);
+        }
+        
+        .back-to-top i {
+            position: relative;
+            z-index: 1;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .back-to-top:hover i {
+            transform: translateY(-2px);
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .back-to-top:focus {
+            outline: 2px solid var(--primary-light, #9DD0F0);
+            outline-offset: 2px;
+        }
+        
+        /* ============================================
+           ENHANCED FOOTER STYLES
+           ============================================ */
+        .enhanced-footer {
+            background: #59A1CE;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            font-family: var(--font-family);
+            margin-top: 0;
+        }
+
+        .enhanced-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color, #7FBCE3), var(--primary-light, #9DD0F0));
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 1.5rem 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-branding {
+            margin-bottom: 3.5rem;
+            padding-bottom: 2.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .branding-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 1.5rem;
+        }
+
+        .footer-logo {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: all var(--transition);
+            padding: 8px 0;
+            border-radius: 10px;
+        }
+
+        .logo-section-footer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .logo-icon-footer {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: all var(--transition);
+        }
+
+        .footer-logo:hover .logo-icon-footer {
+            transform: scale(1.08);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .logo-image-footer {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            border-radius: 50%;
+            transition: all var(--transition);
+        }
+
+        .brand-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin: 0;
+            color: white;
+        }
+
+        .logo-subtitle-footer {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .mission-statement {
+            max-width: 700px;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+            margin: 0;
+            font-weight: 400;
+        }
+
+        .footer-content-grid {
+            display: grid;
+            gap: 2.5rem;
+            grid-template-columns: 1fr;
+            margin-bottom: 3rem;
+        }
+
+        .footer-module {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .module-title {
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 0 0 1rem 0;
+            padding-bottom: 0.75rem;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .module-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 3rem;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-light, #9DD0F0), transparent);
+            border-radius: 2px;
+        }
+
+        .module-title i {
+            color: var(--primary-light, #9DD0F0);
+            font-size: 1rem;
+        }
+
+        .contact-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            transition: transform 0.2s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateX(5px);
+        }
+
+        .contact-item i {
+            color: var(--primary-light, #9DD0F0);
+            font-size: 1rem;
+            margin-top: 0.25rem;
+            flex-shrink: 0;
+            width: 16px;
+            text-align: center;
+        }
+
+        .contact-text {
+            color: white;
+            font-style: normal;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .footer-module .contact-text {
+            color: white !important;
+        }
+
+        .contact-link {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .contact-link:hover {
+            color: white;
+            text-decoration: none;
+        }
+
+        .contact-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-light, #9DD0F0);
+            transition: width 0.3s ease;
+        }
+
+        .contact-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .nav-link-footer {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link-footer::before {
+            content: '';
+            position: absolute;
+            left: -100%;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .nav-link-footer:hover::before {
+            left: 100%;
+        }
+
+        .nav-link-footer:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(5px);
+        }
+
+        .nav-link-footer i {
+            color: var(--primary-light, #9DD0F0);
+            font-size: 0.875rem;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+            width: 16px;
+            text-align: center;
+        }
+
+        .nav-link-footer:hover i {
+            transform: scale(1.2);
+        }
+
+        .quick-nav {
+            width: 100%;
+        }
+
+        .hours-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .hours-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .hours-item:last-child {
+            border-bottom: none;
+        }
+
+        .hours-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+        }
+
+        .day {
+            color: white;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .time {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+            font-weight: 400;
+        }
+
+        .closed {
+            color: rgba(255, 255, 255, 0.5);
+            font-style: italic;
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .bottom-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            align-items: center;
+            text-align: center;
+        }
+
+        .social-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .social-title {
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .social-link {
+            position: relative;
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            overflow: visible;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, var(--primary-color, #7FBCE3), var(--primary-light, #9DD0F0));
+            border-radius: 50%;
+            transform: scale(0);
+            transition: transform 0.3s ease;
+        }
+
+        .social-link:hover::before {
+            transform: scale(1);
+        }
+
+        .social-link i {
+            position: relative;
+            z-index: 1;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .social-link:hover i {
+            transform: scale(1.2);
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-8px);
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            margin-bottom: 8px;
+        }
+
+        .social-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 5px solid transparent;
+            border-top-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .social-link:hover .social-tooltip {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .legal-section {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .copyright {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-bottom-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-bottom-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-bottom-link:hover,
+        .footer-bottom-links a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        .separator {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.875rem;
+        }
+
+        .appointment-link {
+            display: inline-flex;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all var(--transition);
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .appointment-link:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .appointment-link i {
+            margin-right: 10px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .contact-banner {
+                height: var(--banner-height-mobile);
+            }
+            
+            .navbar {
+                height: var(--navbar-mobile-height);
+                top: var(--banner-height-mobile);
+            }
+            
+            .nav-container {
+                padding: 0 24px;
+                gap: 0;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+            }
+            
+            .nav-content {
+                display: none !important;
+                flex: 0 0 0 !important;
+                flex-grow: 0 !important;
+                flex-shrink: 0 !important;
+                flex-basis: 0 !important;
+                width: 0 !important;
+                min-width: 0 !important;
+                max-width: 0 !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                position: absolute !important;
+                visibility: hidden !important;
+                opacity: 0 !important;
+            }
+            
+            .logo-section {
+                flex: 0 0 auto;
+                margin: 0;
+            }
+            
+            .mobile-controls {
+                flex: 0 0 auto;
+                margin: 0;
+            }
+            
+            .logo {
+                gap: 10px;
+                margin: 0;
+            }
+            
+            .hamburger {
+                margin: 0;
+            }
+            
+            .logo-icon {
+                width: 40px;
+                height: 40px;
+                border-radius: 10px;
+            }
+            
+            .logo-img {
+                width: 30px;
+                height: 30px;
+            }
+            
+            .logo-fallback {
+                width: 30px;
+                height: 30px;
+            }
+            
+            .logo-text {
+                font-size: 1.1rem;
+                font-weight: 700;
+            }
+            
+            .logo-subtitle {
+                font-size: 0.65rem;
+                font-weight: 600;
+                display: block !important;
+            }
+            
+            .mobile-controls {
+                display: flex;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .banner-container {
+                padding: 0 12px;
+                justify-content: center;
+                gap: 12px;
+                flex-wrap: wrap;
+            }
+            
+            .banner-contact, .banner-hours {
+                font-size: 10px;
+                gap: 4px;
+                padding: 3px 8px;
+                border-radius: 8px;
+                background: rgba(255, 255, 255, 0.15);
+                white-space: nowrap;
+            }
+            
+            .banner-contact:hover, .banner-hours:hover {
+                background: rgba(255, 255, 255, 0.25);
+            }
+            
+            .banner-contact i, .banner-hours i {
+                font-size: 9px;
+            }
+            
+            .banner-text {
+                white-space: nowrap;
+            }
+            
+            .scroll-progress {
+                top: var(--banner-height-mobile);
+                height: 2px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .navbar {
+                height: 60px;
+            }
+            
+            .logo {
+                gap: 8px;
+            }
+            
+            .logo-icon {
+                width: 36px;
+                height: 36px;
+                border-radius: 8px;
+            }
+            
+            .logo-img {
+                width: 28px;
+                height: 28px;
+            }
+            
+            .logo-fallback {
+                width: 28px;
+                height: 28px;
+                font-size: 13px;
+            }
+            
+            .logo-text {
+                font-size: 1rem;
+                font-weight: 700;
+            }
+            
+            .logo-subtitle {
+                font-size: 0.6rem;
+                letter-spacing: 0.6px;
+                display: block !important;
+            }
+            
+            .hamburger {
+                min-width: 44px;
+                padding: 8px 10px;
+            }
+            
+            .hamburger-text {
+                display: none;
+            }
+            
+            .mobile-nav-links {
+                width: 260px;
+            }
+            
+            .mobile-nav-inner {
+                padding: 20px 16px;
+            }
+        }
+        
+        @media (max-width: 380px) {
+            .logo-text {
+                font-size: 0.95rem;
+            }
+            
+            .logo-subtitle {
+                font-size: 0.48rem;
+                display: none;
+            }
+            
+            .logo-icon {
+                width: 34px;
+                height: 34px;
+                border-radius: 7px;
+            }
+            
+            .logo-img {
+                width: 24px;
+                height: 24px;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .branding-content {
+                flex-direction: row;
+                justify-content: space-between;
+                text-align: left;
+            }
+            
+            .logo-section-footer {
+                justify-content: flex-start;
+            }
+            
+            .mission-statement {
+                max-width: 50%;
+                text-align: left;
+            }
+            
+            .footer-content-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .bottom-content {
+                flex-direction: row;
+                justify-content: space-between;
+                text-align: left;
+            }
+            
+            .social-section {
+                align-items: flex-start;
+            }
+            
+            .legal-section {
+                align-items: flex-end;
+            }
+        }
+        
+        @media (min-width: 992px) {
+            .footer-content-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .footer-container {
+                padding: 3rem 1rem 1.5rem;
+            }
+            
+            .brand-name {
+                font-size: 1.4rem;
+            }
+            
+            .mission-statement {
+                font-size: 1rem;
+            }
+            
+            .back-to-top {
+                width: 2.5rem;
+                height: 2.5rem;
+                bottom: 1rem;
+                right: 1rem;
+            }
+            
+            .back-to-top i {
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo-text-container-footer {
+                display: none;
+            }
+            
+            .footer-logo {
+                gap: 0;
+                justify-content: center;
+            }
+            
+            .logo-icon-footer {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .logo-image-footer {
+                width: 38px;
+                height: 38px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .brand-text {
+                font-size: 18px;
+            }
+            
+            .brand-icon {
+                font-size: 24px;
+            }
+        }
+        
+        /* Print styles */
+        @media print {
+            header, footer, .back-to-top, .enhanced-footer {
+                display: none !important;
+            }
+            
+            body {
+                background-color: white !important;
+                color: black !important;
+            }
+            
+            main {
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+        }
+
+        /* Add these styles to your CSS section */
+        .contact-link {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color var(--transition);
+        }
+
+        .contact-link:hover {
+            color: var(--primary-color);
+        }
+
+        .contact-item span,
+        .contact-item .contact-link {
+            line-height: 1.5;
+            display: block;
+        }
+
+        /* Add these styles to your CSS section */
+        .contact-info {
+            padding: 20px 0;
+        }
+
+        .contact-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .contact-item i {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 16px;
+            transition: all var(--transition);
+        }
+
+        .contact-item:hover i {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(127, 188, 227, 0.3);
+        }
+
+        .contact-text {
+            flex: 1;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 16px;
+            transition: color var(--transition);
+        }
+
+        a.contact-text:hover {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        /* Remove any conflicting styles */
+        .contact-item .icon-container,
+        .contact-item .icon-wrapper {
+            display: none;
+        }
+        
+    </style>
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Page Loader -->
+    <div class="page-loader">
+        <div class="loader"></div>
+        <span class="sr-only">Загрузка страницы...</span>
+    </div>
+
+    <!-- Skip to content link for accessibility -->
+    <a href="#main-content" class="sr-only sr-only-focusable">Перейти к основному содержанию</a>
+
+    <!-- Contact Banner -->
+    <div class="contact-banner" role="banner">
+        <div class="banner-container">
+            <a href="mailto:info@erusmedical.ru" class="banner-contact" aria-label="Email Эрус Медикал">
+                <i class="fas fa-envelope" aria-hidden="true"></i>
+                <span class="banner-text">info@erusmedical.ru</span>
+            </a>
+            <div class="banner-hours-desktop">
+                <i class="fas fa-clock" aria-hidden="true"></i>
+                <span class="banner-text">9:00 – 5:00 pm</span>
+            </div>
+            <div class="banner-hours">
+                <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                <span class="banner-text">3-я Тверская-Ямская улица 44</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" role="navigation" aria-label="Main Navigation" id="navbar">
+        <div class="nav-container">
+            <!-- Logo Section -->
+            <div class="logo-section">
+                <a href="{% url 'home' %}" class="logo" aria-label="Эрус Центр лечения боли - Главная">
+                    <div class="logo-icon">
+                        <img src="/static/img/logo.png" alt="Эрус Логотип" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="logo-fallback" style="display: none; width: 32px; height: 32px; background: var(--primary-color); border-radius: 50%; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 14px;">Э</div>
+                    </div>
+                    <div class="logo-text-container">
+                        <span class="logo-text">Эрус</span>
+                        <span class="logo-subtitle">Центр лечения боли</span>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Desktop Navigation Links -->
+            <div class="nav-content">
+                <div class="nav-links" id="navLinks" role="menubar" aria-label="Primary navigation">
+                    <div class="nav-links-inner">
+                        <a href="{% url 'home' %}" class="nav-link {% if request.resolver_match.url_name == 'home' or request.path == '/' %}active{% endif %}" role="menuitem" data-nav="home">
+                            <span class="nav-text">Главная</span>
+                        </a>
+                        
+                        <a href="{% url 'treatment' %}" class="nav-link {% if request.resolver_match.url_name == 'treatment' %}active{% endif %}" role="menuitem" data-nav="treatment">
+                            <span class="nav-text">Услуги</span>
+                        </a>
+                        
+                        <a href="{% url 'contacts' %}" class="nav-link {% if request.resolver_match.url_name == 'contacts' %}active{% endif %}" role="menuitem" data-nav="contacts">
+                            <span class="nav-text">Контакты</span>
+                        </a>
+                        
+                        <a href="{% url 'contact' %}" class="contact-button" aria-label="Связаться с нами">
+                            <i class="fas fa-calendar-check button-icon" aria-hidden="true"></i>
+                            <span class="button-text">Связаться с нами</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mobile Hamburger Button -->
+            <div class="mobile-controls">
+                <button class="hamburger" 
+                        aria-label="Toggle navigation menu" 
+                        aria-expanded="false" 
+                        aria-controls="mobileNavLinks"
+                        type="button"
+                        id="hamburger">
+                    <div class="hamburger-icon">
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                    </div>
+                    <span class="hamburger-text">Menu</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation Menu -->
+    <div class="mobile-nav-links" id="mobileNavLinks" role="menubar" aria-label="Mobile navigation">
+        <div class="mobile-nav-inner">
+            <a href="{% url 'home' %}" class="mobile-nav-link {% if request.resolver_match.url_name == 'home' or request.path == '/' %}active{% endif %}" role="menuitem" data-nav="home">
+                <span class="nav-text">Главная</span>
+            </a>
+            
+            <a href="{% url 'treatment' %}" class="mobile-nav-link {% if request.resolver_match.url_name == 'treatment' %}active{% endif %}" role="menuitem" data-nav="treatment">
+                <span class="nav-text">Услуги</span>
+            </a>
+            
+            <a href="{% url 'contacts' %}" class="mobile-nav-link {% if request.resolver_match.url_name == 'contacts' %}active{% endif %}" role="menuitem" data-nav="contacts">
+                <span class="nav-text">Контакты</span>
+            </a>
+            
+            <a href="{% url 'contact' %}" class="mobile-contact-button" aria-label="Связаться с нами">
+                <i class="fas fa-calendar-check button-icon" aria-hidden="true"></i>
+                <span class="button-text">Связаться с нами</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" aria-hidden="true" id="mobileOverlay"></div>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" aria-label="Наверх" role="button" tabindex="0">
+        <i class="fas fa-chevron-up" aria-hidden="true"></i>
+    </a>
+
+    <!-- Enhanced Footer -->
+    <footer class="enhanced-footer" role="contentinfo" aria-label="Site footer">
+        <div class="footer-container">
+            <!-- Branding Section -->
+            <section class="footer-branding" aria-labelledby="footer-branding-title">
+                <div class="branding-content">
+                    <div class="logo-section-footer">
+                        <a href="{% url 'home' %}" class="footer-logo" aria-label="Эрус Центр лечения боли - Главная">
+                            <div class="logo-icon-footer">
+                                <img src="/static/img/logo.png" 
+                                     alt="Эрус Логотип" 
+                                     class="logo-image-footer"
+                                     width="60" 
+                                     height="60"
+                                     loading="lazy"
+                                     onerror="this.style.display='none';">
+                            </div>
+                            <div class="logo-text-container-footer">
+                                <h2 id="footer-branding-title" class="brand-name">Эрус</h2>
+                                <span class="logo-subtitle-footer">Центр лечения боли</span>
+                            </div>
+                        </a>
+                    </div>
+                    <p class="mission-statement">
+                        Мы помогаем пациентам получить консультации нейрохирурга, невролога и реабилитолога. Наш подход основан на внимательном отношении и профессиональной оценке состояния.
+                    </p>
+                </div>
+            </section>
+
+            <div class="footer-content-grid">
+                <!-- Contact Information Module -->
+                <section class="footer-module" aria-labelledby="contact-title">
+                    <h3 id="contact-title" class="module-title">
+                        <i class="fas fa-address-card" aria-hidden="true"></i>
+                        Контактная информация
+                    </h3>
+                    <div class="contact-list" role="list">
+                        <div class="contact-item" role="listitem">
+                            <i class="fas fa-globe" aria-hidden="true"></i>
+                            <span class="contact-text">
+                                3-я Тверская-Ямская улица 44, Москва
+                            </span>
+                        </div>
+                        <div class="contact-item" role="listitem">
+                            <i class="fas fa-clock" aria-hidden="true"></i>
+                            <span class="contact-text">
+                                Оставьте заявку и наш медицинский секретарь свяжется с вами в течение 48 часов
+                            </span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Quick Links Module -->
+                <section class="footer-module" aria-labelledby="quick-links-title">
+                    <h3 id="quick-links-title" class="module-title">
+                        <i class="fas fa-link" aria-hidden="true"></i>
+                        Быстрая навигация
+                    </h3>
+                    <nav class="quick-nav" role="navigation" aria-label="Quick navigation links">
+                        <ul class="nav-list">
+                            <li><a href="{% url 'home' %}" class="nav-link-footer">
+                                <i class="fas fa-home" aria-hidden="true"></i>
+                                <span>Главная</span>
+                            </a></li>
+                            <li><a href="{% url 'treatment' %}" class="nav-link-footer">
+                                <i class="fas fa-stethoscope" aria-hidden="true"></i>
+                                <span>Услуги</span>
+                            </a></li>
+                            <li><a href="{% url 'contacts' %}" class="nav-link-footer">
+                                <i class="fas fa-envelope" aria-hidden="true"></i>
+                                <span>Контакты</span>
+                            </a></li>
+                            <li><a href="{% url 'contact' %}" class="nav-link-footer">
+                                <i class="fas fa-calendar-check" aria-hidden="true"></i>
+                                <span>Оставить заявку</span>
+                            </a></li>
+                        </ul>
+                    </nav>
+                </section>
+
+                <!-- Information Resource Module -->
+                <section class="footer-module" aria-labelledby="info-title">
+                    <h3 id="info-title" class="module-title">
+                        <i class="fas fa-info-circle" aria-hidden="true"></i>
+                        Информационный ресурс
+                    </h3>
+                    <p class="contact-text">Мы проводим консультации по хронической боли и подбираем индивидуальный план её ведения. Помогаем понять причину боли и предлагаем практичные, безопасные подходы к облегчению состояния.</p>
+                    <a href="{% url 'contact' %}" class="appointment-link">
+                        <i class="fas fa-calendar-check"></i> Оставить заявку
+                    </a>
+                </section>
+            </div>
+
+            <section class="footer-bottom" aria-label="Footer bottom section">
+                <div class="bottom-content">
+                    <div class="social-section">
+                        <h4 class="social-title">Свяжитесь с нами</h4>
+                        <div class="social-links" role="list">
+                            <a href="mailto:info@erusmedical.ru" 
+                               class="social-link"
+                               role="listitem"
+                               aria-label="Email us">
+                                <i class="fas fa-envelope" aria-hidden="true"></i>
+                                <span class="social-tooltip">Email</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="legal-section">
+                        <p class="copyright">
+                            © <span class="current-year">2024</span> Эрус Центр лечения боли. Все права защищены.
+                        </p>
+                        <div class="footer-bottom-links">
+                            <a href="{% url 'privacy_policy' %}" class="footer-bottom-link">Политика конфиденциальности</a>
+                            <span class="separator">•</span>
+                            <a href="{% url 'terms' %}" class="footer-bottom-link">Условия использования</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Progress Bar
+            const scrollProgress = document.getElementById('scrollProgress');
+            if (scrollProgress) {
+                function updateProgressBar() {
+                    const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                    const scrolled = (window.scrollY / windowHeight) * 100;
+                    scrollProgress.style.width = scrolled + '%';
+                }
+                window.addEventListener('scroll', updateProgressBar);
+                updateProgressBar();
+            }
+            
+            // Navbar scroll effect
+            const navbar = document.getElementById('navbar');
+            if (navbar) {
+                let lastScroll = 0;
+                window.addEventListener('scroll', function() {
+                    const currentScroll = window.pageYOffset;
+                    if (currentScroll > 50) {
+                        navbar.classList.add('scrolled');
+                    } else {
+                        navbar.classList.remove('scrolled');
+                    }
+                    lastScroll = currentScroll;
+                });
+            }
+            
+            // Mobile menu functionality
+            const hamburger = document.getElementById('hamburger');
+            const mobileNavLinks = document.getElementById('mobileNavLinks');
+            const mobileOverlay = document.getElementById('mobileOverlay');
+            
+            function openMobileMenu() {
+                if (hamburger && mobileNavLinks && mobileOverlay) {
+                    hamburger.classList.add('active');
+                    hamburger.setAttribute('aria-expanded', 'true');
+                    mobileNavLinks.classList.add('active');
+                    mobileOverlay.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+            
+            function closeMobileMenu() {
+                if (hamburger && mobileNavLinks && mobileOverlay) {
+                    hamburger.classList.remove('active');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                    mobileNavLinks.classList.remove('active');
+                    mobileOverlay.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            }
+            
+            if (hamburger) {
+                hamburger.addEventListener('click', function() {
+                    if (hamburger.classList.contains('active')) {
+                        closeMobileMenu();
+                    } else {
+                        openMobileMenu();
+                    }
+                });
+            }
+            
+            if (mobileOverlay) {
+                mobileOverlay.addEventListener('click', closeMobileMenu);
+            }
+            
+            // Close mobile menu when clicking nav links
+            const mobileNavLinksAll = document.querySelectorAll('.mobile-nav-link, .mobile-contact-button');
+            mobileNavLinksAll.forEach(link => {
+                link.addEventListener('click', function() {
+                    closeMobileMenu();
+                });
+            });
+            
+            // Close mobile menu on window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    closeMobileMenu();
+                }
+            });
+            
+            // Back to top button functionality
+            const backToTopButton = document.querySelector('.back-to-top');
+            if (backToTopButton) {
+                const toggleBackToTop = () => {
+                    if (window.scrollY > 300) {
+                        backToTopButton.classList.add('visible');
+                    } else {
+                        backToTopButton.classList.remove('visible');
+                    }
+                };
+                
+                toggleBackToTop();
+                
+                let isScrolling = false;
+                window.addEventListener('scroll', () => {
+                    if (!isScrolling) {
+                        window.requestAnimationFrame(() => {
+                            toggleBackToTop();
+                            isScrolling = false;
+                        });
+                        isScrolling = true;
+                    }
+                });
+                
+                backToTopButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+                
+                backToTopButton.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        window.scrollTo({
+                            top: 0,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            }
+            
+            // Set current year
+            const currentYearElements = document.querySelectorAll('.current-year');
+            const currentYear = new Date().getFullYear();
+            currentYearElements.forEach(element => {
+                element.textContent = currentYear;
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]:not(.back-to-top)').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href');
+                    
+                    if (targetId !== '#') {
+                        const targetElement = document.querySelector(targetId);
+                        
+                        if (targetElement) {
+                            e.preventDefault();
+                            const bannerHeight = window.innerWidth <= 768 ? 32 : 36;
+                            const navbarHeight = window.innerWidth <= 768 ? 64 : 72;
+                            const offset = bannerHeight + navbarHeight;
+                            window.scrollTo({
+                                top: targetElement.offsetTop - offset,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+            
+            // Footer animations
+            const contactItems = document.querySelectorAll('.contact-item');
+            contactItems.forEach((item, index) => {
+                setTimeout(() => {
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+            
+            const socialLinks = document.querySelectorAll('.social-link');
+            socialLinks.forEach((link, index) => {
+                setTimeout(() => {
+                    link.style.opacity = '1';
+                    link.style.transform = 'translateY(0)';
+                }, 100 * index);
+                
+                link.addEventListener('mouseenter', function() {
+                    const icon = this.querySelector('i');
+                    if (icon) {
+                        icon.style.transform = 'rotate(360deg)';
+                        icon.style.transition = 'transform 0.5s ease';
+                    }
+                });
+                
+                link.addEventListener('mouseleave', function() {
+                    const icon = this.querySelector('i');
+                    if (icon) {
+                        icon.style.transform = 'rotate(0deg)';
+                    }
+                });
+            });
+        });
+    </script>
+
+    {% block extra_js %}{% endblock %}
+
+    <!-- Cookie Consent Banner -->
+    <div id="cookieBanner" class="cookie-banner" style="display: none;">
+        <div class="cookie-banner-content">
+            <div class="cookie-banner-logo">
+                <img src="/static/img/logo.png" alt="Эрус Логотип" class="cookie-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="cookie-logo-fallback" style="display: none;">
+                    <span>Э</span>
+                </div>
+            </div>
+            <div class="cookie-banner-text">
+                <p class="cookie-banner-title">
+                    <i class="fas fa-cookie-bite me-2"></i>
+                    Мы используем файлы cookie
+                </p>
+                <p class="cookie-banner-description">
+                    Мы используем файлы cookie для улучшения работы сайта, анализа трафика и персонализации контента. 
+                    Продолжая использовать наш сайт, вы соглашаетесь с использованием файлов cookie. 
+                    <a href="{% url 'privacy_policy' %}" class="cookie-link">Подробнее в политике конфиденциальности</a>.
+                </p>
+            </div>
+            <div class="cookie-banner-actions">
+                <button id="acceptCookies" class="cookie-btn-accept">
+                    Принять все
+                </button>
+                <button id="rejectCookies" class="cookie-btn-reject">
+                    Отклонить
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #ffffff 0%, var(--bg-light, #F8FAFB) 100%);
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+            z-index: 10000;
+            padding: 24px 20px;
+            border-top: 4px solid var(--primary-color, #7FBCE3);
+            transform: translateY(100%);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .cookie-banner-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .cookie-banner-logo {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cookie-logo-img {
+            height: 48px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .cookie-logo-fallback {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary-color, #7FBCE3), var(--primary-dark, #6BA8D6));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 20px;
+            font-family: var(--font-family, 'Montserrat', sans-serif);
+        }
+
+        .cookie-banner-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .cookie-banner-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--secondary-color, #2c3e50);
+            font-size: 1.1rem;
+            font-family: var(--font-family, 'Montserrat', sans-serif);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cookie-banner-title i {
+            color: var(--primary-color, #7FBCE3);
+        }
+
+        .cookie-banner-description {
+            margin: 0;
+            color: var(--text-light, #666);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            font-family: var(--font-family, 'Montserrat', sans-serif);
+        }
+
+        .cookie-link {
+            color: var(--primary-color, #7FBCE3);
+            text-decoration: underline;
+            font-weight: 500;
+            transition: var(--transition-speed, 0.3s ease);
+        }
+
+        .cookie-link:hover {
+            text-decoration: none;
+            color: var(--primary-dark, #6BA8D6);
+        }
+
+        .cookie-banner-actions {
+            display: flex;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        .cookie-btn-accept {
+            padding: 12px 24px;
+            font-size: 0.95rem;
+            white-space: nowrap;
+            background: linear-gradient(135deg, var(--primary-color, #7FBCE3), var(--primary-dark, #6BA8D6));
+            color: white;
+            border: none;
+            border-radius: var(--border-radius, 8px);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-speed, 0.3s ease);
+            font-family: var(--font-family, 'Montserrat', sans-serif);
+            box-shadow: 0 4px 12px rgba(127, 188, 227, 0.3);
+        }
+
+        .cookie-btn-accept:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(127, 188, 227, 0.4);
+            background: linear-gradient(135deg, var(--primary-dark, #6BA8D6), var(--primary-color, #7FBCE3));
+        }
+
+        .cookie-btn-reject {
+            padding: 12px 24px;
+            font-size: 0.95rem;
+            white-space: nowrap;
+            background: white;
+            color: var(--secondary-color, #2c3e50);
+            border: 2px solid var(--border-color, #E1E8ED);
+            border-radius: var(--border-radius, 8px);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-speed, 0.3s ease);
+            font-family: var(--font-family, 'Montserrat', sans-serif);
+        }
+
+        .cookie-btn-reject:hover {
+            background: var(--bg-light, #F8FAFB);
+            border-color: var(--primary-color, #7FBCE3);
+            color: var(--primary-color, #7FBCE3);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .cookie-banner {
+                padding: 20px 16px;
+            }
+
+            .cookie-banner-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 16px;
+            }
+
+            .cookie-banner-logo {
+                margin: 0 auto;
+            }
+
+            .cookie-banner-text {
+                text-align: center;
+            }
+
+            .cookie-banner-actions {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .cookie-btn-accept,
+            .cookie-btn-reject {
+                flex: 1;
+                min-width: 140px;
+            }
+        }
+    </style>
+
+    <script>
+        // Cookie Consent Management
+        (function() {
+            const COOKIE_CONSENT_KEY = 'cookie_consent';
+            const COOKIE_CONSENT_EXPIRY = 365; // days
+
+            function setCookie(name, value, days) {
+                const date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                const expires = "expires=" + date.toUTCString();
+                document.cookie = name + "=" + value + ";" + expires + ";path=/;SameSite=Lax";
+            }
+
+            function getCookie(name) {
+                const nameEQ = name + "=";
+                const ca = document.cookie.split(';');
+                for (let i = 0; i < ca.length; i++) {
+                    let c = ca[i];
+                    while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                    if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+                }
+                return null;
+            }
+
+            function showCookieBanner() {
+                const banner = document.getElementById('cookieBanner');
+                if (banner) {
+                    banner.style.display = 'block';
+                    // Smooth slide up animation
+                    setTimeout(() => {
+                        banner.style.transform = 'translateY(0)';
+                        banner.style.opacity = '1';
+                    }, 10);
+                }
+            }
+
+            function hideCookieBanner() {
+                const banner = document.getElementById('cookieBanner');
+                if (banner) {
+                    banner.style.transform = 'translateY(100%)';
+                    banner.style.opacity = '0';
+                    setTimeout(() => {
+                        banner.style.display = 'none';
+                    }, 300);
+                }
+            }
+
+            function acceptCookies() {
+                setCookie(COOKIE_CONSENT_KEY, 'accepted', COOKIE_CONSENT_EXPIRY);
+                hideCookieBanner();
+            }
+
+            function rejectCookies() {
+                setCookie(COOKIE_CONSENT_KEY, 'rejected', COOKIE_CONSENT_EXPIRY);
+                hideCookieBanner();
+            }
+
+            // Check if consent already given
+            const consent = getCookie(COOKIE_CONSENT_KEY);
+            if (!consent) {
+                // Show banner after page load
+                document.addEventListener('DOMContentLoaded', function() {
+                    setTimeout(showCookieBanner, 1000); // Show after 1 second
+                });
+            }
+
+            // Event listeners
+            document.addEventListener('DOMContentLoaded', function() {
+                const acceptBtn = document.getElementById('acceptCookies');
+                const rejectBtn = document.getElementById('rejectCookies');
+
+                if (acceptBtn) {
+                    acceptBtn.addEventListener('click', acceptCookies);
+                }
+
+                if (rejectBtn) {
+                    rejectBtn.addEventListener('click', rejectCookies);
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

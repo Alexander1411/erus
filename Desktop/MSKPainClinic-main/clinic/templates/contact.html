@@ -1,0 +1,2040 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Эрус Центр лечения боли | Контакты{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Variables are defined in base.html - no need to redefine here */
+    
+    /* Contact information boxes */
+    .contact-info-box {
+        background-color: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+        padding: 30px;
+        margin-bottom: 30px;
+        transition: all var(--transition-speed);
+        height: 100%;
+    }
+    
+    .contact-info-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+    
+    .contact-info-box i {
+        font-size: 2.5rem;
+        color: var(--primary-color);
+        margin-bottom: 20px;
+    }
+    
+    /* Contact form */
+    .contact-form {
+        background-color: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+        padding: 40px;
+    }
+
+    /* Form floating styles */
+    .form-floating {
+        position: relative;
+    }
+
+    .form-floating > .form-control,
+    .form-floating > .form-control-plaintext {
+        height: calc(3.5rem + 2px);
+        line-height: 1.25;
+    }
+
+    .form-floating > label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding: 1rem 0.75rem;
+        overflow: hidden;
+        text-align: start;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        pointer-events: none;
+        border: 1px solid transparent;
+        transform-origin: 0 0;
+        transition: opacity .1s ease-in-out, transform .1s ease-in-out;
+        color: #6c757d;
+    }
+
+    .form-floating > .form-control::placeholder {
+        color: transparent;
+    }
+
+    .form-floating > .form-control:focus,
+    .form-floating > .form-control:not(:placeholder-shown) {
+        padding-top: 1.625rem;
+        padding-bottom: 0.625rem;
+    }
+
+    .form-floating > .form-control:focus ~ label,
+    .form-floating > .form-control:not(:placeholder-shown) ~ label {
+        opacity: .65;
+        transform: scale(.85) translateY(-0.5rem) translateX(0.15rem);
+        background-color: white;
+        padding: 0 0.5rem;
+        height: auto;
+    }
+
+    /* Textarea in form-floating */
+    .form-floating > textarea.form-control {
+        height: 150px !important;
+    }
+
+    /* Form control styles */
+    .form-control {
+        display: block;
+        width: 100%;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #212529;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        appearance: none;
+        border-radius: 0.375rem;
+        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    }
+
+    .form-control:focus {
+        color: #212529;
+        background-color: #fff;
+        border-color: var(--primary-color);
+        outline: 0;
+        box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
+    }
+
+    /* Form select styles - match form-control */
+    .form-select {
+        border: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .form-select:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
+    }
+
+    /* Invalid feedback */
+    .invalid-feedback {
+        display: none;
+        width: 100%;
+        margin-top: 0.25rem;
+        font-size: 0.875em;
+        color: #dc3545;
+    }
+
+    .was-validated .form-control:invalid,
+    .form-control.is-invalid {
+        border-color: #dc3545;
+        padding-right: calc(1.5em + 0.75rem);
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right calc(0.375em + 0.1875rem) center;
+        background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+    }
+
+    .was-validated .form-control:invalid:focus,
+    .form-control.is-invalid:focus {
+        border-color: #dc3545;
+        box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+    }
+
+    .was-validated .form-control:invalid ~ .invalid-feedback,
+    .form-control.is-invalid ~ .invalid-feedback {
+        display: block;
+    }
+
+    /* Phone hint */
+    .phone-hint {
+        font-size: 0.875em;
+        color: #6c757d;
+        margin-top: 0.25rem;
+    }
+
+    /* Submit button */
+    .btn-primary {
+        color: #fff;
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        border-radius: var(--border-radius);
+        transition: all var(--transition-speed);
+    }
+
+    .btn-primary:hover {
+        background-color: #2980b9;
+        border-color: #2980b9;
+        transform: translateY(-2px);
+    }
+
+    /* Checkbox styles */
+    .form-check {
+        padding-left: 1.5rem;
+    }
+
+    .form-check-input {
+        width: 1.1em;
+        height: 1.1em;
+        margin-top: 0.25em;
+        margin-left: -1.5rem;
+        background-color: #fff;
+        border: 1px solid rgba(0,0,0,.25);
+        border-radius: 0.25em;
+        transition: background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    }
+
+    .form-check-input:checked {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+
+    .form-check-label {
+        color: var(--text-color);
+        font-size: 0.95rem;
+    }
+
+    .form-check-label a {
+        color: var(--primary-color);
+        text-decoration: none;
+    }
+
+    .form-check-label a:hover {
+        text-decoration: underline;
+    }
+    
+    /* Animation */
+    .fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 1s ease, transform 1s ease;
+    }
+    
+    .fade-in.appear {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    /* Section spacing & styling */
+    .section-padding {
+        padding: 80px 0;
+    }
+    
+    /* Remove top padding from contact form section */
+    #contact-form.section-padding {
+        padding-top: 0;
+    }
+    
+    /* Desktop: small top margin for body diagram */
+    @media (min-width: 992px) {
+        #contact-form.section-padding {
+            padding-top: 4px;
+        }
+    }
+    
+    .section-title {
+        margin-bottom: 40px;
+        text-align: center;
+    }
+    
+    .section-title h2 {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+        color: var(--text-color);
+        font-weight: 600;
+        position: relative;
+        display: inline-block;
+    }
+    
+    .section-title h2:after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: -10px;
+        width: 80px;
+        height: 3px;
+        background-color: var(--primary-color);
+        transform: translateX(-50%);
+    }
+    
+    .section-title p {
+        color: #6c757d;
+        font-size: 1.1rem;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+    
+    /* Social links */
+    .social-links {
+        display: flex;
+        justify-content: center;
+        margin-top: 15px;
+        gap: 10px;
+    }
+    
+    .social-links a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        background-color: var(--light-color);
+        color: var(--primary-color);
+        border-radius: 50%;
+        transition: all var(--transition-speed);
+        text-decoration: none;
+    }
+    
+    .social-links a:hover {
+        background-color: var(--primary-color);
+        color: white;
+        transform: translateY(-3px);
+    }
+    
+    /* Responsive styles */
+    @media (max-width: 992px) {
+        .contact-form {
+            padding: 30px;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .section-title h2 {
+            font-size: 2rem;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .section-title h2 {
+            font-size: 1.8rem;
+        }
+        
+        .contact-info-box i {
+            font-size: 2rem;
+        }
+    }
+
+    /* Message styles */
+    .alert {
+        position: relative;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border: 1px solid transparent;
+        border-radius: 0.5rem;
+        font-size: 1.1rem;
+    }
+
+    .alert-success {
+        color: #0f5132;
+        background-color: #d1e7dd;
+        border-color: #badbcc;
+    }
+
+    .alert-danger {
+        color: #842029;
+        background-color: #f8d7da;
+        border-color: #f5c2c7;
+    }
+
+    .alert.fade-out {
+        transition: opacity 0.5s ease-in-out;
+        opacity: 0;
+    }
+
+    .message-container {
+        position: relative;
+        z-index: 1000;
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+    }
+
+    .contact-form-container {
+        background-color: #fff;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-form .form-control {
+        border-radius: 5px;
+    }
+
+    .contact-form .btn-primary {
+        padding: 10px 30px;
+        font-size: 1.1rem;
+    }
+    
+    /* pain assessment form styles */
+    .form-step {
+        display: none;
+    }
+    
+    .form-step.active {
+        display: block;
+    }
+    
+    .step-indicator {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+    
+    .step {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: #e0e0e0;
+        color: #666;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 10px;
+        position: relative;
+    }
+    
+    .step.active {
+        background-color: var(--primary-color);
+        color: white;
+    }
+    
+    .step.completed {
+        background-color: #4cd964;
+        color: white;
+    }
+    
+    .step:not(:last-child):after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background-color: #e0e0e0;
+        top: 50%;
+        left: 100%;
+        transform: translateY(-50%);
+    }
+    
+    .form-navigation {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+    
+    .pain-options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+    
+    .pain-option {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        background-color: #f0f7ff;
+        padding: 8px 15px;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .pain-option:hover {
+        background-color: var(--accent-color);
+    }
+    
+    .pain-option input {
+        margin-right: 5px;
+    }
+    
+    .preferred-location {
+        margin-bottom: 20px;
+    }
+    
+    .preferred-location .form-check {
+        margin-bottom: 10px;
+    }
+
+    /* Body Map Styles - Variables are defined in base.html */
+
+    .body-map-container {
+        position: relative;
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+        background: transparent;
+        border-radius: 0;
+        box-shadow: none;
+        transition: all 0.3s ease;
+    }
+
+    .diagram-title {
+        text-align: center;
+        color: var(--primary-color);
+        margin-bottom: 15px;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .diagram-instruction {
+        text-align: center;
+        color: var(--text-light);
+        margin-bottom: 20px;
+        font-size: 16px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .diagram-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+
+    .body-views {
+        width: 800px;
+        height: 600px;
+        position: relative;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    @media (max-width: 850px) {
+        .body-views {
+            width: 100%;
+            height: 500px;
+        }
+    }
+
+    .body-map {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .body-map .body-part {
+        fill: var(--primary-light);
+        stroke: var(--primary-color);
+        stroke-width: 1;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .body-map .body-part:hover {
+        fill: var(--primary-medium);
+        stroke-width: 2;
+        filter: drop-shadow(0 0 3px rgba(52, 152, 219, 0.5));
+    }
+
+    .body-map .body-part.selected {
+        fill: var(--accent-light);
+        stroke: var(--accent-color);
+        stroke-width: 2;
+    }
+
+    .body-map .body-part:focus {
+        outline: 2px solid var(--primary-color);
+        outline-offset: 2px;
+    }
+
+    .body-map-labels {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        font-size: 1.2rem;
+        color: var(--text-color);
+        margin-top: 1rem;
+        font-weight: 500;
+    }
+
+    .selected-parts-container {
+        margin-top: 20px;
+        padding: 15px;
+        background: transparent;
+        border-radius: 0;
+        transition: all 0.3s ease;
+    }
+
+    .selected-parts-container h3 {
+        margin: 0 0 15px 0;
+        color: var(--primary-color);
+        font-size: 18px;
+    }
+
+    .selected-parts-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        min-height: 40px;
+    }
+
+    .selected-part-tag {
+        display: inline-flex;
+        align-items: center;
+        padding: 8px 14px;
+        background: var(--card-bg);
+        border: 1px solid var(--accent-color);
+        border-radius: 20px;
+        font-size: 14px;
+        color: var(--accent-color);
+        transition: all 0.2s ease;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .selected-part-tag:hover {
+        background: rgba(231, 76, 60, 0.05);
+        transform: translateY(-2px);
+    }
+
+    .remove-part {
+        margin-left: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 16px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        transition: all 0.2s ease;
+    }
+
+    .remove-part:hover {
+        background: var(--accent-color);
+        color: white;
+    }
+
+    .empty-selection-message {
+        color: var(--text-light);
+        font-style: italic;
+        padding: 10px 0;
+    }
+
+    .clear-all-button {
+        margin-left: 10px;
+        padding: 5px 10px;
+        background: var(--accent-light);
+        color: var(--accent-color);
+        border: 1px solid var(--accent-color);
+        border-radius: 4px;
+        font-size: 12px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .clear-all-button:hover {
+        background: var(--accent-color);
+        color: white;
+    }
+
+    .tooltip {
+        position: absolute;
+        padding: 5px 10px;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        border-radius: 4px;
+        font-size: 12px;
+        pointer-events: none;
+        z-index: 100;
+        display: none;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 950px) {
+        .body-map-container {
+            padding: 15px;
+        }
+        
+        .diagram-wrapper {
+            padding: 1rem;
+        }
+    }
+
+    @media (max-width: 650px) {
+        .diagram-title {
+            font-size: 24px;
+        }
+        
+        .diagram-instruction {
+            font-size: 14px;
+        }
+        
+        .body-views {
+            height: 400px;
+        }
+        
+        .body-map-labels {
+            margin-top: 1rem;
+        }
+    }
+
+    /* Mobile-friendly toggle buttons for body-map-labels */
+    .body-map-labels {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        font-size: 1.2rem;
+        color: var(--text-color);
+        margin-top: 1rem;
+        font-weight: 500;
+    }
+    
+    .view-toggle-button {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin: 15px 0;
+        width: 100%;
+    }
+    
+    .view-toggle-button button {
+        font-size: 1rem;
+        padding: 10px 0;
+        min-width: 140px;
+        border-radius: 24px;
+        transition: background 0.2s, color 0.2s;
+        font-weight: 500;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    
+    .view-toggle-button button.active {
+        background-color: var(--primary-color);
+        color: white;
+        border-color: var(--primary-color);
+    }
+    
+    @media (max-width: 600px) {
+        .view-toggle-button {
+            flex-direction: column;
+            gap: 10px;
+            align-items: stretch;
+            margin: 10px auto;
+            max-width: 300px;
+        }
+        
+        .view-toggle-button button {
+            width: 100%;
+            min-width: 0;
+            font-size: 1.15rem;
+            padding: 12px 0;
+            border-radius: 28px;
+        }
+    }
+
+    /* Body map views */
+    .mobile-body-map {
+        display: block;
+    }
+    
+    .desktop-body-map {
+        display: none;
+    }
+    
+    @media (min-width: 992px) {
+        .mobile-body-map {
+            display: none;
+        }
+        
+        .desktop-body-map {
+            display: block;
+        }
+    }
+</style>
+{% endblock extra_css %}
+
+{% block content %}
+<!-- Message Section -->
+{% if messages %}
+<div class="message-container">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-lg-8 mx-auto">
+                {% for message in messages %}
+                <div class="alert {% if message.tags == 'error' %}alert-danger{% else %}alert-{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- Contact Form Section -->
+<section id="contact-form" class="section-padding bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 mx-auto fade-in">
+                <div class="contact-form-container">
+                    <form id="contactForm" action="{% url 'submit_contact' %}" method="post" class="multi-step-form needs-validation" novalidate>
+                        {% csrf_token %}
+                        
+                        <!-- Step 1: Body Diagram -->
+                        <div class="form-step active" data-step="1">
+                            <!-- Mobile version -->
+                            <div class="mobile-body-map">
+                                <div class="body-map-container">
+                                    <div class="diagram-instruction">
+                                        Нажмите на области тела, где вы испытываете боль (необязательно)
+                                    </div>
+                                    <div class="diagram-wrapper">
+                                        <!-- Front View (default view) -->
+                                        <div class="body-views front-view" style="display: block;">
+                                            <div class="tooltip"></div>
+                                            <svg class="body-map" version="1.0" xmlns="http://www.w3.org/2000/svg"
+                                                width="100%" height="100%" viewBox="0 0 450 710"
+                                                preserveAspectRatio="xMidYMid meet">
+                                                <g transform="translate(0.000,1055.000000) scale(0.090000,-0.080000)">
+                                                    <g id="mobile-front-view" transform="translate(99,0)">
+                                                        <!-- Front figure paths -->
+                                                        <!-- Head (Голова) -->
+                        <path class="body-part" data-name="Голова" 
+                        d="M2068 13189 c-319 -162 -293 -862 40 -1068 401 -248 760 763 370
+                        1041 -87 62 -314 77 -410 27z"/>
+                    
+                    <!-- Neck (Шея) -->
+                    <path class="body-part" data-name="Шея" 
+                        d="M1980 11953 c0 -191 186 -352 325 -281 174 88 195 117 195 270 l0
+                        141 -63 -45 c-98 -70 -244 -74 -362 -10 l-95 51 0 -126z"/>
+                    
+                    <!-- Left Shoulder (Правое плечо) -->
+                    <path class="body-part" data-name="Правое плечо" 
+                        d="M1730 11760 c-55 -21 -174 -58 -265 -81 -377 -99 -480 -228 -505
+                        -636 -8 -139 -13 -256 -10 -259 3 -4 86 38 183 93 l177 100 37 225 c54 332 22
+                        299 370 377 l302 67 -65 75 c-74 87 -89 90 -224 39z"/>
+                    
+                    <!-- Right Shoulder (Левое плечо) -->
+                    <path class="body-part" data-name="Левое плечо" 
+                        d="M2544 11722 l-63 -79 274 -64 c336 -79 345 -83 346 -165 1 -35 17
+                        -149 35 -252 l34 -189 160 -95 c88 -53 165 -97 172 -97 7 -1 17 73 24 164 31
+                        457 -95 632 -538 745 -109 28 -232 64 -273 81 -102 39 -100 40 -171 -49z"/>
+                        
+                    <!-- Left Upper Chest (Правая верхняя часть груди) -->
+                    <path class="body-part" data-name="Правая верхняя часть груди" 
+                        d="M1940 11540 c-532 -116 -471 -66 -520 -430 l-24 -180 74 -235 c85
+                        -270 71 -259 200 -153 151 125 214 153 475 207 l55 12 0 389 c0 391 -11 448
+                        -84 428 -3 -1 -82 -18 -176 -38z"/>
+                    
+                    <!-- Right Upper Chest (Левая верхняя часть груди) -->
+                    <path class="body-part" data-name="Левая верхняя часть груди" 
+                        d="M2313 11555 c-30 -22 -33 -69 -28 -415 l5 -390 60 -5 c184 -17 337
+                        -83 477 -206 95 -84 132 -86 133 -6 0 12 28 108 62 214 l62 191 -40 243 c-22
+                        133 -43 245 -47 249 -6 5 -393 95 -609 140 -23 5 -57 -2 -75 -15z"/>
+                    
+                    <!-- Left Arm (Правая рука) -->
+                    <path class="body-part" data-name="Правая рука" 
+                        d="M1125 10766 l-185 -111 0 -255 c0 -209 6 -258 30 -267 17 -7 30 -35
+                        30 -64 0 -127 94 -170 178 -81 101 108 186 554 149 785 l-17 103 -185 -110z"/>
+                    
+                    <!-- Right Arm (Левая рука) -->
+                    <path class="body-part" data-name="Левая рука" 
+                        d="M3160 10873 c-45 -352 -42 -385 53 -708 49 -164 95 -225 170 -225 49
+                        0 97 55 97 110 0 26 14 61 30 77 23 24 30 84 30 277 l0 246 -190 113 c-105 62
+                        -190 111 -190 110z"/>
+                        
+                    <!-- Abdomen (Живот) -->
+                    <path class="body-part" data-name="Живот" 
+                        d="M2015 10640 c-126 -32 -220 -91 -330 -207 l-104 -111 44 -136 c59
+                        -183 58 -396 -3 -544 l-43 -107 92 -91 c106 -105 189 -259 240 -444 127 -466
+                        496 -486 630 -35 65 217 164 398 267 489 l91 80 -42 108 c-50 130 -43 426 14
+                        585 l34 97 -117 120 c-184 188 -494 266 -773 196z"/>
+                        
+                    <!-- Left Wrist (Правое запястье) -->
+                    <path class="body-part" data-name="Правое запястье" 
+                        d="M840 8515 c0 -251 17 -314 113 -422 148 -166 251 -174 133 -10 -88
+                        122 -123 327 -55 314 25 -5 44 -38 61 -105 30 -115 57 -151 91 -117 27 27 1
+                        174 -64 370 -22 63 -39 129 -39 145 0 23 -27 30 -120 30 l-120 0 0 -205z"/>
+                    
+                    <!-- Right Wrist (Левое запястье) -->
+                    <path class="body-part" data-name="Левое запястье" 
+                        d="M3364 8585 c-57 -190 -89 -362 -75 -398 19 -52 65 4 93 114 20 76 35
+                        99 64 99 65 0 38 -197 -43 -311 -89 -128 -79 -167 26 -98 138 91 198 233 207
+                        490 l9 239 -121 0 -120 0 -40 -135z"/>
+                        
+                    <!-- Left Forearm (Левое предплечье) -->
+                    <path class="body-part" data-name="Левое предплечье" 
+                        d="M862 9891 c-17 -74 -22 -263 -18 -590 l6 -481 115 0 115 0 0 75 c0
+                        68 50 291 130 584 47 172 42 429 -9 402 -101 -55 -281 3 -281 90 0 69 -36 20
+                        -58 -80z"/>
+                    
+                    <!-- Right Forearm (Левая предплечье) -->
+                    <path class="body-part" data-name="Левая предплечье" 
+                        d="M3536 9939 c-48 -83 -117 -105 -219 -70 l-82 28 10 -194 c7 -139 29
+                        -265 82 -453 40 -143 73 -298 73 -345 l0 -85 107 0 107 0 15 475 c17 576 -13
+                        784 -93 644z"/>
+                        
+                    <!-- Left Thigh (Правая бедро) -->
+                    <path class="body-part" data-name="Правая бедро" 
+                        d="M1536 9429 c-21 -35 -133 -477 -167 -659 -51 -271 -14 -796 93 -1319
+                        22 -110 46 -264 52 -341 7 -79 23 -146 37 -155 13 -8 30 -45 37 -82 19 -102
+                        93 -161 184 -147 168 28 214 139 268 656 21 202 57 490 79 638 22 149 41 330
+                        41 403 l0 133 -85 50 c-145 86 -192 151 -241 337 -59 219 -261 548 -298 486z"/>
+                        
+                    <!-- Right Thigh (Левое бедро) -->
+                    <path class="body-part" data-name="Левое бедро" 
+                        d="M2846 9354 c-116 -125 -178 -243 -223 -422 -44 -172 -107 -258 -248
+                        -337 -41 -23 -75 -52 -74 -64 0 -31 70 -655 128 -1148 66 -572 89 -628 261
+                        -652 136 -20 239 137 269 409 9 83 47 299 84 480 64 314 67 351 67 750 -1 436
+                        -8 497 -104 850 -66 240 -64 238 -160 134z"/>
+                        
+                    <!-- Left Lower Leg (Правая голень голень) -->
+                    <path class="body-part" data-name="Правая голень" 
+                        d="M1484 6723 c-92 -314 -79 -618 45 -1109 89 -352 144 -683 125 -756
+                        -9 -35 2 -38 135 -38 l144 0 -1 335 c-2 307 3 355 57 575 72 289 74 432 13
+                        690 -24 105 -49 211 -54 237 -7 33 -17 41 -34 27 -108 -85 -261 -63 -357 52
+                        l-52 61 -21 -74z"/>
+                        
+                    <!-- Right Lower Leg (Левая голень) -->
+                    <path class="body-part" data-name="Левая голень" 
+                        d="M2924 6756 c-65 -105 -176 -146 -289 -107 -104 36 -99 43 -153 -199
+                        -61 -277 -58 -453 11 -711 52 -193 56 -236 56 -571 l0 -362 80 18 c45 11 106
+                        15 136 11 54 -8 55 -7 55 103 0 146 40 366 128 712 121 476 134 786 46 1092
+                        l-25 87 -45 -73z"/>
+                        
+                    <!-- Left Foot (Правая стопа) -->
+                    <path class="body-part" data-name="Правая стопа" 
+                        d="M1586 4548 c-85 -256 -63 -288 203 -288 186 0 192 10 175 260 l-14
+                        210 -150 5 -150 5 -64 -192z"/>
+                        
+                    <!-- Right Foot (Левая стопа) -->
+                    <path class="body-part" data-name="Левая стопа" 
+                        d="M2610 4733 l-80 -24 -15 -208 c-18 -250 -22 -246 199 -236 240 11
+                        286 74 181 242 -15 24 -39 82 -55 129 -39 124 -81 142 -230 97z"/>
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </div>
+
+                                        <!-- Back View (initially hidden) -->
+                                        <div class="body-views back-view" style="display: none;">
+                                            <div class="tooltip"></div>
+                                            <svg class="body-map" version="1.0" xmlns="http://www.w3.org/2000/svg"
+                                                width="100%" height="100%" viewBox="0 0 250 670"
+                                                preserveAspectRatio="xMidYMid meet">
+                                                <g transform="translate(0.000,980.000000) scale(0.080000,-0.073000)">
+                                                    <g id="mobile-back-view" transform="translate(-5300,0)">
+                                                        <!-- Back figure paths -->
+                                                        <!-- Back Head (Затылок) -->
+                        <path class="body-part" data-name="Затылок" 
+                        d="M6651 13218 c-192 -46 -294 -202 -293 -444 1 -79 -4 -187 -10 -239
+                        -11 -86 -7 -99 50 -156 61 -61 62 -65 62 -261 l0 -199 -215 -102 c-118 -55
+                        -237 -110 -265 -121 l-50 -21 70 -30 c112 -48 418 -104 565 -105 l135 0 0 65
+                        c1 104 21 155 62 155 33 0 38 -16 38 -110 l0 -110 65 0 c247 2 695 92 695 141
+                        0 10 -11 19 -25 20 -14 0 -128 52 -255 115 l-230 114 7 200 c4 110 16 203 26
+                        207 87 32 139 196 88 274 -21 33 -31 96 -31 204 0 296 -211 470 -489 403z"/>
+                        
+                    <!-- Upper Back Left (Верхняя левая часть спины) -->
+                    <path class="body-part" data-name="Верхняя левая часть спины" 
+                        d="M5700 11594 c-224 -117 -269 -206 -272 -534 -2 -166 -14 -286 -35
+                        -359 -48 -157 -47 -525 1 -517 24 4 38 -14 50 -70 26 -122 52 -157 112 -150
+                        149 17 292 593 223 894 -15 63 -14 95 2 110 36 36 74 -37 100 -195 26 -157 95
+                        -415 116 -438 42 -44 485 309 626 499 l77 104 0 261 0 261 -149 0 c-218 0
+                        -434 35 -622 101 -194 69 -167 65 -229 33z"/>
+                        
+                    <!-- Upper Back Right (Верхняя правая часть спины) -->
+                    <path class="body-part" data-name="Верхняя правая часть спины" 
+                        d="M7598 11568 c-146 -61 -420 -108 -631 -108 l-167 0 0 -248 0 -248
+                        123 -163 c143 -190 257 -295 437 -402 l129 -78 25 47 c26 49 89 287 126 477
+                        19 95 30 115 64 115 34 0 39 -9 28 -55 -77 -335 49 -896 213 -953 73 -26 93
+                        -3 108 125 10 83 20 103 50 103 44 0 56 393 14 494 -13 32 -25 173 -26 326 -5
+                        484 -189 696 -493 568z"/>
+                        
+                    <!-- Lower Back (Поясница) -->
+                    <path class="body-part" data-name="Поясница" 
+                        d="M6800 10243 l0 -603 -50 0 -50 0 0 582 0 582 -77 -97 c-148 -187
+                        -339 -352 -509 -439 -70 -37 -94 -59 -86 -84 99 -343 104 -499 24 -685 -11
+                        -25 11 -30 143 -30 192 0 275 -28 433 -147 l124 -94 79 58 c182 133 308 181
+                        474 183 85 0 155 2 155 3 0 2 -14 42 -31 90 -39 110 -39 306 0 488 41 191 44
+                        183 -74 242 -118 60 -407 331 -496 466 l-59 89 0 -604z"/>
+                        
+                    <!-- Left Arm (Back) (Левая рука сзади) -->
+                    <path class="body-part" data-name="Левая рука сзади" 
+                        d="M5299 9949 c-45 -132 -48 -170 -55 -769 -4 -346 -8 -712 -10 -813 -4
+                        -203 32 -277 186 -382 144 -98 191 -55 100 93 -70 113 -96 312 -40 312 20 0
+                        34 -30 43 -94 15 -108 29 -136 66 -136 76 0 69 265 -12 425 -79 157 -80 274
+                        -6 525 111 373 128 460 129 638 0 168 -2 176 -35 147 -94 -84 -214 -44 -273
+                        90 l-46 103 -47 -139z"/>
+                        
+                    <!-- Right Arm (Back) (Правая рука сзади) -->
+                    <path class="body-part" data-name="Правая рука сзади" 
+                        d="M8140 10044 c-1 -158 -167 -237 -291 -140 l-55 44 12 -209 c9 -162
+                        33 -281 103 -529 108 -380 112 -450 33 -606 -66 -130 -90 -261 -66 -364 24
+                        -109 70 -89 101 45 19 78 37 115 58 115 55 0 21 -214 -53 -330 -97 -153 -38
+                        -185 121 -65 160 121 183 197 164 535 -9 160 -14 502 -11 760 6 431 3 481 -34
+                        600 -51 158 -81 212 -82 144z"/>
+                        
+                    <!-- Left Thigh (Back) (Левое бедро сзади) -->
+                    <path class="body-part" data-name="Левое бедро сзади" 
+                        d="M6004 9334 c-135 -161 -239 -1216 -167 -1674 38 -235 103 -705 103
+                        -739 0 -7 65 -9 145 -5 112 6 169 -2 249 -33 122 -49 106 -72 164 237 136 726
+                        202 1134 202 1251 l0 47 -125 -59 c-138 -65 -296 -78 -438 -36 -125 38 -80 63
+                        104 59 160 -4 177 0 319 72 l150 76 -6 300 c-7 344 -16 363 -214 466 -125 64
+                        -444 90 -486 38z"/>
+                        
+                    <!-- Right Thigh (Back) (Правое бедро сзади) -->
+                    <path class="body-part" data-name="Правое бедро сзади" 
+                        d="M7068 9319 c-56 -22 -141 -78 -190 -126 l-88 -87 6 -292 6 -293 134
+                        -65 c118 -58 156 -66 322 -70 216 -5 236 -14 133 -57 -139 -58 -358 -36 -504
+                        50 -38 23 -73 41 -78 41 -32 0 24 -460 89 -743 21 -92 68 -315 103 -497 77
+                        -391 54 -352 171 -299 80 36 122 42 251 35 l155 -9 12 111 c6 62 38 310 71
+                        552 55 408 58 458 39 689 -42 511 -133 988 -204 1076 -34 40 -308 30 -428 -16z"/>
+                        
+                    <!-- Left Lower Leg (Back) (Левая голень сзади) -->
+                    <path class="body-part" data-name="Левая голень сзади" 
+                        d="M5997 6827 c-49 -9 -56 -22 -85 -173 -18 -90 -47 -231 -64 -314 -39
+                        -189 -28 -349 53 -770 126 -660 119 -931 -27 -1055 -109 -92 -118 -141 -35
+                        -184 92 -48 326 -82 415 -60 l76 19 -6 230 c-3 127 -16 298 -27 380 -30 207
+                        -8 482 53 660 112 329 131 530 79 829 -19 107 -26 217 -19 274 l13 95 -75 32
+                        c-81 33 -262 53 -351 37z"/>
+                        
+                    <!-- Right Lower Leg (Back) (Правая голень сзади) -->
+                    <path class="body-part" data-name="Правая голень сзади" 
+                        d="M7150 6785 c-59 -34 -60 -38 -64 -215 -2 -99 -7 -297 -10 -440 -6
+                        -249 -3 -269 63 -480 79 -252 88 -444 46 -1030 -27 -395 19 -430 421 -311 156
+                        46 161 73 37 195 -157 156 -167 433 -37 1076 103 509 103 502 53 740 -25 116
+                        -54 273 -67 350 l-22 140 -180 5 c-140 3 -193 -4 -240 -30z"/>
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </div>
+
+                                        <div class="view-toggle-button">
+                                            <button id="frontBtn" type="button" class="btn btn-sm btn-primary active">Вид спереди</button>
+                                            <button id="backBtn" type="button" class="btn btn-sm btn-outline-primary">Вид сзади</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="selected-parts-container">
+                                        <h3>Выбранные области <button id="mobileClearAllButton" class="clear-all-button">Очистить все</button></h3>
+                                        <div class="selected-parts-list" id="mobileSelectedParts">
+                                            <!-- Selected body parts will appear here as tags -->
+
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row mt-4">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-floating">
+                                            <select class="form-select" id="mobilePainDuration" name="pain_duration" required>
+                                                <option value="">Выберите продолжительность</option>
+                                                <option value="менее_месяца">Менее месяца</option>
+                                                <option value="1-3_месяца">1-3 месяца</option>
+                                                <option value="3-6_месяцев">3-6 месяцев</option>
+                                                <option value="6-12_месяцев">6-12 месяцев</option>
+                                                <option value="больше_года">Более года</option>
+                                            </select>
+                                            <label for="mobilePainDuration">Продолжительность боли</label>
+                                            <div class="invalid-feedback">
+                                                Пожалуйста, выберите продолжительность боли
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-floating">
+                                            <select class="form-select" id="mobilePainLevel" name="pain_level" required>
+                                                <option value="">Выберите уровень боли</option>
+                                                <option value="1">1 - Очень слабая</option>
+                                                <option value="2">2 - Слабая</option>
+                                                <option value="3">3 - Умеренная</option>
+                                                <option value="4">4 - Умеренная</option>
+                                                <option value="5">5 - Средняя</option>
+                                                <option value="6">6 - Средняя</option>
+                                                <option value="7">7 - Сильная</option>
+                                                <option value="8">8 - Сильная</option>
+                                                <option value="9">9 - Очень сильная</option>
+                                                <option value="10">10 - Невыносимая</option>
+                                            </select>
+                                            <label for="mobilePainLevel">Уровень боли (1-10)</label>
+                                            <div class="invalid-feedback">
+                                                Пожалуйста, выберите уровень боли
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <input type="hidden" name="pain_locations" id="mobilePainLocations" value="">
+                            </div>
+
+                            
+
+                            
+                            
+                            <!-- Desktop version with side-by-side views -->
+                            <div class="desktop-body-map">
+                                <div class="body-map-container">
+                                    <div class="diagram-instruction">
+                                        Нажмите на области тела, где вы испытываете боль (необязательно)
+                                    </div>
+                                    <div class="diagram-wrapper">
+                                        <div class="body-views">
+                                            <div class="tooltip"></div>
+                                            <svg class="body-map" version="1.0" xmlns="http://www.w3.org/2000/svg"
+                                                width="630.000000pt" height="607.000000pt" viewBox="0 0 700.000000 590.000000"
+                                                preserveAspectRatio="xMidYMid meet">
+                                                <g transform="translate(0.0000,790.000000) scale(0.050,-0.055000)">
+                                                    <!-- Front view -->
+                                                    <g id="front-view" transform="translate(-400,0)">
+                                                       <!-- Front figure paths -->
+                        
+                        <!-- Head (Голова) -->
+                        <path class="body-part" data-name="Голова" 
+                        d="M2068 13189 c-319 -162 -293 -862 40 -1068 401 -248 760 763 370
+                        1041 -87 62 -314 77 -410 27z"/>
+                    
+                    <!-- Neck (Шея) -->
+                    <path class="body-part" data-name="Шея" 
+                        d="M1980 11953 c0 -191 186 -352 325 -281 174 88 195 117 195 270 l0
+                        141 -63 -45 c-98 -70 -244 -74 -362 -10 l-95 51 0 -126z"/>
+                    
+                    <!-- Left Shoulder (Правое плечо) -->
+                    <path class="body-part" data-name="Правое плечо" 
+                        d="M1730 11760 c-55 -21 -174 -58 -265 -81 -377 -99 -480 -228 -505
+                        -636 -8 -139 -13 -256 -10 -259 3 -4 86 38 183 93 l177 100 37 225 c54 332 22
+                        299 370 377 l302 67 -65 75 c-74 87 -89 90 -224 39z"/>
+                    
+                    <!-- Right Shoulder (Левое плечо) -->
+                    <path class="body-part" data-name="Левое плечо" 
+                        d="M2544 11722 l-63 -79 274 -64 c336 -79 345 -83 346 -165 1 -35 17
+                        -149 35 -252 l34 -189 160 -95 c88 -53 165 -97 172 -97 7 -1 17 73 24 164 31
+                        457 -95 632 -538 745 -109 28 -232 64 -273 81 -102 39 -100 40 -171 -49z"/>
+                        
+                    <!-- Left Upper Chest (Правая верхняя часть груди) -->
+                    <path class="body-part" data-name="Правая верхняя часть груди" 
+                        d="M1940 11540 c-532 -116 -471 -66 -520 -430 l-24 -180 74 -235 c85
+                        -270 71 -259 200 -153 151 125 214 153 475 207 l55 12 0 389 c0 391 -11 448
+                        -84 428 -3 -1 -82 -18 -176 -38z"/>
+                    
+                    <!-- Right Upper Chest (Левая верхняя часть груди) -->
+                    <path class="body-part" data-name="Левая верхняя часть груди" 
+                        d="M2313 11555 c-30 -22 -33 -69 -28 -415 l5 -390 60 -5 c184 -17 337
+                        -83 477 -206 95 -84 132 -86 133 -6 0 12 28 108 62 214 l62 191 -40 243 c-22
+                        133 -43 245 -47 249 -6 5 -393 95 -609 140 -23 5 -57 -2 -75 -15z"/>
+                    
+                    <!-- Left Arm (Правая рука) -->
+                    <path class="body-part" data-name="Правая рука" 
+                        d="M1125 10766 l-185 -111 0 -255 c0 -209 6 -258 30 -267 17 -7 30 -35
+                        30 -64 0 -127 94 -170 178 -81 101 108 186 554 149 785 l-17 103 -185 -110z"/>
+                    
+                    <!-- Right Arm (Левая рука) -->
+                    <path class="body-part" data-name="Левая рука" 
+                        d="M3160 10873 c-45 -352 -42 -385 53 -708 49 -164 95 -225 170 -225 49
+                        0 97 55 97 110 0 26 14 61 30 77 23 24 30 84 30 277 l0 246 -190 113 c-105 62
+                        -190 111 -190 110z"/>
+                        
+                    <!-- Abdomen (Живот) -->
+                    <path class="body-part" data-name="Живот" 
+                        d="M2015 10640 c-126 -32 -220 -91 -330 -207 l-104 -111 44 -136 c59
+                        -183 58 -396 -3 -544 l-43 -107 92 -91 c106 -105 189 -259 240 -444 127 -466
+                        496 -486 630 -35 65 217 164 398 267 489 l91 80 -42 108 c-50 130 -43 426 14
+                        585 l34 97 -117 120 c-184 188 -494 266 -773 196z"/>
+                        
+                    <!-- Left Wrist (Правое запястье) -->
+                    <path class="body-part" data-name="Правое запястье" 
+                        d="M840 8515 c0 -251 17 -314 113 -422 148 -166 251 -174 133 -10 -88
+                        122 -123 327 -55 314 25 -5 44 -38 61 -105 30 -115 57 -151 91 -117 27 27 1
+                        174 -64 370 -22 63 -39 129 -39 145 0 23 -27 30 -120 30 l-120 0 0 -205z"/>
+                    
+                    <!-- Right Wrist (Левое запястье) -->
+                    <path class="body-part" data-name="Левое запястье" 
+                        d="M3364 8585 c-57 -190 -89 -362 -75 -398 19 -52 65 4 93 114 20 76 35
+                        99 64 99 65 0 38 -197 -43 -311 -89 -128 -79 -167 26 -98 138 91 198 233 207
+                        490 l9 239 -121 0 -120 0 -40 -135z"/>
+                        
+                    <!-- Left Forearm (Левое предплечье) -->
+                    <path class="body-part" data-name="Левое предплечье" 
+                        d="M862 9891 c-17 -74 -22 -263 -18 -590 l6 -481 115 0 115 0 0 75 c0
+                        68 50 291 130 584 47 172 42 429 -9 402 -101 -55 -281 3 -281 90 0 69 -36 20
+                        -58 -80z"/>
+                    
+                    <!-- Right Forearm (Левая предплечье) -->
+                    <path class="body-part" data-name="Левая предплечье" 
+                        d="M3536 9939 c-48 -83 -117 -105 -219 -70 l-82 28 10 -194 c7 -139 29
+                        -265 82 -453 40 -143 73 -298 73 -345 l0 -85 107 0 107 0 15 475 c17 576 -13
+                        784 -93 644z"/>
+                        
+                    <!-- Left Thigh (Правое бедро) -->
+                    <path class="body-part" data-name="Правое бедро" 
+                        d="M1536 9429 c-21 -35 -133 -477 -167 -659 -51 -271 -14 -796 93 -1319
+                        22 -110 46 -264 52 -341 7 -79 23 -146 37 -155 13 -8 30 -45 37 -82 19 -102
+                        93 -161 184 -147 168 28 214 139 268 656 21 202 57 490 79 638 22 149 41 330
+                        41 403 l0 133 -85 50 c-145 86 -192 151 -241 337 -59 219 -261 548 -298 486z"/>
+                        
+                    <!-- Right Thigh (Левое бедро) -->
+                    <path class="body-part" data-name="Левое бедро" 
+                        d="M2846 9354 c-116 -125 -178 -243 -223 -422 -44 -172 -107 -258 -248
+                        -337 -41 -23 -75 -52 -74 -64 0 -31 70 -655 128 -1148 66 -572 89 -628 261
+                        -652 136 -20 239 137 269 409 9 83 47 299 84 480 64 314 67 351 67 750 -1 436
+                        -8 497 -104 850 -66 240 -64 238 -160 134z"/>
+                        
+                    <!-- Left Lower Leg (Правая голень голень) -->
+                    <path class="body-part" data-name="Правая голень" 
+                        d="M1484 6723 c-92 -314 -79 -618 45 -1109 89 -352 144 -683 125 -756
+                        -9 -35 2 -38 135 -38 l144 0 -1 335 c-2 307 3 355 57 575 72 289 74 432 13
+                        690 -24 105 -49 211 -54 237 -7 33 -17 41 -34 27 -108 -85 -261 -63 -357 52
+                        l-52 61 -21 -74z"/>
+                        
+                    <!-- Right Lower Leg (Левая голень) -->
+                    <path class="body-part" data-name="Левая голень" 
+                        d="M2924 6756 c-65 -105 -176 -146 -289 -107 -104 36 -99 43 -153 -199
+                        -61 -277 -58 -453 11 -711 52 -193 56 -236 56 -571 l0 -362 80 18 c45 11 106
+                        15 136 11 54 -8 55 -7 55 103 0 146 40 366 128 712 121 476 134 786 46 1092
+                        l-25 87 -45 -73z"/>
+                        
+                    <!-- Left Foot (Правая стопа) -->
+                    <path class="body-part" data-name="Правая стопа" 
+                        d="M1586 4548 c-85 -256 -63 -288 203 -288 186 0 192 10 175 260 l-14
+                        210 -150 5 -150 5 -64 -192z"/>
+                        
+                    <!-- Right Foot (Левая стопа) -->
+                    <path class="body-part" data-name="Левая стопа" 
+                        d="M2610 4733 l-80 -24 -15 -208 c-18 -250 -22 -246 199 -236 240 11
+                        286 74 181 242 -15 24 -39 82 -55 129 -39 124 -81 142 -230 97z"/>
+                                                    </g>
+
+                                                    <g id="back-view" transform="translate(4200,0)">
+                                                        <!-- Back figure paths -->
+                                                         
+                                                    <!-- Back Head (Затылок) -->
+                                                    <path class="body-part" data-name="Затылок" 
+                                                        d="M6651 13218 c-192 -46 -294 -202 -293 -444 1 -79 -4 -187 -10 -239
+                                                        -11 -86 -7 -99 50 -156 61 -61 62 -65 62 -261 l0 -199 -215 -102 c-118 -55
+                                                        -237 -110 -265 -121 l-50 -21 70 -30 c112 -48 418 -104 565 -105 l135 0 0 65
+                                                        c1 104 21 155 62 155 33 0 38 -16 38 -110 l0 -110 65 0 c247 2 695 92 695 141
+                                                        0 10 -11 19 -25 20 -14 0 -128 52 -255 115 l-230 114 7 200 c4 110 16 203 26
+                                                        207 87 32 139 196 88 274 -21 33 -31 96 -31 204 0 296 -211 470 -489 403z"/>
+                                                        
+                                                    <!-- Upper Back Left (Верхняя левая часть спины) -->
+                                                    <path class="body-part" data-name="Верхняя левая часть спины" 
+                                                        d="M5700 11594 c-224 -117 -269 -206 -272 -534 -2 -166 -14 -286 -35
+                                                        -359 -48 -157 -47 -525 1 -517 24 4 38 -14 50 -70 26 -122 52 -157 112 -150
+                                                        149 17 292 593 223 894 -15 63 -14 95 2 110 36 36 74 -37 100 -195 26 -157 95
+                                                        -415 116 -438 42 -44 485 309 626 499 l77 104 0 261 0 261 -149 0 c-218 0
+                                                        -434 35 -622 101 -194 69 -167 65 -229 33z"/>
+                                                        
+                                                    <!-- Upper Back Right (Верхняя правая часть спины) -->
+                                                    <path class="body-part" data-name="Верхняя правая часть спины" 
+                                                        d="M7598 11568 c-146 -61 -420 -108 -631 -108 l-167 0 0 -248 0 -248
+                                                        123 -163 c143 -190 257 -295 437 -402 l129 -78 25 47 c26 49 89 287 126 477
+                                                        19 95 30 115 64 115 34 0 39 -9 28 -55 -77 -335 49 -896 213 -953 73 -26 93
+                                                        -3 108 125 10 83 20 103 50 103 44 0 56 393 14 494 -13 32 -25 173 -26 326 -5
+                                                        484 -189 696 -493 568z"/>
+                                                        
+                                                    <!-- Lower Back (Поясница) -->
+                                                    <path class="body-part" data-name="Поясница" 
+                                                        d="M6800 10243 l0 -603 -50 0 -50 0 0 582 0 582 -77 -97 c-148 -187
+                                                        -339 -352 -509 -439 -70 -37 -94 -59 -86 -84 99 -343 104 -499 24 -685 -11
+                                                        -25 11 -30 143 -30 192 0 275 -28 433 -147 l124 -94 79 58 c182 133 308 181
+                                                        474 183 85 0 155 2 155 3 0 2 -14 42 -31 90 -39 110 -39 306 0 488 41 191 44
+                                                        183 -74 242 -118 60 -407 331 -496 466 l-59 89 0 -604z"/>
+                                                        
+                                                    <!-- Left Arm (Back) (Левая рука сзади) -->
+                                                    <path class="body-part" data-name="Левая рука сзади" 
+                                                        d="M5299 9949 c-45 -132 -48 -170 -55 -769 -4 -346 -8 -712 -10 -813 -4
+                                                        -203 32 -277 186 -382 144 -98 191 -55 100 93 -70 113 -96 312 -40 312 20 0
+                                                        34 -30 43 -94 15 -108 29 -136 66 -136 76 0 69 265 -12 425 -79 157 -80 274
+                                                        -6 525 111 373 128 460 129 638 0 168 -2 176 -35 147 -94 -84 -214 -44 -273
+                                                        90 l-46 103 -47 -139z"/>
+                                                        
+                                                    <!-- Right Arm (Back) (Правая рука сзади) -->
+                                                    <path class="body-part" data-name="Правая рука сзади" 
+                                                        d="M8140 10044 c-1 -158 -167 -237 -291 -140 l-55 44 12 -209 c9 -162
+                                                        33 -281 103 -529 108 -380 112 -450 33 -606 -66 -130 -90 -261 -66 -364 24
+                                                        -109 70 -89 101 45 19 78 37 115 58 115 55 0 21 -214 -53 -330 -97 -153 -38
+                                                        -185 121 -65 160 121 183 197 164 535 -9 160 -14 502 -11 760 6 431 3 481 -34
+                                                        600 -51 158 -81 212 -82 144z"/>
+                                                        
+                                                    <!-- Left Thigh (Back) (Левое бедро сзади) -->
+                                                    <path class="body-part" data-name="Левое бедро сзади" 
+                                                        d="M6004 9334 c-135 -161 -239 -1216 -167 -1674 38 -235 103 -705 103
+                                                        -739 0 -7 65 -9 145 -5 112 6 169 -2 249 -33 122 -49 106 -72 164 237 136 726
+                                                        202 1134 202 1251 l0 47 -125 -59 c-138 -65 -296 -78 -438 -36 -125 38 -80 63
+                                                        104 59 160 -4 177 0 319 72 l150 76 -6 300 c-7 344 -16 363 -214 466 -125 64
+                                                        -444 90 -486 38z"/>
+                                                        
+                                                    <!-- Right Thigh (Back) (Правое бедро сзади) -->
+                                                    <path class="body-part" data-name="Правое бедро сзади" 
+                                                        d="M7068 9319 c-56 -22 -141 -78 -190 -126 l-88 -87 6 -292 6 -293 134
+                                                        -65 c118 -58 156 -66 322 -70 216 -5 236 -14 133 -57 -139 -58 -358 -36 -504
+                                                        50 -38 23 -73 41 -78 41 -32 0 24 -460 89 -743 21 -92 68 -315 103 -497 77
+                                                        -391 54 -352 171 -299 80 36 122 42 251 35 l155 -9 12 111 c6 62 38 310 71
+                                                        552 55 408 58 458 39 689 -42 511 -133 988 -204 1076 -34 40 -308 30 -428 -16z"/>
+                                                        
+                                                    <!-- Left Lower Leg (Back) (Левая голень сзади) -->
+                                                    <path class="body-part" data-name="Левая голень сзади" 
+                                                        d="M5997 6827 c-49 -9 -56 -22 -85 -173 -18 -90 -47 -231 -64 -314 -39
+                                                        -189 -28 -349 53 -770 126 -660 119 -931 -27 -1055 -109 -92 -118 -141 -35
+                                                        -184 92 -48 326 -82 415 -60 l76 19 -6 230 c-3 127 -16 298 -27 380 -30 207
+                                                        -8 482 53 660 112 329 131 530 79 829 -19 107 -26 217 -19 274 l13 95 -75 32
+                                                        c-81 33 -262 53 -351 37z"/>
+                                                        
+                                                    <!-- Right Lower Leg (Back) (Правая голень сзади) -->
+                                                    <path class="body-part" data-name="Правая голень сзади" 
+                                                        d="M7150 6785 c-59 -34 -60 -38 -64 -215 -2 -99 -7 -297 -10 -440 -6
+                                                        -249 -3 -269 63 -480 79 -252 88 -444 46 -1030 -27 -395 19 -430 421 -311 156
+                                                        46 161 73 37 195 -157 156 -167 433 -37 1076 103 509 103 502 53 740 -25 116
+                                                        -54 273 -67 350 l-22 140 -180 5 c-140 3 -193 -4 -240 -30z"/>
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="body-map-labels">
+                                        <div>Вид спереди</div>
+                                        <div>Вид сзади</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="selected-parts-container">
+                                    <h3>Выбранные области <button id="clearAllButton" class="clear-all-button">Очистить все</button></h3>
+                                    <div class="selected-parts-list" id="selectedParts">
+                                        <!-- Selected body parts will appear here as tags -->
+                                    </div>
+                                </div>
+
+                                <div class="row mt-4">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-floating">
+                                            <select class="form-select" id="painDuration" name="pain_duration" required>
+                                                <option value="">Выберите продолжительность</option>
+                                                <option value="менее_месяца">Менее месяца</option>
+                                                <option value="1-3_месяца">1-3 месяца</option>
+                                                <option value="3-6_месяцев">3-6 месяцев</option>
+                                                <option value="6-12_месяцев">6-12 месяцев</option>
+                                                <option value="больше_года">Более года</option>
+                                            </select>
+                                            <label for="painDuration">Продолжительность боли</label>
+                                            <div class="invalid-feedback">
+                                                Пожалуйста, выберите продолжительность боли
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-floating">
+                                            <select class="form-select" id="painLevel" name="pain_level" required>
+                                                <option value="">Выберите уровень боли</option>
+                                                <option value="1">1 - Очень слабая</option>
+                                                <option value="2">2 - Слабая</option>
+                                                <option value="3">3 - Умеренная</option>
+                                                <option value="4">4 - Умеренная</option>
+                                                <option value="5">5 - Средняя</option>
+                                                <option value="6">6 - Средняя</option>
+                                                <option value="7">7 - Сильная</option>
+                                                <option value="8">8 - Сильная</option>
+                                                <option value="9">9 - Очень сильная</option>
+                                                <option value="10">10 - Невыносимая</option>
+                                            </select>
+                                            <label for="painLevel">Уровень боли (1-10)</label>
+                                            <div class="invalid-feedback">
+                                                Пожалуйста, выберите уровень боли
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <input type="hidden" name="pain_locations" id="painLocations" value="">
+                            </div>
+                            
+                            <div class="form-navigation">
+                                <div></div>
+                                <button type="button" class="btn btn-primary next-step">Далее <i class="fas fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Contact Information -->
+                        <div class="form-step" data-step="2">
+                            <h4 class="mb-4">Контактная информация</h4>
+                            
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="lastNameInput" name="last_name" placeholder="Фамилия" required>
+                                        <label for="lastNameInput">Фамилия</label>
+                                        <div class="invalid-feedback">Пожалуйста, введите фамилию</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="firstNameInput" name="first_name" placeholder="Имя" required>
+                                        <label for="firstNameInput">Имя</label>
+                                        <div class="invalid-feedback">Пожалуйста, введите имя</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="patronymicInput" name="patronymic" placeholder="Отчество">
+                                        <label for="patronymicInput">Отчество</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input type="email" class="form-control" id="emailInput" name="contact_email" placeholder="Электронная почта" required>
+                                        <label for="emailInput">Электронная почта</label>
+                                        <div class="invalid-feedback">Пожалуйста, введите корректный email</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input type="tel" class="form-control" id="phoneInput" name="mobile" placeholder="Мобильный телефон" required>
+                                        <label for="phoneInput">Мобильный телефон</label>
+                                        <div class="invalid-feedback">Пожалуйста, введите номер телефона</div>
+                                        <div class="phone-hint">Пример: +7 (900) 123-45-67</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-navigation mt-4">
+                                <button type="button" class="btn btn-outline-primary prev-step">Назад</button>
+                                <button type="button" class="btn btn-primary next-step">Далее</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 3: Confirmation -->
+                        <div class="form-step" data-step="3">
+                            <h4 class="mb-4">Дополнительная информация</h4>
+                            <div class="mb-3">
+                                <textarea class="form-control" id="additionalInfo" name="message" rows="5" placeholder="Дополнительная информация о вашей ситуации"></textarea>
+                                <div class="form-text">Опишите подробнее вашу ситуацию, чтобы мы могли подобрать наиболее подходящего специалиста</div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label class="form-label">Тип пациента</label>
+                                <div class="d-flex gap-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="patient_type" id="selfPaying" value="self-paying" checked>
+                                        <label class="form-check-label" for="selfPaying">
+                                            Платное лечение
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="patient_type" id="oms" value="oms">
+                                        <label class="form-check-label" for="oms">
+                                            ОМС
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-check mb-4">
+                                <input class="form-check-input" type="checkbox" id="consentCheck" name="consent" value="true" required>
+                                <label class="form-check-label" for="consentCheck">
+                                    Я согласен на обработку моих персональных данных в соответствии с политикой конфиденциальности
+                                </label>
+                                <div class="invalid-feedback">
+                                    Необходимо ваше согласие для отправки формы
+                                </div>
+                            </div>
+                            <div class="form-navigation mt-4 d-flex justify-content-between">
+                                <button type="button" class="btn btn-outline-primary prev-step">Назад</button>
+                                <button type="submit" class="btn btn-success">
+                                    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                    <span class="submit-text">Отправить заявку</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Removed redundant form-navigation block that was outside form-steps -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+
+{% block extra_js %}
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Prevent scroll restoration on page load
+            if ('scrollRestoration' in history) {
+                history.scrollRestoration = 'manual';
+            }
+            
+            // General UI functionality
+            // Back to top button functionality
+            const backToTopButton = document.querySelector('.back-to-top');
+            if (backToTopButton) {
+                const toggleBackToTop = () => {
+                    if (window.scrollY > 300) {
+                        backToTopButton.classList.add('visible');
+                    } else {
+                        backToTopButton.classList.remove('visible');
+                    }
+                };
+                
+                // Initial check
+                toggleBackToTop();
+                
+                // Add scroll listener with throttling
+                let isScrolling = false;
+                window.addEventListener('scroll', () => {
+                    if (!isScrolling) {
+                        window.requestAnimationFrame(() => {
+                            toggleBackToTop();
+                            isScrolling = false;
+                        });
+                        isScrolling = true;
+                    }
+                });
+                
+                // Handle click and keyboard events
+                backToTopButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+                
+                backToTopButton.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        window.scrollTo({
+                            top: 0,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            }
+            
+            // Fade-in animation
+            const fadeElems = document.querySelectorAll('.fade-in');
+            
+            const observerOptions = {
+                threshold: 0.2,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    
+                    entry.target.classList.add('appear');
+                    observer.unobserve(entry.target);
+                });
+            }, observerOptions);
+            
+            fadeElems.forEach(elem => {
+                observer.observe(elem);
+            });
+            
+            // Form steps functionality
+            const multiStepForm = document.querySelector('.multi-step-form');
+            if (multiStepForm) {
+                const formSteps = multiStepForm.querySelectorAll('.form-step');
+                const stepIndicators = multiStepForm.querySelectorAll('.step');
+                const nextButtons = multiStepForm.querySelectorAll('.next-step');
+                const prevButtons = multiStepForm.querySelectorAll('.prev-step');
+                
+                let currentStep = 0;
+                
+                // Show a specific step and update indicators
+                function showStep(stepIndex) {
+                    // Update form steps
+                    formSteps.forEach((step, index) => {
+                        if (index === stepIndex) {
+                            step.classList.add('active');
+                        } else {
+                            step.classList.remove('active');
+                        }
+                    });
+                    
+                    // Update step indicators
+                    stepIndicators.forEach((indicator, index) => {
+                        if (index < stepIndex) {
+                            indicator.classList.add('completed');
+                            indicator.classList.remove('active');
+                        } else if (index === stepIndex) {
+                            indicator.classList.add('active');
+                            indicator.classList.remove('completed');
+                        } else {
+                            indicator.classList.remove('active', 'completed');
+                        }
+                    });
+                    
+                    currentStep = stepIndex;
+                    
+                    // Scroll to top of form when switching to step 2 or 3
+                    if (stepIndex === 1 || stepIndex === 2) {
+                        setTimeout(() => {
+                            const formRect = multiStepForm.getBoundingClientRect();
+                            const navbarHeight = window.innerWidth <= 768 ? 64 : 72;
+                            const bannerHeight = window.innerWidth <= 768 ? 32 : 36;
+                            const offset = navbarHeight + bannerHeight + 20;
+                            window.scrollTo({
+                                top: window.pageYOffset + formRect.top - offset,
+                                behavior: 'smooth'
+                            });
+                        }, 50);
+                    }
+                }
+                
+                // Function to validate the current step
+                function validateStep(stepIndex) {
+                    const step = formSteps[stepIndex];
+                    const requiredFields = step.querySelectorAll('[required]');
+                    let isValid = true;
+                    
+                    // Special case for first step - at least select pain level
+                    if (stepIndex === 0) {
+                        // Check if either mobile or desktop pain level/duration fields are filled
+                        const durationField = document.getElementById('painDuration');
+                        const mobileDurationField = document.getElementById('mobilePainDuration');
+                        const painLevelField = document.getElementById('painLevel');
+                        const mobilePainLevelField = document.getElementById('mobilePainLevel');
+                        
+                        let hasDuration = false;
+                        let hasPainLevel = false;
+                        
+                        if ((durationField && durationField.value) || 
+                            (mobileDurationField && mobileDurationField.value)) {
+                            hasDuration = true;
+                            // Sync values
+                            if (durationField && mobileDurationField) {
+                                if (durationField.value && !mobileDurationField.value) {
+                                    mobileDurationField.value = durationField.value;
+                                } else if (mobileDurationField.value && !durationField.value) {
+                                    durationField.value = mobileDurationField.value;
+                                }
+                            }
+                        }
+                        
+                        if ((painLevelField && painLevelField.value) ||
+                            (mobilePainLevelField && mobilePainLevelField.value)) {
+                            hasPainLevel = true;
+                            // Sync values
+                            if (painLevelField && mobilePainLevelField) {
+                                if (painLevelField.value && !mobilePainLevelField.value) {
+                                    mobilePainLevelField.value = painLevelField.value;
+                                } else if (mobilePainLevelField.value && !painLevelField.value) {
+                                    painLevelField.value = mobilePainLevelField.value;
+                                }
+                            }
+                        }
+                        
+                        if (!hasDuration) {
+                            isValid = false;
+                            if (durationField) durationField.classList.add('is-invalid');
+                            if (mobileDurationField) mobileDurationField.classList.add('is-invalid');
+                        } else {
+                            if (durationField) durationField.classList.remove('is-invalid');
+                            if (mobileDurationField) mobileDurationField.classList.remove('is-invalid');
+                        }
+                        
+                        if (!hasPainLevel) {
+                            isValid = false;
+                            if (painLevelField) painLevelField.classList.add('is-invalid');
+                            if (mobilePainLevelField) mobilePainLevelField.classList.add('is-invalid');
+                        } else {
+                            if (painLevelField) painLevelField.classList.remove('is-invalid');
+                            if (mobilePainLevelField) mobilePainLevelField.classList.remove('is-invalid');
+                        }
+                    } else {
+                        // Standard validation for other steps
+                        requiredFields.forEach(field => {
+                            if (field.type === 'checkbox') {
+                                // Special handling for checkbox (like consent)
+                                if (!field.checked) {
+                                    isValid = false;
+                                    field.classList.add('is-invalid');
+                                    const feedback = field.closest('.form-check').querySelector('.invalid-feedback');
+                                    if (feedback) feedback.style.display = 'block';
+                                } else {
+                                    field.classList.remove('is-invalid');
+                                    const feedback = field.closest('.form-check').querySelector('.invalid-feedback');
+                                    if (feedback) feedback.style.display = 'none';
+                                }
+                            } else if (field.id === 'phoneInput') {
+                                // Specialized phone validation
+                                const isPhoneValid = validatePhoneNumber(field.value);
+                                if (!isPhoneValid) {
+                                    isValid = false;
+                                    field.classList.add('is-invalid');
+                                    const feedback = field.parentNode.querySelector('.invalid-feedback');
+                                    if (feedback) feedback.style.display = 'block';
+                                } else {
+                                    field.classList.remove('is-invalid');
+                                    const feedback = field.parentNode.querySelector('.invalid-feedback');
+                                    if (feedback) feedback.style.display = 'none';
+                                }
+                            } else if (!field.checkValidity()) {
+                                isValid = false;
+                                field.classList.add('is-invalid');
+                                const feedback = field.parentNode.querySelector('.invalid-feedback');
+                                if (feedback) feedback.style.display = 'block';
+                            } else {
+                                field.classList.remove('is-invalid');
+                                const feedback = field.parentNode.querySelector('.invalid-feedback');
+                                if (feedback) feedback.style.display = 'none';
+                            }
+                        });
+                    }
+                    
+                    return isValid;
+                }
+                
+                // Phone validation function
+                function validatePhoneNumber(phone) {
+                    // Basic Russian mobile format validation
+                    const regex = /^\+7\s\(\d{3}\)\s\d{3}-\d{2}-\d{2}$/;
+                    return regex.test(phone) && phone.includes('(9'); // Must start with 9 for mobile
+                }
+                
+                // Format phone number
+                const phoneInput = document.getElementById('phoneInput');
+                if (phoneInput) {
+                    phoneInput.addEventListener('input', function() {
+                        let val = this.value.replace(/\D/g, '');
+                        
+                        // Ensure starts with 7
+                        if (val.length > 0 && val[0] !== '7') {
+                            val = '7' + val;
+                        }
+                        
+                        // Format to +7 (XXX) XXX-XX-XX
+                        if (val.length > 0) {
+                            val = '+' + val;
+                        }
+                        if (val.length > 2) {
+                            val = val.substring(0, 2) + ' (' + val.substring(2);
+                        }
+                        if (val.length > 7) {
+                            val = val.substring(0, 7) + ') ' + val.substring(7);
+                        }
+                        if (val.length > 12) {
+                            val = val.substring(0, 12) + '-' + val.substring(12);
+                        }
+                        if (val.length > 15) {
+                            val = val.substring(0, 15) + '-' + val.substring(15, 17);
+                        }
+                        
+                        this.value = val.substring(0, 19); // Limit length
+                    });
+                }
+                
+                // Consent checkbox special handling
+                const consentCheckbox = document.getElementById('consentCheck');
+                if (consentCheckbox) {
+                    consentCheckbox.addEventListener('change', function() {
+                        if (this.checked) {
+                            this.classList.remove('is-invalid');
+                            const feedback = this.closest('.form-check').querySelector('.invalid-feedback');
+                            if (feedback) feedback.style.display = 'none';
+                        } else {
+                            this.classList.add('is-invalid');
+                            const feedback = this.closest('.form-check').querySelector('.invalid-feedback');
+                            if (feedback) feedback.style.display = 'block';
+                        }
+                    });
+                }
+                
+                // Next button click handler
+                nextButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        // Validate current step before proceeding
+                        if (validateStep(currentStep)) {
+                            showStep(currentStep + 1);
+                            // showStep function handles scrolling for step 2 and 3
+                        } else {
+                            // Scroll to the first invalid field
+                            const invalidField = formSteps[currentStep].querySelector('.is-invalid');
+                            if (invalidField) {
+                                invalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            }
+                        }
+                    });
+                });
+                
+                // Previous button click handler
+                prevButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        if (currentStep > 0) {
+                            showStep(currentStep - 1);
+                            // showStep function handles scrolling for step 2 and 3
+                        }
+                    });
+                });
+                
+                // Form submission handler with validation
+                multiStepForm.addEventListener('submit', function(event) {
+                    // Validate all steps before submission
+                    let isValid = true;
+                    
+                    for (let i = 0; i < formSteps.length; i++) {
+                        if (!validateStep(i)) {
+                            isValid = false;
+                            showStep(i); // Show the first invalid step
+                            break;
+                        }
+                    }
+                    
+                    // Double-check consent specifically
+                    const consentCheckbox = document.getElementById('consentCheck');
+                    if (consentCheckbox && !consentCheckbox.checked) {
+                        isValid = false;
+                        consentCheckbox.classList.add('is-invalid');
+                        const feedback = consentCheckbox.closest('.form-check').querySelector('.invalid-feedback');
+                        if (feedback) feedback.style.display = 'block';
+                        showStep(2); // Ensure we're on the step with consent
+                    }
+                    
+                    if (!isValid) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        
+                        // Scroll to the first invalid field
+                        const invalidField = multiStepForm.querySelector('.is-invalid');
+                        if (invalidField) {
+                            invalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                    } else {
+                        // If valid, show loading spinner
+                        const submitBtn = multiStepForm.querySelector('button[type="submit"]');
+                        if (submitBtn) {
+                            const spinner = submitBtn.querySelector('.spinner-border');
+                            const text = submitBtn.querySelector('.submit-text');
+                            
+                            if (spinner && text) {
+                                spinner.classList.remove('d-none');
+                                text.style.display = 'none';
+                                submitBtn.disabled = true;
+                            }
+                        }
+                    }
+                });
+                
+                // Initialize body map interaction
+                initBodyMap();
+            }
+            
+            // Body Map Functionality
+            function initBodyMap() {
+                const bodyParts = document.querySelectorAll('.body-part');
+                const selectedPartsContainer = document.getElementById('selectedParts');
+                const mobileSelectedPartsContainer = document.getElementById('mobileSelectedParts');
+                const painLocationsInput = document.getElementById('painLocations');
+                const mobilePainLocationsInput = document.getElementById('mobilePainLocations'); 
+                const clearAllButton = document.getElementById('clearAllButton');
+                const mobileClearAllButton = document.getElementById('mobileClearAllButton');
+                const selectedParts = new Set();
+                
+                // Toggle view buttons for mobile
+                const frontBtn = document.getElementById('frontBtn');
+                const backBtn = document.getElementById('backBtn');
+                
+                if (frontBtn && backBtn) {
+                    const frontView = document.querySelector('.front-view');
+                    const backView = document.querySelector('.back-view');
+                    
+                    frontBtn.addEventListener('click', function(e) {
+                        e.preventDefault(); // Prevent default button behavior
+                        frontView.style.display = 'block';
+                        backView.style.display = 'none';
+                        frontBtn.classList.add('active');
+                        frontBtn.classList.remove('btn-outline-primary');
+                        frontBtn.classList.add('btn-primary');
+                        backBtn.classList.remove('active');
+                        backBtn.classList.remove('btn-primary');
+                        backBtn.classList.add('btn-outline-primary');
+                    });
+                    
+                    backBtn.addEventListener('click', function(e) {
+                        e.preventDefault(); // Prevent default button behavior
+                        frontView.style.display = 'none';
+                        backView.style.display = 'block';
+                        backBtn.classList.add('active');
+                        backBtn.classList.remove('btn-outline-primary');
+                        backBtn.classList.add('btn-primary');
+                        frontBtn.classList.remove('active');
+                        frontBtn.classList.remove('btn-primary');
+                        frontBtn.classList.add('btn-outline-primary');
+                    });
+                }
+                
+                // Function to update the selected parts containers and inputs
+                function updateSelectedParts() {
+                    // Clear containers
+                    if (selectedPartsContainer) selectedPartsContainer.innerHTML = '';
+                    if (mobileSelectedPartsContainer) mobileSelectedPartsContainer.innerHTML = '';
+                    
+                    // Update hidden inputs with comma-separated list
+                    const selectedPartsArray = Array.from(selectedParts);
+                    const partsString = selectedPartsArray.join(',');
+                    
+                    if (painLocationsInput) painLocationsInput.value = partsString;
+                    if (mobilePainLocationsInput) mobilePainLocationsInput.value = partsString;
+                    
+                    // Show empty message or create tags
+                    if (selectedParts.size === 0) {
+                        const emptyMessage = document.createElement('div');
+                        emptyMessage.className = 'empty-selection-message';
+                        emptyMessage.textContent = 'Не выбрано ни одной области (необязательно)';
+                        
+                        if (selectedPartsContainer) {
+                            selectedPartsContainer.appendChild(emptyMessage.cloneNode(true));
+                        }
+                        
+                        if (mobileSelectedPartsContainer) {
+                            mobileSelectedPartsContainer.appendChild(emptyMessage);
+                        }
+                    } else {
+                        // Create tags for each selected part
+                        selectedPartsArray.forEach(part => {
+                            // Create tag for desktop view
+                            if (selectedPartsContainer) {
+                                const tag = document.createElement('span');
+                                tag.className = 'selected-part-tag';
+                                tag.innerHTML = part + ' <span class="remove-part" data-part="' + part + '">&times;</span>';
+                                selectedPartsContainer.appendChild(tag);
+                            }
+                            
+                            // Create tag for mobile view
+                            if (mobileSelectedPartsContainer) {
+                                const mobileTag = document.createElement('span');
+                                mobileTag.className = 'selected-part-tag';
+                                mobileTag.innerHTML = part + ' <span class="remove-part" data-part="' + part + '">&times;</span>';
+                                mobileSelectedPartsContainer.appendChild(mobileTag);
+                            }
+                        });
+                        
+                        // Add click handlers to remove buttons
+                        document.querySelectorAll('.remove-part').forEach(removeBtn => {
+                            removeBtn.addEventListener('click', function() {
+                                const part = this.getAttribute('data-part');
+                                
+                                // Remove from set
+                                selectedParts.delete(part);
+                                
+                                // Remove selected class from SVG elements
+                                document.querySelectorAll('.body-part[data-name="' + part + '"]').forEach(el => {
+                                    el.classList.remove('selected');
+                                });
+                                
+                                // Update UI
+                                updateSelectedParts();
+                            });
+                        });
+                    }
+                }
+                
+                // Add click handlers to body parts
+                bodyParts.forEach(part => {
+                    // Add tooltip functionality
+                    const tooltips = document.querySelectorAll('.tooltip');
+                    
+                    part.addEventListener('mouseover', function(e) {
+                        const partName = this.getAttribute('data-name');
+                        tooltips.forEach(tooltip => {
+                            tooltip.style.display = 'block';
+                            tooltip.textContent = partName;
+                            tooltip.style.left = (e.pageX + 10) + 'px';
+                            tooltip.style.top = (e.pageY + 10) + 'px';
+                        });
+                    });
+                    
+                    part.addEventListener('mouseout', function() {
+                        tooltips.forEach(tooltip => {
+                            tooltip.style.display = 'none';
+                        });
+                    });
+                    
+                    part.addEventListener('mousemove', function(e) {
+                        tooltips.forEach(tooltip => {
+                            tooltip.style.left = (e.pageX + 10) + 'px';
+                            tooltip.style.top = (e.pageY + 10) + 'px';
+                        });
+                    });
+                    
+                    // Selection functionality
+                    part.addEventListener('click', function() {
+                        const partName = this.getAttribute('data-name');
+                        
+                        if (this.classList.contains('selected')) {
+                            // Deselect
+                            this.classList.remove('selected');
+                            selectedParts.delete(partName);
+                            
+                            // Also deselect same part in other views
+                            document.querySelectorAll('.body-part[data-name="' + partName + '"]').forEach(el => {
+                                if (el !== this) {
+                                    el.classList.remove('selected');
+                                }
+                            });
+                        } else {
+                            // Select
+                            this.classList.add('selected');
+                            selectedParts.add(partName);
+                            
+                            // Also select same part in other views
+                            document.querySelectorAll('.body-part[data-name="' + partName + '"]').forEach(el => {
+                                if (el !== this) {
+                                    el.classList.add('selected');
+                                }
+                            });
+                        }
+                        
+                        updateSelectedParts();
+                    });
+                });
+                
+                // Clear buttons functionality
+                if (clearAllButton) {
+                    clearAllButton.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        
+                        selectedParts.clear();
+                        document.querySelectorAll('.body-part.selected').forEach(el => {
+                            el.classList.remove('selected');
+                        });
+                        
+                        updateSelectedParts();
+                    });
+                }
+                
+                if (mobileClearAllButton) {
+                    mobileClearAllButton.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        
+                        selectedParts.clear();
+                        document.querySelectorAll('.body-part.selected').forEach(el => {
+                            el.classList.remove('selected');
+                        });
+                        
+                        updateSelectedParts();
+                    });
+                }
+                
+                // Initialize UI
+                updateSelectedParts();
+            }
+        });
+    </script>
+{% endblock extra_js %}
+

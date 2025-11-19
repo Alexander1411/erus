@@ -1,0 +1,997 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Эрус Центр лечения боли | Контакты{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Contact Methods Section */
+    .contact-methods {
+        padding: 80px 0;
+        background: var(--bg-white);
+    }
+
+    .contact-methods__container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+    }
+
+    .contact-card {
+        background: var(--bg-white);
+        padding: 40px 30px;
+        border-radius: 16px;
+        text-align: center;
+        transition: var(--transition);
+        border: 1px solid var(--border-color);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .contact-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #59A1CE, #4A8FB8);
+        transform: scaleX(0);
+        transition: var(--transition);
+    }
+
+    .contact-card:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-lg);
+        border-color: #6BB0DD;
+    }
+
+    .contact-card:hover::before {
+        transform: scaleX(1);
+    }
+
+    .contact-card__icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, #59A1CE, #4A8FB8);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 24px;
+        font-size: 32px;
+        color: white;
+        transition: var(--transition);
+    }
+
+    .contact-card:hover .contact-card__icon {
+        transform: scale(1.1);
+    }
+
+    .contact-card__title {
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin-bottom: 12px;
+    }
+
+    .contact-card__description {
+        font-size: 16px;
+        color: var(--text-muted);
+        margin-bottom: 24px;
+        line-height: 1.5;
+    }
+
+    .contact-card__action {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: #59A1CE;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 16px;
+        transition: var(--transition);
+        position: relative;
+    }
+
+    .contact-card__action::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: #59A1CE;
+        transition: var(--transition);
+    }
+
+    .contact-card__action:hover {
+        color: #4A8FB8;
+    }
+
+    .contact-card__action:hover::after {
+        width: calc(100% - 20px);
+    }
+
+    /* Clinic Location Section */
+    .clinic-location {
+        padding: 80px 0;
+        background: var(--bg-light);
+    }
+
+    .clinic-location__container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .section-header {
+        text-align: center;
+        margin-bottom: 60px;
+    }
+
+    .section-header__title {
+        font-size: clamp(2rem, 3vw, 2.5rem);
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 16px;
+    }
+
+    .section-header__subtitle {
+        font-size: 18px;
+        color: var(--text-muted);
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .location-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: start;
+    }
+
+    .location-info {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .info-card {
+        background: var(--bg-white);
+        padding: 30px;
+        border-radius: 16px;
+        box-shadow: var(--shadow-sm);
+        border: 1px solid var(--border-color);
+    }
+
+    .info-card__header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 24px;
+    }
+
+    .info-card__icon {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, #59A1CE, #4A8FB8);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 20px;
+    }
+
+    .info-card__title {
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin: 0;
+    }
+
+    .schedule {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .schedule__item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 16px;
+        background: var(--bg-light);
+        border-radius: 8px;
+        transition: var(--transition);
+    }
+
+    .schedule__item:hover {
+        background: var(--bg-tertiary);
+    }
+
+    .schedule__day {
+        font-weight: 600;
+        color: var(--text-dark);
+    }
+
+    .schedule__time {
+        color: var(--text-muted);
+        font-weight: 500;
+    }
+
+    .clinic-details {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .detail-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        padding: 20px;
+        background: var(--bg-white);
+        border-radius: 12px;
+        transition: var(--transition);
+        border: 1px solid var(--border-color);
+    }
+
+    .detail-item:hover {
+        transform: translateX(4px);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .detail-item__icon {
+        width: 40px;
+        height: 40px;
+        background: rgba(89, 161, 206, 0.1);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #59A1CE;
+        font-size: 16px;
+        flex-shrink: 0;
+    }
+
+    .detail-item__content h4 {
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin: 0 0 4px 0;
+    }
+
+    .detail-item__content p {
+        font-size: 14px;
+        color: var(--text-muted);
+        margin: 0;
+        line-height: 1.4;
+    }
+
+    .location-actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .map-container {
+        position: relative;
+    }
+
+    .map-wrapper {
+        position: relative;
+        width: 100%;
+        height: 500px;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: var(--shadow-md);
+        border: 1px solid var(--border-color);
+    }
+
+    .location-map {
+        width: 100%;
+        height: 100%;
+        border: none;
+        filter: grayscale(20%);
+        transition: var(--transition);
+    }
+
+    .location-map:hover {
+        filter: grayscale(0%);
+    }
+
+    .map-overlay {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 12px 16px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #59A1CE;
+        font-size: 14px;
+        font-weight: 600;
+        box-shadow: var(--shadow-sm);
+    }
+
+    /* How We Work Section */
+    .how-we-work-section {
+        padding: 80px 0;
+        background: var(--bg-light);
+    }
+
+    .how-we-work-section .section-header {
+        margin-bottom: 60px;
+    }
+
+    .work-steps-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+    }
+
+    .work-step-card {
+        background: var(--bg-white);
+        padding: 40px 30px;
+        border-radius: 16px;
+        text-align: center;
+        transition: var(--transition);
+        border: 1px solid var(--border-color);
+        height: 100%;
+    }
+
+    .work-step-card:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-lg);
+        border-color: #6BB0DD;
+    }
+
+    .work-step-card i {
+        font-size: 3rem;
+        color: #59A1CE;
+        margin-bottom: 24px;
+    }
+
+    .work-step-card h4 {
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin-bottom: 16px;
+    }
+
+    .work-step-card p {
+        font-size: 16px;
+        color: var(--text-muted);
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    /* FAQ Section */
+    .faq-section {
+        padding: 80px 0;
+        background: var(--bg-white);
+    }
+
+    .faq-section__container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .faq-accordion {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .faq-item {
+        background: var(--bg-white);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        overflow: hidden;
+        transition: var(--transition);
+    }
+
+    .faq-item:hover {
+        border-color: #6BB0DD;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .faq-item.active {
+        border-color: #59A1CE;
+        box-shadow: var(--shadow-md);
+    }
+
+    .faq-item__question {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 24px 30px;
+        cursor: pointer;
+        transition: var(--transition);
+        background: var(--bg-white);
+    }
+
+    .faq-item:hover .faq-item__question {
+        background: var(--bg-light);
+    }
+
+    .faq-item.active .faq-item__question {
+        background: rgba(89, 161, 206, 0.05);
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .faq-item__title {
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin: 0;
+        flex: 1;
+        line-height: 1.4;
+        transition: var(--transition);
+    }
+
+    .faq-item.active .faq-item__title {
+        color: #59A1CE;
+    }
+
+    .faq-item__toggle {
+        width: 40px;
+        height: 40px;
+        background: var(--bg-tertiary);
+        border: none;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-muted);
+        cursor: pointer;
+        transition: var(--transition);
+        flex-shrink: 0;
+        margin-left: 20px;
+    }
+
+    .faq-item__toggle:hover {
+        background: #6BB0DD;
+        color: white;
+        transform: scale(1.05);
+    }
+
+    .faq-item.active .faq-item__toggle {
+        background: #59A1CE;
+        color: white;
+        transform: rotate(45deg);
+    }
+
+    .faq-item__toggle i {
+        font-size: 16px;
+        transition: var(--transition);
+    }
+
+    .faq-item__answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .faq-item.active .faq-item__answer {
+        max-height: 300px;
+    }
+
+    .faq-item__content {
+        padding: 0 30px 30px;
+    }
+
+    .faq-item__content p {
+        font-size: 16px;
+        line-height: 1.6;
+        color: var(--text-muted);
+        margin: 0;
+    }
+
+    /* Button Styles */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 12px 24px;
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 15px;
+        transition: var(--transition);
+        border: none;
+        cursor: pointer;
+        white-space: nowrap;
+    }
+
+    .btn--primary {
+        background: linear-gradient(135deg, #59A1CE, #4A8FB8);
+        color: white;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .btn--primary:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+        color: white;
+    }
+
+    .btn--outline {
+        background: transparent;
+        color: #59A1CE;
+        border: 2px solid #59A1CE;
+    }
+
+    .btn--outline:hover {
+        background: #59A1CE;
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 992px) {
+        .contact-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .location-grid {
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+
+        .map-wrapper {
+            height: 400px;
+        }
+    }
+
+    @media (max-width: 992px) {
+        .work-steps-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .contact-methods,
+        .clinic-location,
+        .how-we-work-section,
+        .faq-section {
+            padding: 60px 0;
+        }
+
+        .work-steps-grid {
+            grid-template-columns: 1fr;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .contact-grid {
+            grid-template-columns: 1fr;
+            max-width: 400px;
+            margin: 0 auto;
+            gap: 20px;
+        }
+
+        .contact-card {
+            padding: 32px 24px;
+        }
+
+        .location-actions {
+            flex-direction: column;
+        }
+
+        .location-actions .btn {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .schedule__item {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 4px;
+        }
+
+        .faq-item__question {
+            padding: 20px 24px;
+        }
+
+        .faq-item__title {
+            font-size: 16px;
+        }
+
+        .faq-item__content {
+            padding: 0 24px 24px;
+        }
+
+        .faq-item__toggle {
+            width: 36px;
+            height: 36px;
+            margin-left: 16px;
+        }
+    }
+</style>
+{% endblock extra_css %}
+
+{% block content %}
+<!-- Contact Methods Section -->
+<section class="contact-methods">
+    <div class="contact-methods__container">
+        <div class="contact-grid">
+            <div class="contact-card">
+                <div class="contact-card__icon">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+                <h3 class="contact-card__title">Онлайн запись</h3>
+                <p class="contact-card__description">Записаться на консультацию</p>
+                <a href="{% url 'contact' %}" class="contact-card__action">
+                    Записаться
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            
+            <div class="contact-card">
+                <div class="contact-card__icon">
+                    <i class="fas fa-phone"></i>
+                </div>
+                <h3 class="contact-card__title">Телефон</h3>
+                <p class="contact-card__description">Свяжитесь с нами по телефону</p>
+                <a href="tel:+7XXXXXXXXXX" class="contact-card__action">
+                    Позвонить
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            
+            <div class="contact-card">
+                <div class="contact-card__icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <h3 class="contact-card__title">Email</h3>
+                <p class="contact-card__description">Напишите нам на почту</p>
+                <a href="mailto:info@erusmedical.ru" class="contact-card__action">
+                    info@erusmedical.ru
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            
+            <div class="contact-card">
+                <div class="contact-card__icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <h3 class="contact-card__title">Адрес</h3>
+                <p class="contact-card__description">Наш офис в Москве</p>
+                <a href="https://www.google.com/maps/search/3-я+Тверская-Ямская+улица+44,+Москва" target="_blank" rel="noopener" class="contact-card__action">
+                    Открыть карту
+                    <i class="fas fa-external-link-alt"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Clinic Location Section -->
+<section class="clinic-location">
+    <div class="clinic-location__container">
+        <div class="section-header">
+            <h2 class="section-header__title">Наш офис</h2>
+            <p class="section-header__subtitle">Современная клиника лечения боли в Москве</p>
+        </div>
+        
+        <div class="location-grid">
+            <div class="location-info">
+                <div class="clinic-hours">
+                    <div class="info-card">
+                        <div class="info-card__header">
+                            <div class="info-card__icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <h3 class="info-card__title">Часы работы</h3>
+                        </div>
+                        <div class="schedule">
+                            <div class="schedule__item">
+                                <span class="schedule__day">Понедельник - Пятница</span>
+                                <span class="schedule__time">9:00 - 17:00</span>
+                            </div>
+                            <div class="schedule__item">
+                                <span class="schedule__day">Выходные</span>
+                                <span class="schedule__time">Закрыто</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="clinic-details">
+                    <div class="detail-item">
+                        <div class="detail-item__icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="detail-item__content">
+                            <h4>Адрес</h4>
+                            <p>3-я Тверская-Ямская улица 44<br>Москва, Россия</p>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <div class="detail-item__icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="detail-item__content">
+                            <h4>Телефон</h4>
+                            <p>Свяжитесь с нами для записи<br>на консультацию</p>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <div class="detail-item__icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="detail-item__content">
+                            <h4>Email</h4>
+                            <p>info@erusmedical.ru<br>Ответим в течение 48 часов</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="location-actions">
+                    <a href="https://www.google.com/maps/search/3-я+Тверская-Ямская+улица+44,+Москва" target="_blank" rel="noopener" class="btn btn--primary">
+                        <i class="fas fa-directions"></i>
+                        <span>Как добраться</span>
+                    </a>
+                    <a href="tel:+7XXXXXXXXXX" class="btn btn--outline">
+                        <i class="fas fa-phone"></i>
+                        <span>Позвонить</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="map-container">
+                <div class="map-wrapper">
+                    <iframe 
+                        src="https://www.google.com/maps?q=3-я+Тверская-Ямская+улица+44,+Москва&output=embed" 
+                        allowfullscreen
+                        loading="lazy"
+                        title="Адрес клиники"
+                        class="location-map">
+                    </iframe>
+                    <div class="map-overlay">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <span>Интерактивная карта</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How We Work Section -->
+<section class="how-we-work-section">
+    <div class="clinic-location__container">
+        <div class="section-header">
+            <h2 class="section-header__title">Как мы работаем</h2>
+            <p class="section-header__subtitle">Процесс координации лечения хронической боли</p>
+        </div>
+        
+        <div class="work-steps-grid">
+            <div class="work-step-card">
+                <i class="fas fa-clipboard-list"></i>
+                <h4>Шаг 1: Заполните форму</h4>
+                <p>Оставьте заявку с описанием проблемы и контактной информацией</p>
+            </div>
+            
+            <div class="work-step-card">
+                <i class="fas fa-headset"></i>
+                <h4>Шаг 2: Связь с медицинским секретарём</h4>
+                <p>Наш медицинский секретарь свяжется с вами в течение 48 часов для уточнения деталей</p>
+            </div>
+            
+            <div class="work-step-card">
+                <i class="fas fa-user-md"></i>
+                <h4>Шаг 3: Подбор специалиста</h4>
+                <p>Мы подберем оптимального специалиста по лечению вашего типа боли</p>
+            </div>
+            
+            <div class="work-step-card">
+                <i class="fas fa-calendar-check"></i>
+                <h4>Шаг 4: Запись на прием</h4>
+                <p>Организуем запись к выбранному специалисту в удобное для вас время</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="faq-section">
+    <div class="faq-section__container">
+        <div class="section-header">
+            <h2 class="section-header__title">Часто задаваемые вопросы</h2>
+            <p class="section-header__subtitle">Быстрые ответы о наших услугах и процессе записи</p>
+        </div>
+        
+        <div class="faq-accordion">
+            <div class="faq-item" data-faq="1">
+                <div class="faq-item__question">
+                    <h3 class="faq-item__title">Как записаться на консультацию?</h3>
+                    <button class="faq-item__toggle" aria-label="Toggle answer">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+                <div class="faq-item__answer">
+                    <div class="faq-item__content">
+                        <p>Вы можете оставить заявку через форму на сайте, позвонить нам по телефону или написать на email. Наш медицинский секретарь свяжется с вами в течение 48 часов для организации консультации.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item" data-faq="2">
+                <div class="faq-item__question">
+                    <h3 class="faq-item__title">Какие специалисты проводят консультации?</h3>
+                    <button class="faq-item__toggle" aria-label="Toggle answer">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+                <div class="faq-item__answer">
+                    <div class="faq-item__content">
+                        <p>Мы проводим консультации с нейрохирургами, неврологами и реабилитологами. Наш медицинский секретарь поможет подобрать специалиста, наиболее подходящего для вашего случая.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item" data-faq="3">
+                <div class="faq-item__question">
+                    <h3 class="faq-item__title">Какие состояния вы лечите?</h3>
+                    <button class="faq-item__toggle" aria-label="Toggle answer">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+                <div class="faq-item__answer">
+                    <div class="faq-item__content">
+                        <p>Мы помогаем при хронической боли различного происхождения: боль в спине, головные боли, суставная боль, нейропатическая боль и другие состояния, требующие консультации специалиста.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item" data-faq="4">
+                <div class="faq-item__question">
+                    <h3 class="faq-item__title">Что нужно принести на консультацию?</h3>
+                    <button class="faq-item__toggle" aria-label="Toggle answer">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+                <div class="faq-item__answer">
+                    <div class="faq-item__content">
+                        <p>Принесите результаты предыдущих обследований (если есть), список принимаемых лекарств, медицинскую карту (при наличии). Это поможет специалисту лучше понять вашу ситуацию.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item" data-faq="5">
+                <div class="faq-item__question">
+                    <h3 class="faq-item__title">Сколько длится консультация?</h3>
+                    <button class="faq-item__toggle" aria-label="Toggle answer">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+                <div class="faq-item__answer">
+                    <div class="faq-item__content">
+                        <p>Первичная консультация длится 45-60 минут. Это позволяет провести детальную оценку состояния и разработать индивидуальный план лечения.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item" data-faq="6">
+                <div class="faq-item__question">
+                    <h3 class="faq-item__title">Как быстро можно получить консультацию?</h3>
+                    <button class="faq-item__toggle" aria-label="Toggle answer">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+                <div class="faq-item__answer">
+                    <div class="faq-item__content">
+                        <p>После получения вашей заявки наш медицинский секретарь свяжется с вами в течение 48 часов для организации консультации. Мы стараемся организовать приём в удобное для вас время.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // FAQ Accordion functionality
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-item__question');
+            
+            if (question) {
+                question.addEventListener('click', () => {
+                    const isActive = item.classList.contains('active');
+                    
+                    // Close all other items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current item
+                    if (isActive) {
+                        item.classList.remove('active');
+                    } else {
+                        item.classList.add('active');
+                    }
+                });
+                
+                // Keyboard accessibility
+                question.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        question.click();
+                    }
+                });
+            }
+        });
+
+        // Enhanced map interaction
+        const mapContainer = document.querySelector('.map-wrapper');
+        const mapFrame = document.querySelector('.location-map');
+        
+        if (mapContainer && mapFrame) {
+            // Disable map scrolling initially
+            mapFrame.style.pointerEvents = 'none';
+            
+            mapContainer.addEventListener('click', function() {
+                mapFrame.style.pointerEvents = 'auto';
+            });
+            
+            mapContainer.addEventListener('mouseleave', function() {
+                mapFrame.style.pointerEvents = 'none';
+            });
+            
+            // Add click indicator
+            mapContainer.addEventListener('click', function() {
+                mapContainer.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    mapContainer.style.transform = '';
+                }, 150);
+            });
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && href !== '') {
+                    const target = document.querySelector(href);
+                    if (target) {
+                        e.preventDefault();
+                        const bannerHeight = window.innerWidth <= 768 ? 32 : 36;
+                        const navbarHeight = window.innerWidth <= 768 ? 64 : 72;
+                        const offset = bannerHeight + navbarHeight;
+                        window.scrollTo({
+                            top: target.offsetTop - offset,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+    });
+</script>
+{% endblock extra_js %}
+

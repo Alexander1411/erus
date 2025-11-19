@@ -1,0 +1,10 @@
+SIMPLE FIX:
+
+1. In your browser URL bar, change:
+   FROM: https://127.0.0.1:5000
+   TO:   http://127.0.0.1:5000
+
+2. Make sure you type "http://" (not "https://")
+
+That's it! The server is running fine, just use HTTP not HTTPS.
+

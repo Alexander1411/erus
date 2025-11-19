@@ -1,0 +1,674 @@
+{% extends 'base.html' %}
+
+{% block title %}Эрус Центр лечения боли | Лечение Хронической Боли Москва{% endblock %}
+
+{% block meta %}
+<meta name="description" content="Профессиональное лечение хронической боли в Москве. Консультации нейрохирурга, невролога и реабилитолога. Лечение боли в спине, головной боли, грыжи диска, радикулита. Современные методы без операции.">
+<meta name="keywords" content="лечение хронической боли, консультация нейрохирурга, консультация невролога, консультация реабилитолога, запись к неврологу, запись к нейрохирургу, прием невролога Москва, прием нейрохирурга Москва, прием реабилитолога Москва, лечение боли в спине, лечение боли в шее, лечение головной боли, лечение грыжи диска, лечение радикулита, лечение невралгии, диагностика позвоночника, лечение позвоночника, реабилитация после травм, реабилитация позвоночника, лучший невролог Москва, хороший нейрохирург Москва, врач по хронической боли, консультация по боли, врач по позвоночнику Москва, лечение защемления нерва, боль в пояснице лечение, ортоневролог консультация, второе мнение нейрохирурга, второе мнение невролога">
+<meta name="author" content="Эрус Центр лечения боли">
+<meta name="robots" content="index, follow">
+<meta name="language" content="Russian">
+<meta name="geo.region" content="RU-MOW">
+<meta name="geo.placename" content="Москва">
+<meta name="geo.position" content="55.7558;37.6173">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+<meta property="og:title" content="Лечение Хронической Боли Москва | Консультации Нейрохирурга, Невролога и Реабилитолога">
+<meta property="og:description" content="Профессиональное лечение хронической боли в Москве. Консультации нейрохирурга, невролога и реабилитолога. Современные методы лечения боли в спине, головной боли, грыжи диска.">
+<meta property="og:locale" content="ru_RU">
+
+<!-- Yandex specific -->
+<meta name="yandex-verification" content="">
+<meta name="yandex" content="index, follow">
+{% endblock %}
+
+{% block extra_head %}
+<!-- Schema.org structured data for Medical Business -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalBusiness",
+  "name": "Эрус Центр лечения боли",
+  "description": "Профессиональное лечение хронической боли в Москве. Консультации нейрохирурга, невролога и реабилитолога.",
+  "url": "{{ request.build_absolute_uri }}",
+  "logo": "{{ request.scheme }}://{{ request.get_host }}/static/img/favicon.png",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "3-я Тверская-Ямская улица 44",
+    "addressLocality": "Москва",
+    "addressCountry": "RU"
+  },
+  "telephone": "+7 (XXX) XXX-XX-XX",
+  "openingHours": "Mo-Fr 09:00-20:00",
+  "medicalSpecialty": [
+    "Лечение хронической боли",
+    "Неврология",
+    "Нейрохирургия",
+    "Реабилитация",
+    "Лечение боли в спине",
+    "Лечение головной боли",
+    "Лечение грыжи диска",
+    "Лечение радикулита"
+  ],
+  "areaServed": {
+    "@type": "City",
+    "name": "Москва"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Методы лечения хронической боли",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Консультация нейрохирурга",
+          "description": "Консультация нейрохирурга по лечению хронической боли в спине, грыжи диска, радикулита"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Консультация невролога",
+          "description": "Консультация невролога при головных болях, боли в шее, невралгии"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Консультация реабилитолога",
+          "description": "Реабилитация после травм, реабилитация позвоночника"
+        }
+      }
+    ]
+  }
+}
+</script>
+
+<!-- Breadcrumb Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Главная",
+      "item": "{{ request.scheme }}://{{ request.get_host }}{% url 'home' %}"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Методы лечения",
+      "item": "{{ request.build_absolute_uri }}"
+    }
+  ]
+}
+</script>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Variables are defined in base.html - no need to redefine here */
+    
+    /* Section spacing & styling */
+    .section-padding {
+        padding: 40px 0;
+    }
+    
+    /* Add padding to the first section to account for fixed navbar */
+    section.section-padding:first-of-type {
+        padding-top: 60px;
+    }
+    
+    .section-title {
+        text-align: center;
+        margin-bottom: 40px;
+        position: relative;
+    }
+    
+    .section-title h2 {
+        font-size: 2.5rem;
+        color: var(--text-color);
+        margin-bottom: 15px;
+        font-weight: 700;
+        position: relative;
+        display: inline-block;
+    }
+    
+    .section-title h2:after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    }
+    
+    .section-title p {
+        color: #546E7A;
+        font-size: 1.1rem;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+    
+    /* Treatment cards */
+    .treatment-card {
+        transition: all var(--transition-speed);
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        box-shadow: var(--box-shadow);
+        height: 100%;
+        border: none;
+        background-color: white;
+        position: relative;
+        cursor: pointer;
+    }
+    
+    .treatment-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+    
+    .treatment-card img {
+        height: 220px;
+        object-fit: cover;
+        transition: all var(--transition-speed);
+    }
+    
+    .treatment-card:hover img {
+        transform: scale(1.05);
+    }
+    
+    .treatment-card .card-body {
+        padding: 1.5rem;
+    }
+    
+    .treatment-card .card-title {
+        color: var(--text-color);
+        margin-bottom: 1rem;
+        font-weight: 600;
+    }
+    
+    .treatment-card .card-text {
+        color: #546E7A;
+        margin-bottom: 0;
+        line-height: 1.6;
+    }
+    
+    .treatment-card .badge {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        font-size: 0.75rem;
+        padding: 0.5em 0.75em;
+        border-radius: 50px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        z-index: 1;
+    }
+    
+    /* Treatment tabs */
+    .treatment-tabs {
+        position: sticky;
+        top: 90px; /* Account for the fixed navbar */
+    }
+    
+    .treatment-tabs .list-group-item {
+        padding: 15px 25px;
+        border-radius: var(--border-radius);
+        margin-bottom: 10px;
+        color: var(--text-color) !important;
+        font-weight: 500;
+        transition: all var(--transition-speed);
+        border-left: 3px solid transparent;
+        display: flex;
+        align-items: center;
+        border: 1px solid rgba(0, 0, 0, 0.125);
+        background-color: white;
+    }
+    
+    .treatment-tabs .list-group-item:hover {
+        background-color: var(--light-color);
+        border-left-color: var(--primary-color);
+        transform: translateX(5px);
+        z-index: 1;
+    }
+    
+    .treatment-tabs .list-group-item.active {
+        background-color: var(--primary-color);
+        color: white !important;
+        border-left-color: var(--primary-dark);
+        border-color: var(--primary-color);
+    }
+    
+    .treatment-tabs .list-group-item.active i {
+        color: white;
+    }
+    
+    .treatment-tabs .list-group-item i {
+        margin-right: 10px;
+        font-size: 1.1rem;
+        width: 20px;
+        text-align: center;
+        color: var(--primary-color);
+    }
+    
+    .treatment-tabs .list-group-item:hover i {
+        color: var(--primary-color);
+    }
+    
+    /* Treatment details */
+    .treatment-detail {
+        padding: 30px;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+        margin-bottom: 30px;
+        background-color: white;
+        border-top: 4px solid var(--primary-color);
+    }
+    
+    /* Animations */
+    .fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 1s ease, transform 1s ease;
+    }
+    
+    .fade-in.appear {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    /* Responsive styles */
+    @media (max-width: 992px) {
+        .section-title h2 {
+            font-size: 2.2rem;
+        }
+        
+        .treatment-tabs {
+            position: static;
+            margin-bottom: 30px;
+        }
+        
+        .treatment-tabs .list-group-item {
+            padding: 12px 20px;
+            font-size: 0.95rem;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .section-title h2 {
+            font-size: 2rem;
+        }
+        
+        .section-title p {
+            font-size: 1rem;
+        }
+        
+        .treatment-tabs .list-group-item {
+            padding: 10px 15px;
+            margin-bottom: 8px;
+        }
+        
+        .treatment-tabs .list-group-item i {
+            font-size: 1rem;
+            width: 18px;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .section-title h2 {
+            font-size: 1.8rem;
+        }
+    }
+
+    /* CTA Section - Matching home.html style */
+    .cta-medical {
+        background: linear-gradient(135deg, var(--primary-color), #2980b9);
+        padding: 100px 0 60px 0;
+        color: white;
+        margin-bottom: 0;
+    }
+
+    .cta-medical-content {
+        max-width: 700px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .cta-medical-title {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 24px;
+    }
+
+    .cta-medical-description {
+        font-size: 1.25rem;
+        line-height: 1.7;
+        margin-bottom: 40px;
+        opacity: 0.95;
+    }
+
+    .cta-medical .btn-medical.primary {
+        background: white;
+        color: var(--primary-color);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .cta-medical .btn-medical.primary:hover {
+        background: #f8fafc;
+        transform: translateY(-3px);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+    }
+
+    .btn-medical {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 16px 28px;
+        border-radius: 12px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-size: 1rem;
+    }
+
+    .btn-medical.large {
+        padding: 18px 36px;
+        font-size: 1.125rem;
+    }
+
+    @media (max-width: 768px) {
+        .cta-medical {
+            padding: 70px 0 50px 0;
+        }
+
+        .cta-medical-title {
+            font-size: 2.5rem;
+        }
+
+        .cta-medical-description {
+            font-size: 1.1rem;
+        }
+    }
+</style>
+{% endblock extra_css %}
+
+{% block content %}
+<!-- Treatment Categories Section -->
+<section class="section-padding" id="treatments">
+    <div class="container">
+        <div class="section-title">
+            <h1>Методы лечения хронической боли в Москве</h1>
+        </div>
+        
+        <div class="row mb-5">
+            <div class="col-lg-3 col-md-4 mb-4">
+                <div class="list-group treatment-tabs">
+                    <a class="list-group-item list-group-item-action active" data-bs-toggle="pill" href="#all">
+                        <i class="fas fa-th-list" aria-hidden="true"></i> Все методы
+                    </a>
+                    <a class="list-group-item list-group-item-action" data-bs-toggle="pill" href="#spine">
+                        <i class="fas fa-user-injured" aria-hidden="true"></i> Боль в спине
+                    </a>
+                    <a class="list-group-item list-group-item-action" data-bs-toggle="pill" href="#head">
+                        <i class="fas fa-head-side-virus" aria-hidden="true"></i> Головная боль
+                    </a>
+                    <a class="list-group-item list-group-item-action" data-bs-toggle="pill" href="#joints">
+                        <i class="fas fa-bone" aria-hidden="true"></i> Суставная боль
+                    </a>
+                    <a class="list-group-item list-group-item-action" data-bs-toggle="pill" href="#neuro">
+                        <i class="fas fa-brain" aria-hidden="true"></i> Нейропатическая боль
+                    </a>
+                    <a class="list-group-item list-group-item-action" data-bs-toggle="pill" href="#chronic">
+                        <i class="fas fa-heartbeat" aria-hidden="true"></i> Хроническая боль
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-lg-9 col-md-8">
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="all">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 mb-4 fade-in">
+                                <div class="card treatment-card">
+                                    <span class="badge bg-primary">Востребовано</span>
+                                    <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="card-img-top" alt="Эпидуральная блокада - лечение боли в спине и позвоночнике в Москве">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Эпидуральная блокада</h5>
+                                        <p class="card-text">Инъекция с обезболивающим и противовоспалительным препаратом в область позвоночника для снижения боли и воспаления.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-4 col-md-6 mb-4 fade-in">
+                                <div class="card treatment-card">
+                                    <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="card-img-top" alt="Радиочастотная абляция - лечение хронической боли без операции в Москве">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Радиочастотная абляция</h5>
+                                        <p class="card-text">Применение тепловой энергии для уменьшения болевых сигналов от определенных нервов.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-4 col-md-6 mb-4 fade-in">
+                                <div class="card treatment-card">
+                                    <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="card-img-top" alt="Спинальная стимуляция - лечение нейропатической боли в Москве">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Спинальная стимуляция</h5>
+                                        <p class="card-text">Имплантация устройства для снятия боли с помощью мягких импульсов к спинному мозгу.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-4 col-md-6 mb-4 fade-in">
+                                <div class="card treatment-card">
+                                    <span class="badge bg-success">Инновация</span>
+                                    <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="card-img-top" alt="Блокада нервов - лечение защемления нерва и радикулита в Москве">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Блокада нервов</h5>
+                                        <p class="card-text">Инъекция анестетика вблизи определенного нерва для блокирования болевых сигналов.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-4 col-md-6 mb-4 fade-in">
+                                <div class="card treatment-card">
+                                    <img src="https://images.unsplash.com/photo-1538108149393-fbbd81895907?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="card-img-top" alt="Психотерапия при хронической боли - консультация специалиста в Москве">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Психотерапия</h5>
+                                        <p class="card-text">Поддержка при боли через беседы с врачом для улучшения эмоционального состояния и качества жизни.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-4 col-md-6 mb-4 fade-in">
+                                <div class="card treatment-card">
+                                    <img src="https://images.unsplash.com/photo-1530026186672-2cd00ffc50fe?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="card-img-top" alt="Физиотерапия и реабилитация позвоночника в Москве">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Физиотерапия</h5>
+                                        <p class="card-text">Комплекс упражнений и методик для восстановления функций тела и снижения боли.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane fade" id="spine">
+                        <div class="treatment-detail fade-in">
+                            <h2>Лечение боли в спине и позвоночнике в Москве</h2>
+                            <p>Боль в спине и пояснице — одно из самых распространенных состояний, с которым пациенты обращаются за медицинской помощью. Наши специалисты (нейрохирург, невролог, реабилитолог) используют комплексный подход к лечению боли в спине, сочетая консервативные и интервенционные методы. Лечение боли в спине включает диагностику позвоночника, лечение грыжи диска, радикулита и защемления нерва.</p>
+                            
+                            <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <h5>Применяемые методы:</h5>
+                                    <ul>
+                                        <li>Эпидуральные инъекции стероидов</li>
+                                        <li>Радиочастотная абляция фасеточных суставов</li>
+                                        <li>Блокада медиальной ветви нерва</li>
+                                        <li>Физиотерапия и реабилитация</li>
+                                        <li>Интервенционные методы лечения дисков</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Процесс лечения:</h5>
+                                    <p>После диагностики, включающей МРТ и другие методы для определения точной причины боли, наши специалисты разрабатывают индивидуальный план лечения. Мы поможем вам найти подходящего врача, специализирующегося именно на вашем типе болевого синдрома.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane fade" id="head">
+                        <div class="treatment-detail fade-in">
+                            <h2>Лечение головной боли и мигрени в Москве</h2>
+                            <p>От периодических головных болей до хронической мигрени — наши эксперты (невролог, нейрохирург) предлагают эффективные решения для лечения головной боли различного происхождения и интенсивности. Консультация невролога при головных болях поможет определить причину и разработать индивидуальный план лечения.</p>
+                            
+                            <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <h5>Применяемые методы:</h5>
+                                    <ul>
+                                        <li>Блокада затылочного нерва</li>
+                                        <li>Локальные инъекции анестетика</li>
+                                        <li>Терапия CGRP-антителами</li>
+                                        <li>Стимуляция блуждающего нерва</li>
+                                        <li>Медикаментозная терапия</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Процесс лечения:</h5>
+                                    <p>Специалисты нашей группы фокусируются на выявлении триггеров головной боли и разработке комплексного плана лечения. Мы подберём для вас врача, который специализируется на вашем типе головной боли и имеет опыт в современных методах лечения.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane fade" id="joints">
+                        <div class="treatment-detail fade-in">
+                            <h2>Лечение суставной боли и боли в шее в Москве</h2>
+                            <p>Суставная боль и боль в шее могут значительно ограничивать подвижность и снижать качество жизни. Врачи нашей группы (невролог, реабилитолог) применяют современные методы лечения для снятия воспаления и уменьшения боли. Лечение боли в шее включает консультацию невролога и реабилитолога для разработки плана лечения.</p>
+                            
+                            <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <h5>Применяемые методы:</h5>
+                                    <ul>
+                                        <li>Внутрисуставные инъекции</li>
+                                        <li>Плазмотерапия (PRP)</li>
+                                        <li>Введение гиалуроновой кислоты</li>
+                                        <li>Блокады периферических нервов</li>
+                                        <li>Физиотерапия для суставов</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Процесс лечения:</h5>
+                                    <p>Многие специалисты нашей группы используют ультразвуковую навигацию для точного введения препаратов в суставы и окружающие ткани, что повышает эффективность процедур и минимизирует дискомфорт. Мы поможем подобрать врача, имеющего необходимое оборудование и опыт.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane fade" id="neuro">
+                        <div class="treatment-detail fade-in">
+                            <h2>Лечение нейропатической боли и невралгии в Москве</h2>
+                            <p>Нейропатическая боль и невралгия возникают из-за повреждения или дисфункции нервной системы и часто плохо поддаются стандартным методам лечения. Мы сотрудничаем со специалистами (невролог, нейрохирург), имеющими опыт в современных методах лечения этого сложного состояния. Лечение невралгии включает консультацию невролога и разработку индивидуального плана лечения.</p>
+                            
+                            <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <h5>Применяемые методы:</h5>
+                                    <ul>
+                                        <li>Спинальная стимуляция</li>
+                                        <li>Ганглионарные блокады</li>
+                                        <li>Медикаментозная терапия</li>
+                                        <li>Инфузионная терапия</li>
+                                        <li>Лечение с использованием радиочастотной абляции</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Процесс лечения:</h5>
+                                    <p>Эксперты нашей группы применяют мультимодальный подход, который сочетает медикаментозное лечение с интервенционными методами для достижения максимального облегчения боли. Мы поможем вам найти подходящего специалиста в Москве.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane fade" id="chronic">
+                        <div class="treatment-detail fade-in">
+                            <h2>Комплексное лечение хронической боли в Москве</h2>
+                            <p>Хроническая боль — это сложное состояние, которое требует комплексного подхода с участием нейрохирурга, невролога и реабилитолога. Специалисты нашей группы разрабатывают индивидуальные программы лечения хронической боли, учитывающие все аспекты состояния и ее влияние на качество жизни. Врач по хронической боли поможет разработать оптимальный план лечения для вашего случая.</p>
+                            
+                            <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <h5>Применяемые методы:</h5>
+                                    <ul>
+                                        <li>Когнитивно-поведенческая терапия</li>
+                                        <li>Интервенционные методики</li>
+                                        <li>Оптимизация медикаментозной терапии</li>
+                                        <li>Методики биологической обратной связи</li>
+                                        <li>Мультидисциплинарные программы реабилитации</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Процесс лечения:</h5>
+                                    <p>Наша группа понимает, что хроническая боль затрагивает все аспекты жизни пациента. Мы поможем вам найти врачей, чей подход направлен не только на уменьшение болевых ощущений, но и на улучшение функциональности, психологического состояния и качества жизни в целом.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="cta-medical">
+    <div class="container-medical">
+        <div class="cta-medical-content">
+            <h2 class="cta-medical-title">Не можете определиться с подходящим методом лечения?</h2>
+            <p class="cta-medical-description">
+                Оставьте заявку, и наш медицинский секретарь организует консультацию со специалистом, который разработает оптимальный план лечения для вашего случая.
+            </p>
+            <a href="{% url 'contact' %}#contact-form" class="btn-medical primary large">
+                <i class="fas fa-calendar-check"></i>
+                <span>Оставить заявку</span>
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize fade-in animations
+        const fadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('appear');
+                    fadeObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            fadeObserver.observe(el);
+        });
+
+        // Initialize Bootstrap tabs
+        const triggerTabList = [].slice.call(document.querySelectorAll('.treatment-tabs a'));
+        triggerTabList.forEach(function(triggerEl) {
+            const tabTrigger = new bootstrap.Tab(triggerEl);
+            triggerEl.addEventListener('click', function(event) {
+                event.preventDefault();
+                tabTrigger.show();
+            });
+        });
+    });
+</script>
+{% endblock extra_js %}

@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block title %}Эрус Центр лечения боли | Условия использования{% endblock %}
+
+{% block extra_css %}
+<style>
+    .terms-section {
+        padding: 80px 0;
+    }
+    
+    .terms-header {
+        margin-bottom: 50px;
+        text-align: center;
+    }
+    
+    .terms-header h1 {
+        color: var(--secondary-color);
+        margin-bottom: 20px;
+        font-weight: 700;
+        position: relative;
+        display: inline-block;
+    }
+    
+    .terms-header h1:after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: -15px;
+        width: 80px;
+        height: 3px;
+        background: var(--primary-color);
+        transform: translateX(-50%);
+    }
+    
+    .terms-header p {
+        color: #777;
+        font-size: 1.1rem;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+    
+    .terms-card {
+        background-color: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+        padding: 40px;
+        margin-bottom: 30px;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.8;
+    }
+    
+    .terms-card p {
+        margin-bottom: 20px;
+        color: #555;
+    }
+    
+    .terms-card p:last-child {
+        margin-bottom: 0;
+    }
+    
+    .back-link {
+        display: inline-flex;
+        align-items: center;
+        color: var(--primary-color);
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        margin-top: 30px;
+    }
+    
+    .back-link i {
+        margin-right: 8px;
+        transition: transform 0.3s ease;
+    }
+    
+    .back-link:hover {
+        color: var(--secondary-color);
+    }
+    
+    .back-link:hover i {
+        transform: translateX(-3px);
+    }
+    
+    @media (max-width: 768px) {
+        .terms-section {
+            padding: 50px 0;
+        }
+        
+        .terms-header {
+            margin-bottom: 30px;
+        }
+        
+        .terms-card {
+            padding: 25px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="terms-section">
+    <div class="container">
+        <div class="terms-header">
+            <h1>Условия использования</h1>
+            <p>Пожалуйста, ознакомьтесь с условиями использования нашего сайта перед его использованием.</p>
+        </div>
+        
+        <div class="terms-card">
+            <p><strong>Назначение сайта</strong></p>
+            <p>Наш сайт предназначен для предоставления информации о медицинских услугах Эрус Центр лечения боли и для подачи заявки на запись на консультацию к нашим специалистам (нейрохирургу, неврологу, реабилитологу). Сайт не предназначен для оказания экстренной медицинской помощи. В случае экстренной ситуации немедленно обращайтесь в службу скорой медицинской помощи по телефону 103 или 112.</p>
+            
+            <p><strong>Медицинская консультация</strong></p>
+            <p>Вся информация на сайте предоставляется исключительно в информационных целях и не заменяет очную консультацию с врачом. Медицинская консультация и рекомендации по лечению предоставляются только нашими врачами во время очной консультации в нашем медицинском центре после осмотра и оценки вашего состояния.</p>
+            
+            <p><strong>Точность информации</strong></p>
+            <p>При заполнении формы на сайте вы обязуетесь предоставлять точную и актуальную информацию о себе и своем состоянии здоровья. Неточная информация может привести к неправильной подготовке врача к консультации или задержке в организации приёма.</p>
+            
+            <p><strong>Ограничение ответственности</strong></p>
+            <p>Мы не несем ответственности за технические сбои, временную недоступность сайта, опечатки в текстах или неточности в информации на сайте. Медицинские услуги оказываются нашими специалистами в соответствии с действующим законодательством Российской Федерации и стандартами оказания медицинской помощи.</p>
+            
+            <p><strong>Использование сайта</strong></p>
+            <p>Используя наш сайт, вы соглашаетесь не использовать его для незаконных целей, не нарушать работу сайта и не распространять вредоносное программное обеспечение. Мы оставляем за собой право ограничить доступ к сайту любому пользователю, нарушающему эти условия.</p>
+            
+            <p><strong>Изменения условий</strong></p>
+            <p>Мы можем изменять данные условия использования в любое время. Актуальная версия всегда доступна на этой странице. Продолжая использовать сайт после внесения изменений, вы соглашаетесь с обновленными условиями.</p>
+        </div>
+        
+        <div style="text-align: center;">
+            <a href="{% url 'home' %}" class="back-link">
+                <i class="fas fa-arrow-left"></i> Вернуться на главную
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}
