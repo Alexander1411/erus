@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
-{% block title %}Эрус Центр лечения боли | Лечение Хронической Боли Москва{% endblock %}
+{% block title %}Болит спина, голова, нога? Лечение боли в Москве | Эрус Центр{% endblock %}
 
 {% block meta %}
-<meta name="description" content="Профессиональное лечение хронической боли в Москве. Консультации нейрохирурга, невролога и реабилитолога. Лечение боли в спине, головной боли, грыжи диска, радикулита. Современные методы без операции.">
-<meta name="keywords" content="лечение хронической боли, консультация нейрохирурга, консультация невролога, консультация реабилитолога, запись к неврологу, запись к нейрохирургу, прием невролога Москва, прием нейрохирурга Москва, прием реабилитолога Москва, лечение боли в спине, лечение боли в шее, лечение головной боли, лечение грыжи диска, лечение радикулита, лечение невралгии, диагностика позвоночника, лечение позвоночника, реабилитация после травм, реабилитация позвоночника, лучший невролог Москва, хороший нейрохирург Москва, врач по хронической боли, консультация по боли, врач по позвоночнику Москва, лечение защемления нерва, боль в пояснице лечение, ортоневролог консультация, второе мнение нейрохирурга, второе мнение невролога">
+<meta name="description" content="У вас болит спина, голова, нога, рука или шея? Мы помогаем найти причину и лечение. Консультация невролога, нейрохирурга, реабилитолога в Москве. Грыжа диска, радикулит, мигрень, остеохондроз, артроз. Запись на прием.">
+<meta name="keywords" content="лечение боли Москва, болит спина, болит голова, болит нога, болит рука, болит шея, болит поясница, лечение боли в спине, лечение боли в шее, лечение головной боли, лечение боли в ноге, лечение боли в руке, консультация невролога Москва, консультация нейрохирурга Москва, консультация реабилитолога Москва, запись к неврологу, запись к нейрохирургу, прием невролога Москва, прием нейрохирурга Москва, прием реабилитолога Москва, лечение грыжи диска, лечение радикулита, лечение ишиаса, лечение остеохондроза, лечение артроза, лечение артрита, лечение мигрени, лечение невралгии, лечение защемления нерва, лечение стеноза позвоночника, боль в пояснице лечение, боль в спине лечение, боль в шее лечение, головная боль лечение, невролог Москва, нейрохирург Москва, реабилитолог Москва, врач по боли Москва, центр лечения боли Москва, клиника лечения боли, диагностика позвоночника, лечение позвоночника, реабилитация после травм, реабилитация позвоночника, лучший невролог Москва, хороший нейрохирург Москва, врач по хронической боли, консультация по боли, врач по позвоночнику Москва, ортоневролог консультация, второе мнение нейрохирурга, второе мнение невролога, ноет спина, стреляет в ногу, немеет рука, немеет нога, не могу поднять руку, больно ходить, скованность в спине">
 <meta name="author" content="Эрус Центр лечения боли">
 <meta name="robots" content="index, follow">
 <meta name="language" content="Russian">
@@ -15,13 +15,24 @@
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="{{ request.build_absolute_uri }}">
-<meta property="og:title" content="Лечение Хронической Боли Москва | Консультации Нейрохирурга, Невролога и Реабилитолога">
-<meta property="og:description" content="Профессиональное лечение хронической боли в Москве. Консультации нейрохирурга, невролога и реабилитолога. Современные методы лечения боли в спине, головной боли, грыжи диска.">
+<meta property="og:title" content="Болит спина, голова, нога? Лечение боли в Москве | Эрус Центр">
+<meta property="og:description" content="У вас болит спина, голова, нога или рука? Мы помогаем найти причину и лечение. Консультация невролога, нейрохирурга, реабилитолога в Москве.">
 <meta property="og:locale" content="ru_RU">
+<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}/static/img/og-image.jpg">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Болит спина, голова, нога? Лечение боли | Эрус Центр">
+<meta name="twitter:description" content="У вас болит спина, голова, нога или рука? Консультация невролога, нейрохирурга, реабилитолога в Москве.">
 
 <!-- Yandex specific -->
 <meta name="yandex-verification" content="">
 <meta name="yandex" content="index, follow">
+<meta name="yandex-revisit-after" content="7 days">
+<meta name="yandex-direct" content="yes">
+<!-- Yandex Webmaster -->
+<meta name="yandex-verification" content="">
+<!-- Yandex Metrika will be added via base template -->
 {% endblock %}
 
 {% block extra_head %}
@@ -29,9 +40,9 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "MedicalBusiness",
-  "name": "Эрус Центр лечения боли",
-  "description": "Профессиональное лечение хронической боли в Москве. Консультации нейрохирурга, невролога и реабилитолога.",
+      "@type": "MedicalBusiness",
+      "name": "Эрус Центр лечения боли",
+      "description": "Найдите помощь для вашей боли. Профессиональные консультации в Москве.",
   "url": "{{ request.build_absolute_uri }}",
   "logo": "{{ request.scheme }}://{{ request.get_host }}/static/img/favicon.png",
   "address": {
@@ -48,9 +59,24 @@
     "Нейрохирургия",
     "Реабилитация",
     "Лечение боли в спине",
+    "Лечение боли в шее",
+    "Лечение боли в ноге",
+    "Лечение боли в руке",
     "Лечение головной боли",
+    "Лечение мигрени",
     "Лечение грыжи диска",
-    "Лечение радикулита"
+    "Лечение радикулита",
+    "Лечение ишиаса",
+    "Лечение остеохондроза",
+    "Лечение артроза",
+    "Лечение артрита",
+    "Лечение невралгии",
+    "Лечение защемления нерва",
+    "Лечение стеноза позвоночника",
+    "Лечение межреберной невралгии",
+    "Лечение тригеминальной невралгии",
+    "Реабилитация после травм",
+    "Реабилитация после операций"
   ],
   "areaServed": {
     "@type": "City",
@@ -58,14 +84,14 @@
   },
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
-    "name": "Методы лечения хронической боли",
+    "name": "Консультации специалистов по типам боли",
     "itemListElement": [
       {
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
           "name": "Консультация нейрохирурга",
-          "description": "Консультация нейрохирурга по лечению хронической боли в спине, грыжи диска, радикулита"
+          "description": "Консультация нейрохирурга при грыже диска, радикулите, стенозе позвоночника, защемлении нерва, посттравматических травмах позвоночника, опухолях позвоночника или мозга, тяжелых неврологических симптомах"
         }
       },
       {
@@ -73,7 +99,7 @@
         "itemOffered": {
           "@type": "Service",
           "name": "Консультация невролога",
-          "description": "Консультация невролога при головных болях, боли в шее, невралгии"
+          "description": "Консультация невролога при мигрени и головных болях, нейропатической боли, нарушениях движения, рассеянном склерозе, периферической нейропатии, лицевых болях (тригеминальная невралгия), судорогах/эпилепсии, постинсультных симптомах"
         }
       },
       {
@@ -81,7 +107,7 @@
         "itemOffered": {
           "@type": "Service",
           "name": "Консультация реабилитолога",
-          "description": "Реабилитация после травм, реабилитация позвоночника"
+          "description": "Консультация реабилитолога при боли в спине/шее от мышц и суставов, боли связанной с осанкой, реабилитации после операции или травмы, суставной боли, спортивных травмах, мышечных спазмах и хроническом напряжении, восстановлении после инсульта или неврологических событий"
         }
       }
     ]
@@ -89,7 +115,7 @@
 }
 </script>
 
-<!-- Breadcrumb Schema -->
+<!-- Breadcrumbs Schema for Yandex -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -99,13 +125,55 @@
       "@type": "ListItem",
       "position": 1,
       "name": "Главная",
-      "item": "{{ request.scheme }}://{{ request.get_host }}{% url 'home' %}"
+      "item": "{{ request.scheme }}://{{ request.get_host }}/"
     },
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "Методы лечения",
+      "name": "Симптомы и типы боли",
       "item": "{{ request.build_absolute_uri }}"
+    }
+  ]
+}
+</script>
+
+<!-- FAQ Schema for common pain questions -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Что делать если болит спина?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Если у вас болит спина, запишитесь на консультацию к неврологу или нейрохирургу. Мы помогаем при грыже диска, радикулите, остеохондрозе, защемлении нерва и других причинах боли в спине. Врач проведет диагностику и подберет лечение."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "К какому врачу обратиться если болит голова?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Если у вас часто болит голова или мигрень, обратитесь к неврологу. Мы проводим диагностику и лечение различных типов головной боли в Москве. Врач поможет определить причину и подобрать эффективное лечение."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Что делать если болит нога или рука?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Если болит нога или рука, это может быть связано с проблемами позвоночника (грыжа диска, радикулит), суставов (артроз, артрит) или нервов. Запишитесь на консультацию к неврологу, нейрохирургу или реабилитологу для диагностики и лечения."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Где можно записаться на консультацию по боли в Москве?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Эрус Центр лечения боли в Москве предоставляет консультации невролога, нейрохирурга и реабилитолога. Мы помогаем при боли в спине, шее, голове, ногах и руках. Адрес: 3-я Тверская-Ямская улица 44. Запись на прием доступна на сайте."
+      }
     }
   ]
 }
@@ -114,561 +182,1457 @@
 
 {% block extra_css %}
 <style>
-    /* Variables are defined in base.html - no need to redefine here */
+.treatments-page-wrapper {
+    width: 100%;
+    position: relative;
+    background: transparent;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #1e293b;
     
-    /* Section spacing & styling */
-    .section-padding {
-        padding: 40px 0;
-    }
-    
-    /* Add padding to the first section to account for fixed navbar */
-    section.section-padding:first-of-type {
-        padding-top: 60px;
-    }
-    
-    .section-title {
+    --treat-primary: #1a5e8f;
+    --treat-secondary: #2c78b0;
+    --treat-accent: #3498db;
+    --treat-bg-white: #ffffff;
+    --treat-bg-light: #f8fafc;
+    --treat-text-primary: #1e293b;
+    --treat-text-secondary: #64748b;
+    --treat-text-muted: #94a3b8;
+    --treat-border: #e2e8f0;
+    --treat-radius-lg: 0.5rem;
+    --treat-radius-xl: 0.75rem;
+    --treat-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --treat-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --treat-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    --treat-transition: all 0.3s ease;
+}
+
+.treatments-section {
+    padding: 5rem 0;
+    background: linear-gradient(135deg, var(--treat-bg-light) 0%, #f0f9ff 100%);
+    width: 100%;
+}
+
+.treatments-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Ensure grid container doesn't allow more than 2 columns */
+.treatments-container .treatments-grid {
+    max-width: 100%;
+}
+
+.treatments-header {
         text-align: center;
-        margin-bottom: 40px;
-        position: relative;
+    margin-bottom: 3rem;
     }
     
-    .section-title h2 {
+.treat-section-title {
         font-size: 2.5rem;
-        color: var(--text-color);
-        margin-bottom: 15px;
         font-weight: 700;
+    color: var(--treat-primary);
+    margin-bottom: 0.5rem;
+}
+
+.treat-section-subtitle {
+    font-size: 1.125rem;
+    color: var(--treat-text-secondary);
+    margin-bottom: 2rem;
+}
+
+.treatments-search {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.search-container {
         position: relative;
-        display: inline-block;
-    }
-    
-    .section-title h2:after {
-        content: '';
-        position: absolute;
-        bottom: -10px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 80px;
-        height: 3px;
-        background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-    }
-    
-    .section-title p {
-        color: #546E7A;
-        font-size: 1.1rem;
-        max-width: 700px;
-        margin: 0 auto;
-    }
-    
-    /* Treatment cards */
+    width: 100%;
+    max-width: 400px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 0.875rem 1rem 0.875rem 3rem;
+    border: 2px solid var(--treat-border);
+    border-radius: var(--treat-radius-xl);
+    font-size: 1rem;
+    font-family: inherit;
+    background: var(--treat-bg-white);
+    transition: var(--treat-transition);
+    box-shadow: var(--treat-shadow-md);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--treat-primary);
+    box-shadow: var(--treat-shadow-lg);
+}
+
+.search-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--treat-text-muted);
+    font-size: 1rem;
+    pointer-events: none;
+}
+
+.treatments-filter {
+    margin-bottom: 3rem;
+    display: flex;
+    justify-content: center;
+    padding: 0 1rem;
+}
+
+.filter-tabs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 900px;
+}
+
+.filter-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 0.75rem;
+    border: 2px solid #e2e8f0;
+    background: #ffffff;
+    color: #64748b;
+    border-radius: 16px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    min-height: 80px;
+    justify-content: center;
+}
+
+.filter-btn i {
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+    margin-bottom: 0.25rem;
+}
+
+.filter-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(26, 94, 143, 0.15);
+    border-color: #1a5e8f;
+    color: #1a5e8f;
+}
+
+.filter-btn.active {
+    background: linear-gradient(135deg, #1a5e8f 0%, #2c78b0 100%);
+    color: white;
+    border-color: #1a5e8f;
+    box-shadow: 0 8px 25px rgba(26, 94, 143, 0.3);
+}
+
+.filter-btn.active i {
+    color: white;
+}
+
+.treatments-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-bottom: 4rem;
+    width: 100%;
+}
+
     .treatment-card {
-        transition: all var(--transition-speed);
-        border-radius: var(--border-radius);
+    background: var(--treat-bg-white);
+    border-radius: var(--treat-radius-xl);
+    box-shadow: var(--treat-shadow-md);
         overflow: hidden;
-        box-shadow: var(--box-shadow);
-        height: 100%;
+    transition: var(--treat-transition);
         border: none;
-        background-color: white;
         position: relative;
-        cursor: pointer;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    opacity: 1;
+    transform: scale(1);
     }
     
     .treatment-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-    }
-    
-    .treatment-card img {
-        height: 220px;
-        object-fit: cover;
-        transition: all var(--transition-speed);
-    }
-    
-    .treatment-card:hover img {
-        transform: scale(1.05);
-    }
-    
-    .treatment-card .card-body {
-        padding: 1.5rem;
-    }
-    
-    .treatment-card .card-title {
-        color: var(--text-color);
-        margin-bottom: 1rem;
+    transform: translateY(-8px);
+    box-shadow: var(--treat-shadow-xl);
+}
+
+.treatment-card.hiding {
+    opacity: 0;
+    transform: scale(0.8);
+    pointer-events: none;
+    display: none;
+}
+
+.card-header {
+    position: relative;
+    padding: 2rem 2rem 1rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.treatment-icon {
+    width: 3.5rem;
+    height: 3.5rem;
+    background: linear-gradient(135deg, var(--treat-primary), var(--treat-secondary));
+    border-radius: var(--treat-radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.card-content {
+    padding: 0 2rem;
+}
+
+.treatment-title {
+    font-size: 1.5rem;
         font-weight: 600;
+    color: var(--treat-primary);
+    margin-bottom: 1rem;
     }
     
-    .treatment-card .card-text {
-        color: #546E7A;
-        margin-bottom: 0;
+.treatment-description {
+    color: var(--treat-text-secondary);
         line-height: 1.6;
-    }
-    
-    .treatment-card .badge {
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        font-size: 0.75rem;
-        padding: 0.5em 0.75em;
-        border-radius: 50px;
-        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-        z-index: 1;
-    }
-    
-    /* Treatment tabs */
-    .treatment-tabs {
-        position: sticky;
-        top: 90px; /* Account for the fixed navbar */
-    }
-    
-    .treatment-tabs .list-group-item {
-        padding: 15px 25px;
-        border-radius: var(--border-radius);
-        margin-bottom: 10px;
-        color: var(--text-color) !important;
-        font-weight: 500;
-        transition: all var(--transition-speed);
-        border-left: 3px solid transparent;
+    margin-bottom: 1.5rem;
+}
+
+.treatment-features {
+    margin-bottom: 1.5rem;
+}
+
+.feature {
         display: flex;
         align-items: center;
-        border: 1px solid rgba(0, 0, 0, 0.125);
-        background-color: white;
-    }
-    
-    .treatment-tabs .list-group-item:hover {
-        background-color: var(--light-color);
-        border-left-color: var(--primary-color);
-        transform: translateX(5px);
-        z-index: 1;
-    }
-    
-    .treatment-tabs .list-group-item.active {
-        background-color: var(--primary-color);
-        color: white !important;
-        border-left-color: var(--primary-dark);
-        border-color: var(--primary-color);
-    }
-    
-    .treatment-tabs .list-group-item.active i {
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--treat-text-secondary);
+}
+
+.feature .tick {
+    color: #22c55e;
+    font-size: 0.875rem;
+    flex-shrink: 0;
+    font-weight: bold;
+}
+
+.card-footer {
+    padding: 1.5rem 2rem 2rem;
+}
+
+.learn-more-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem;
+    border: 2px solid var(--treat-primary);
+    background: transparent;
+    color: var(--treat-primary);
+    border-radius: var(--treat-radius-lg);
+    font-weight: 600;
+    transition: var(--treat-transition);
+    cursor: pointer;
+    font-family: inherit;
+    text-decoration: none;
+}
+
+.learn-more-btn:hover {
+    background: var(--treat-primary);
         color: white;
-    }
-    
-    .treatment-tabs .list-group-item i {
-        margin-right: 10px;
-        font-size: 1.1rem;
-        width: 20px;
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
+.treatments-cta {
+    background: var(--treat-bg-white);
+    border-radius: var(--treat-radius-xl);
+    padding: 3rem;
         text-align: center;
-        color: var(--primary-color);
-    }
-    
-    .treatment-tabs .list-group-item:hover i {
-        color: var(--primary-color);
-    }
-    
-    /* Treatment details */
-    .treatment-detail {
-        padding: 30px;
-        border-radius: var(--border-radius);
-        box-shadow: var(--box-shadow);
-        margin-bottom: 30px;
-        background-color: white;
-        border-top: 4px solid var(--primary-color);
-    }
-    
-    /* Animations */
-    .fade-in {
-        opacity: 0;
-        transform: translateY(30px);
-        transition: opacity 1s ease, transform 1s ease;
-    }
-    
-    .fade-in.appear {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    
-    /* Responsive styles */
-    @media (max-width: 992px) {
-        .section-title h2 {
-            font-size: 2.2rem;
-        }
-        
-        .treatment-tabs {
-            position: static;
-            margin-bottom: 30px;
-        }
-        
-        .treatment-tabs .list-group-item {
-            padding: 12px 20px;
-            font-size: 0.95rem;
-        }
-    }
-    
-    @media (max-width: 768px) {
-        .section-title h2 {
-            font-size: 2rem;
-        }
-        
-        .section-title p {
-            font-size: 1rem;
-        }
-        
-        .treatment-tabs .list-group-item {
-            padding: 10px 15px;
-            margin-bottom: 8px;
-        }
-        
-        .treatment-tabs .list-group-item i {
-            font-size: 1rem;
-            width: 18px;
-        }
-    }
-    
-    @media (max-width: 576px) {
-        .section-title h2 {
-            font-size: 1.8rem;
-        }
+    box-shadow: var(--treat-shadow-lg);
+    border: none;
+    width: 100%;
+}
+
+.cta-content h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--treat-primary);
+    margin-bottom: 1rem;
+}
+
+.cta-content p {
+    font-size: 1.125rem;
+    color: var(--treat-text-secondary);
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.treat-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.5rem;
+    border-radius: var(--treat-radius-lg);
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--treat-transition);
+    background: linear-gradient(135deg, var(--treat-primary), var(--treat-secondary));
+    color: white;
+    box-shadow: var(--treat-shadow-md);
+}
+
+.treat-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--treat-shadow-lg);
+    color: white;
+    text-decoration: none;
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
     }
 
-    /* CTA Section - Matching home.html style */
-    .cta-medical {
-        background: linear-gradient(135deg, var(--primary-color), #2980b9);
-        padding: 100px 0 60px 0;
-        color: white;
-        margin-bottom: 0;
+/* Responsive adjustments */
+@media (max-width: 900px) {
+    .treatments-grid { 
+        grid-template-columns: 1fr; 
+        gap: 1.5rem; 
     }
-
-    .cta-medical-content {
-        max-width: 700px;
-        margin: 0 auto;
-        text-align: center;
-    }
-
-    .cta-medical-title {
-        font-size: 3rem;
-        font-weight: 700;
-        margin-bottom: 24px;
-    }
-
-    .cta-medical-description {
-        font-size: 1.25rem;
-        line-height: 1.7;
-        margin-bottom: 40px;
-        opacity: 0.95;
-    }
-
-    .cta-medical .btn-medical.primary {
-        background: white;
-        color: var(--primary-color);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    }
-
-    .cta-medical .btn-medical.primary:hover {
-        background: #f8fafc;
-        transform: translateY(-3px);
-        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
-    }
-
-    .btn-medical {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        padding: 16px 28px;
-        border-radius: 12px;
-        font-weight: 600;
-        text-decoration: none;
-        transition: all 0.3s ease;
-        font-size: 1rem;
-    }
-
-    .btn-medical.large {
-        padding: 18px 36px;
-        font-size: 1.125rem;
-    }
+}
 
     @media (max-width: 768px) {
-        .cta-medical {
-            padding: 70px 0 50px 0;
-        }
+    .treatments-section { padding: 3rem 0; }
+    .treatments-container { padding: 0 0.75rem; }
+    .treat-section-title { font-size: 1.75rem; }
+    .treatments-cta { padding: 2rem 1.5rem; }
+    .cta-content h3 { font-size: 1.5rem; }
+}
 
-        .cta-medical-title {
-            font-size: 2.5rem;
-        }
-
-        .cta-medical-description {
-            font-size: 1.1rem;
-        }
+@media (max-width: 480px) {
+    .treatments-container { padding: 0 0.5rem; }
+    .card-header { padding: 1.5rem 1.5rem 1rem; }
+    .card-content { padding: 0 1.5rem; }
+    .card-footer { padding: 1rem 1.5rem 1.5rem; }
     }
 </style>
 {% endblock extra_css %}
 
 {% block content %}
-<!-- Treatment Categories Section -->
-<section class="section-padding" id="treatments">
-    <div class="container">
-        <div class="section-title">
-            <h1>Методы лечения хронической боли в Москве</h1>
-        </div>
-        
-        <div class="row mb-5">
-            <div class="col-lg-3 col-md-4 mb-4">
-                <div class="list-group treatment-tabs">
-                    <a class="list-group-item list-group-item-action active" data-bs-toggle="pill" href="#all">
-                        <i class="fas fa-th-list" aria-hidden="true"></i> Все методы
-                    </a>
-                    <a class="list-group-item list-group-item-action" data-bs-toggle="pill" href="#spine">
-                        <i class="fas fa-user-injured" aria-hidden="true"></i> Боль в спине
-                    </a>
-                    <a class="list-group-item list-group-item-action" data-bs-toggle="pill" href="#head">
-                        <i class="fas fa-head-side-virus" aria-hidden="true"></i> Головная боль
-                    </a>
-                    <a class="list-group-item list-group-item-action" data-bs-toggle="pill" href="#joints">
-                        <i class="fas fa-bone" aria-hidden="true"></i> Суставная боль
-                    </a>
-                    <a class="list-group-item list-group-item-action" data-bs-toggle="pill" href="#neuro">
-                        <i class="fas fa-brain" aria-hidden="true"></i> Нейропатическая боль
-                    </a>
-                    <a class="list-group-item list-group-item-action" data-bs-toggle="pill" href="#chronic">
-                        <i class="fas fa-heartbeat" aria-hidden="true"></i> Хроническая боль
-                    </a>
+<div class="treatments-page-wrapper">
+    <section class="treatments-section">
+        <div class="treatments-container">
+            
+            <!-- Search Function -->
+            <div class="treatments-search">
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Поиск симптомов или типа боли..." id="treatmentSearch">
+                    <i class="fas fa-search search-icon"></i>
                 </div>
             </div>
             
-            <div class="col-lg-9 col-md-8">
-                <div class="tab-content">
-                    <div class="tab-pane fade show active" id="all">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-6 mb-4 fade-in">
-                                <div class="card treatment-card">
-                                    <span class="badge bg-primary">Востребовано</span>
-                                    <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="card-img-top" alt="Эпидуральная блокада - лечение боли в спине и позвоночнике в Москве">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Эпидуральная блокада</h5>
-                                        <p class="card-text">Инъекция с обезболивающим и противовоспалительным препаратом в область позвоночника для снижения боли и воспаления.</p>
+            <!-- Filter Tabs -->
+            <div class="treatments-filter">
+                <div class="filter-tabs">
+                    <button class="filter-btn active" data-filter="all">
+                        <i class="fas fa-th-large"></i>
+                        Все
+                    </button>
+                    <button class="filter-btn" data-filter="spine">
+                        <i class="fas fa-bone"></i>
+                        Боль в спине
+                    </button>
+                    <button class="filter-btn" data-filter="head">
+                        <i class="fas fa-head-side-virus"></i>
+                        Головная боль
+                    </button>
+                    <button class="filter-btn" data-filter="nerve">
+                        <i class="fas fa-brain"></i>
+                        Нервная боль
+                    </button>
+                    <button class="filter-btn" data-filter="joint">
+                        <i class="fas fa-running"></i>
+                        Суставы и мышцы
+                    </button>
+                    <button class="filter-btn" data-filter="recovery">
+                        <i class="fas fa-heartbeat"></i>
+                        Восстановление
+                    </button>
+                </div>
+            </div>
+                            
+            <!-- Pain Points Cards Grid -->
+            <div class="treatments-grid" id="treatmentsGrid">
+                
+                <!-- Грыжа диска -->
+                <div class="treatment-card fade-in" data-category="spine" data-keywords="грыжа диска грыжа межпозвоночного диска протрузия диска боль в спине отдающая в ноги боль в ноге боль в ногах боль в пояснице боль в левой пояснице боль в правой пояснице боль в нижней части спины боль в верхней части спины болит спина болит поясница болит нога болит ноги ноет спина ноет поясница стреляет в ногу тянет ногу немеет нога немеет ноги">
+                    <div class="card-header">
+                        <div class="treatment-icon">💔</div>
                                     </div>
+                    <div class="card-content">
+                        <h3 class="treatment-title">Грыжа диска</h3>
+                        <p class="treatment-description">Структурные проблемы позвоночника, требующие профессиональной оценки.</p>
+                        <div class="treatment-features">
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Грыжа межпозвоночного диска</span>
+                                </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Протрузия диска</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Боль в спине, отдающая в ноги</span>
+                                    </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'contact' %}#contact-form" class="learn-more-btn">
+                            Записаться на консультацию
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
                                 </div>
                             </div>
                             
-                            <div class="col-lg-4 col-md-6 mb-4 fade-in">
-                                <div class="card treatment-card">
-                                    <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="card-img-top" alt="Радиочастотная абляция - лечение хронической боли без операции в Москве">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Радиочастотная абляция</h5>
-                                        <p class="card-text">Применение тепловой энергии для уменьшения болевых сигналов от определенных нервов.</p>
+                <!-- Радикулит / Ишиас -->
+                <div class="treatment-card fade-in" data-category="spine" data-keywords="радикулит ишиас радикулопатия боль по ходу нерва боль в ноге боль в ягодице и ноге боль в ногах боль в пояснице боль в левой пояснице боль в правой пояснице боль в нижней части спины болит спина болит поясница болит нога болит ягодица стреляет в ногу стреляет в спину стреляет в поясницу тянет ногу ноет нога немеет нога">
+                    <div class="card-header">
+                        <div class="treatment-icon">⚡</div>
                                     </div>
-                                </div>
+                    <div class="card-content">
+                        <h3 class="treatment-title">Радикулит (Ишиас)</h3>
+                        <p class="treatment-description">Боль, вызванная сдавлением или воспалением нервных корешков в позвоночнике.</p>
+                        <div class="treatment-features">
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Боль по ходу нерва</span>
                             </div>
-                            
-                            <div class="col-lg-4 col-md-6 mb-4 fade-in">
-                                <div class="card treatment-card">
-                                    <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="card-img-top" alt="Спинальная стимуляция - лечение нейропатической боли в Москве">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Спинальная стимуляция</h5>
-                                        <p class="card-text">Имплантация устройства для снятия боли с помощью мягких импульсов к спинному мозгу.</p>
-                                    </div>
-                                </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Ишиас (боль в ягодице и ноге)</span>
                             </div>
-                            
-                            <div class="col-lg-4 col-md-6 mb-4 fade-in">
-                                <div class="card treatment-card">
-                                    <span class="badge bg-success">Инновация</span>
-                                    <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="card-img-top" alt="Блокада нервов - лечение защемления нерва и радикулита в Москве">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Блокада нервов</h5>
-                                        <p class="card-text">Инъекция анестетика вблизи определенного нерва для блокирования болевых сигналов.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="col-lg-4 col-md-6 mb-4 fade-in">
-                                <div class="card treatment-card">
-                                    <img src="https://images.unsplash.com/photo-1538108149393-fbbd81895907?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="card-img-top" alt="Психотерапия при хронической боли - консультация специалиста в Москве">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Психотерапия</h5>
-                                        <p class="card-text">Поддержка при боли через беседы с врачом для улучшения эмоционального состояния и качества жизни.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="col-lg-4 col-md-6 mb-4 fade-in">
-                                <div class="card treatment-card">
-                                    <img src="https://images.unsplash.com/photo-1530026186672-2cd00ffc50fe?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="card-img-top" alt="Физиотерапия и реабилитация позвоночника в Москве">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Физиотерапия</h5>
-                                        <p class="card-text">Комплекс упражнений и методик для восстановления функций тела и снижения боли.</p>
-                                    </div>
-                                </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Радикулопатия</span>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="tab-pane fade" id="spine">
-                        <div class="treatment-detail fade-in">
-                            <h2>Лечение боли в спине и позвоночнике в Москве</h2>
-                            <p>Боль в спине и пояснице — одно из самых распространенных состояний, с которым пациенты обращаются за медицинской помощью. Наши специалисты (нейрохирург, невролог, реабилитолог) используют комплексный подход к лечению боли в спине, сочетая консервативные и интервенционные методы. Лечение боли в спине включает диагностику позвоночника, лечение грыжи диска, радикулита и защемления нерва.</p>
+                    <div class="card-footer">
+                        <a href="{% url 'contact' %}#contact-form" class="learn-more-btn">
+                            Записаться на консультацию
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                                </div>
+                            </div>
                             
-                            <div class="row mt-4">
-                                <div class="col-md-6">
-                                    <h5>Применяемые методы:</h5>
-                                    <ul>
-                                        <li>Эпидуральные инъекции стероидов</li>
-                                        <li>Радиочастотная абляция фасеточных суставов</li>
-                                        <li>Блокада медиальной ветви нерва</li>
-                                        <li>Физиотерапия и реабилитация</li>
-                                        <li>Интервенционные методы лечения дисков</li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-6">
-                                    <h5>Процесс лечения:</h5>
-                                    <p>После диагностики, включающей МРТ и другие методы для определения точной причины боли, наши специалисты разрабатывают индивидуальный план лечения. Мы поможем вам найти подходящего врача, специализирующегося именно на вашем типе болевого синдрома.</p>
-                                </div>
+                <!-- Стеноз позвоночника -->
+                <div class="treatment-card fade-in" data-category="spine" data-keywords="стеноз позвоночника сужение позвоночного канала спинальный стеноз боль в ноге боль в ногах онемение в ногах боль при ходьбе боль в пояснице боль в нижней части спины болит спина болит нога болит ноги немеет нога немеет ноги не могу ходить больно ходить слабость в ногах">
+                    <div class="card-header">
+                        <div class="treatment-icon">🔒</div>
+                                    </div>
+                    <div class="card-content">
+                        <h3 class="treatment-title">Стеноз позвоночника</h3>
+                        <p class="treatment-description">Сужение позвоночного канала, вызывающее сдавление спинного мозга и нервов.</p>
+                        <div class="treatment-features">
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Сужение позвоночного канала</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Боль при ходьбе</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Онемение в ногах</span>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="tab-pane fade" id="head">
-                        <div class="treatment-detail fade-in">
-                            <h2>Лечение головной боли и мигрени в Москве</h2>
-                            <p>От периодических головных болей до хронической мигрени — наши эксперты (невролог, нейрохирург) предлагают эффективные решения для лечения головной боли различного происхождения и интенсивности. Консультация невролога при головных болях поможет определить причину и разработать индивидуальный план лечения.</p>
+                    <div class="card-footer">
+                        <a href="{% url 'contact' %}#contact-form" class="learn-more-btn">
+                            Записаться на консультацию
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                                </div>
+                            </div>
                             
-                            <div class="row mt-4">
-                                <div class="col-md-6">
-                                    <h5>Применяемые методы:</h5>
-                                    <ul>
-                                        <li>Блокада затылочного нерва</li>
-                                        <li>Локальные инъекции анестетика</li>
-                                        <li>Терапия CGRP-антителами</li>
-                                        <li>Стимуляция блуждающего нерва</li>
-                                        <li>Медикаментозная терапия</li>
-                                    </ul>
+                <!-- Защемление нерва -->
+                <div class="treatment-card fade-in" data-category="spine" data-keywords="защемление нерва компрессия нерва сдавление нерва боль в ноге боль в ногах боль в руке боль в руках боль в пояснице боль в спине боль в шее болит спина болит нога болит рука болит шея немеет рука немеет нога стреляет стреляет в руку стреляет в ногу ноет тянет">
+                    <div class="card-header">
+                        <div class="treatment-icon">🔧</div>
+                                    </div>
+                    <div class="card-content">
+                        <h3 class="treatment-title">Защемление нерва</h3>
+                        <p class="treatment-description">Сдавление нервов, приводящее к боли, онемению и слабости.</p>
+                        <div class="treatment-features">
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Компрессия нерва</span>
                                 </div>
-                                <div class="col-md-6">
-                                    <h5>Процесс лечения:</h5>
-                                    <p>Специалисты нашей группы фокусируются на выявлении триггеров головной боли и разработке комплексного плана лечения. Мы подберём для вас врача, который специализируется на вашем типе головной боли и имеет опыт в современных методах лечения.</p>
-                                </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Сдавление нервных корешков</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Нервная компрессия</span>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="tab-pane fade" id="joints">
-                        <div class="treatment-detail fade-in">
-                            <h2>Лечение суставной боли и боли в шее в Москве</h2>
-                            <p>Суставная боль и боль в шее могут значительно ограничивать подвижность и снижать качество жизни. Врачи нашей группы (невролог, реабилитолог) применяют современные методы лечения для снятия воспаления и уменьшения боли. Лечение боли в шее включает консультацию невролога и реабилитолога для разработки плана лечения.</p>
-                            
-                            <div class="row mt-4">
-                                <div class="col-md-6">
-                                    <h5>Применяемые методы:</h5>
-                                    <ul>
-                                        <li>Внутрисуставные инъекции</li>
-                                        <li>Плазмотерапия (PRP)</li>
-                                        <li>Введение гиалуроновой кислоты</li>
-                                        <li>Блокады периферических нервов</li>
-                                        <li>Физиотерапия для суставов</li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-6">
-                                    <h5>Процесс лечения:</h5>
-                                    <p>Многие специалисты нашей группы используют ультразвуковую навигацию для точного введения препаратов в суставы и окружающие ткани, что повышает эффективность процедур и минимизирует дискомфорт. Мы поможем подобрать врача, имеющего необходимое оборудование и опыт.</p>
-                                </div>
-                            </div>
+                    <div class="card-footer">
+                        <a href="{% url 'contact' %}#contact-form" class="learn-more-btn">
+                            Записаться на консультацию
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
                         </div>
                     </div>
                     
-                    <div class="tab-pane fade" id="neuro">
-                        <div class="treatment-detail fade-in">
-                            <h2>Лечение нейропатической боли и невралгии в Москве</h2>
-                            <p>Нейропатическая боль и невралгия возникают из-за повреждения или дисфункции нервной системы и часто плохо поддаются стандартным методам лечения. Мы сотрудничаем со специалистами (невролог, нейрохирург), имеющими опыт в современных методах лечения этого сложного состояния. Лечение невралгии включает консультацию невролога и разработку индивидуального плана лечения.</p>
-                            
-                            <div class="row mt-4">
-                                <div class="col-md-6">
-                                    <h5>Применяемые методы:</h5>
-                                    <ul>
-                                        <li>Спинальная стимуляция</li>
-                                        <li>Ганглионарные блокады</li>
-                                        <li>Медикаментозная терапия</li>
-                                        <li>Инфузионная терапия</li>
-                                        <li>Лечение с использованием радиочастотной абляции</li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-6">
-                                    <h5>Процесс лечения:</h5>
-                                    <p>Эксперты нашей группы применяют мультимодальный подход, который сочетает медикаментозное лечение с интервенционными методами для достижения максимального облегчения боли. Мы поможем вам найти подходящего специалиста в Москве.</p>
-                                </div>
+                <!-- Шейный остеохондроз -->
+                <div class="treatment-card fade-in" data-category="spine" data-keywords="шейный остеохондроз боль в шее от позвоночника остеохондроз шейного отдела головокружение шейный зажим боль в шее боль в верхней части спины боль в руке боль в руках болит шея болит голова кружится голова головокружение ноет шея тянет шею зажало шею не могу повернуть голову болит рука немеет рука">
+                    <div class="card-header">
+                        <div class="treatment-icon">🦴</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="treatment-title">Шейный остеохондроз / Боль в шее от позвоночника</h3>
+                        <p class="treatment-description">Дегенеративные изменения в шейном отделе позвоночника, вызывающие боль и другие симптомы.</p>
+                        <div class="treatment-features">
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Боль в шее</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Головокружение</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>"Шейный зажим"</span>
                             </div>
                         </div>
                     </div>
+                    <div class="card-footer">
+                        <a href="{% url 'contact' %}#contact-form" class="learn-more-btn">
+                            Записаться на консультацию
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
                     
-                    <div class="tab-pane fade" id="chronic">
-                        <div class="treatment-detail fade-in">
-                            <h2>Комплексное лечение хронической боли в Москве</h2>
-                            <p>Хроническая боль — это сложное состояние, которое требует комплексного подхода с участием нейрохирурга, невролога и реабилитолога. Специалисты нашей группы разрабатывают индивидуальные программы лечения хронической боли, учитывающие все аспекты состояния и ее влияние на качество жизни. Врач по хронической боли поможет разработать оптимальный план лечения для вашего случая.</p>
-                            
-                            <div class="row mt-4">
-                                <div class="col-md-6">
-                                    <h5>Применяемые методы:</h5>
-                                    <ul>
-                                        <li>Когнитивно-поведенческая терапия</li>
-                                        <li>Интервенционные методики</li>
-                                        <li>Оптимизация медикаментозной терапии</li>
-                                        <li>Методики биологической обратной связи</li>
-                                        <li>Мультидисциплинарные программы реабилитации</li>
-                                    </ul>
+                <!-- Нейрохирург: Посттравматические травмы позвоночника -->
+                <div class="treatment-card fade-in" data-category="neurosurgeon" data-keywords="травма позвоночника посттравматические травмы повреждение позвоночника">
+                    <div class="card-header">
+                        <div class="treatment-icon">🚨</div>
                                 </div>
-                                <div class="col-md-6">
-                                    <h5>Процесс лечения:</h5>
-                                    <p>Наша группа понимает, что хроническая боль затрагивает все аспекты жизни пациента. Мы поможем вам найти врачей, чей подход направлен не только на уменьшение болевых ощущений, но и на улучшение функциональности, психологического состояния и качества жизни в целом.</p>
+                    <div class="card-content">
+                        <h3 class="treatment-title">Посттравматические травмы позвоночника</h3>
+                        <p class="treatment-description">Повреждения позвоночника после травм, требующие структурной оценки.</p>
+                        <div class="treatment-features">
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Травмы позвоночника</span>
                                 </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Повреждения после травмы</span>
                             </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Нестабильность позвоночника</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'contact' %}#contact-form" class="learn-more-btn">
+                            Записаться на консультацию
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        </div>
+                    </div>
+                    
+                <!-- Нейрохирург: Опухоли позвоночника/мозга -->
+                <div class="treatment-card fade-in" data-category="neurosurgeon" data-keywords="опухоль позвоночника опухоль мозга новообразование позвоночника новообразование мозга">
+                    <div class="card-header">
+                        <div class="treatment-icon">🔬</div>
+                                </div>
+                    <div class="card-content">
+                        <h3 class="treatment-title">Опухоли позвоночника или мозга</h3>
+                        <p class="treatment-description">Новообразования, затрагивающие позвоночник или головной мозг, требующие профессиональной оценки.</p>
+                        <div class="treatment-features">
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Опухоли позвоночника</span>
+                                </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Опухоли головного мозга</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Новообразования нервной системы</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'contact' %}#contact-form" class="learn-more-btn">
+                            Записаться на консультацию
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        </div>
+                    </div>
+                    
+                <!-- Нейрохирург: Тяжелые неврологические симптомы -->
+                <div class="treatment-card fade-in" data-category="neurosurgeon" data-keywords="онемение слабость потеря функции неврологические симптомы">
+                    <div class="card-header">
+                        <div class="treatment-icon">⚠️</div>
+                                </div>
+                    <div class="card-content">
+                        <h3 class="treatment-title">Тяжелые неврологические симптомы</h3>
+                        <p class="treatment-description">Серьезные неврологические проявления, требующие немедленной профессиональной оценки.</p>
+                        <div class="treatment-features">
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Онемение</span>
+                                </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Слабость в конечностях</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Потеря функции</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'contact' %}#contact-form" class="learn-more-btn">
+                            Записаться на консультацию
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        </div>
+                    </div>
+                    
+                <!-- Невролог: Мигрень и головные боли -->
+                <div class="treatment-card fade-in" data-category="neurologist" data-keywords="мигрень головная боль головные боли кластерные головные боли болит голова сильно болит голова постоянно болит голова пульсирует голова стучит в голове не могу терпеть головную боль тошнит от головной боли">
+                    <div class="card-header">
+                        <div class="treatment-icon">🧠</div>
+                                </div>
+                    <div class="card-content">
+                        <h3 class="treatment-title">Мигрень и головные боли</h3>
+                        <p class="treatment-description">Хронические головные боли, мигрени и связанные с ними состояния, требующие профессиональной диагностики и лечения.</p>
+                        <div class="treatment-features">
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Мигрень</span>
+                                </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Головные боли</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Кластерные головные боли</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'contact' %}#contact-form" class="learn-more-btn">
+                            Записаться на консультацию
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        </div>
+                    </div>
+                    
+                <!-- Невролог: Тензионные головные боли -->
+                <div class="treatment-card fade-in" data-category="neurologist head" data-keywords="тензионные головные боли стрессовые головные боли напряжение в голове давящая головная боль напряжение в мышцах шеи болит голова давит голову сжимает голову обруч на голове напряжение в голове болит шея зажало шею стресс головная боль">
+                    <div class="card-header">
+                        <div class="treatment-icon">😰</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="treatment-title">Тензионные головные боли (стрессовые)</h3>
+                        <p class="treatment-description">Головные боли, вызванные мышечным напряжением и стрессом, требующие профессиональной помощи.</p>
+                        <div class="treatment-features">
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Давящая боль</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Напряжение в мышцах шеи</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Усиление при стрессе</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'contact' %}#contact-form" class="learn-more-btn">
+                            Записаться на консультацию
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                    
+                <!-- Невролог: Нейропатическая боль -->
+                <div class="treatment-card fade-in" data-category="neurologist" data-keywords="нейропатическая боль жжение покалывание стреляющая боль периферическая нейропатия боль в руке боль в ноге боль в руках боль в ногах боль в спине боль в шее жжет покалывает стреляет колет немеет мурашки ползают мурашки по коже болит жгучая боль">
+                    <div class="card-header">
+                        <div class="treatment-icon">⚡</div>
+                                </div>
+                    <div class="card-content">
+                        <h3 class="treatment-title">Нейропатическая боль</h3>
+                        <p class="treatment-description">Боль, вызванная повреждением или дисфункцией нервной системы: жжение, покалывание, стреляющая боль.</p>
+                        <div class="treatment-features">
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Жжение, покалывание</span>
+                                </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Стреляющая боль</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Периферическая нейропатия</span>
                         </div>
                     </div>
                 </div>
+                    <div class="card-footer">
+                        <a href="{% url 'contact' %}#contact-form" class="learn-more-btn">
+                            Записаться на консультацию
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
             </div>
         </div>
-    </div>
-</section>
 
-<!-- Call to Action -->
-<section class="cta-medical">
-    <div class="container-medical">
-        <div class="cta-medical-content">
-            <h2 class="cta-medical-title">Не можете определиться с подходящим методом лечения?</h2>
-            <p class="cta-medical-description">
-                Оставьте заявку, и наш медицинский секретарь организует консультацию со специалистом, который разработает оптимальный план лечения для вашего случая.
-            </p>
-            <a href="{% url 'contact' %}#contact-form" class="btn-medical primary large">
-                <i class="fas fa-calendar-check"></i>
-                <span>Оставить заявку</span>
+                <!-- Невролог: Межреберная невралгия -->
+                <div class="treatment-card fade-in" data-category="neurologist nerve" data-keywords="межреберная невралгия боль в груди боль между рёбрами боль при вдохе невралгия грудной клетки болит грудь болит между ребрами больно дышать больно вдохнуть стреляет в грудь колет в груди боль в боку боль в боку при вдохе">
+                    <div class="card-header">
+                        <div class="treatment-icon">💔</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="treatment-title">Межреберная невралгия (боль в груди)</h3>
+                        <p class="treatment-description">Боль, вызванная раздражением межреберных нервов, часто путаемая с сердечной болью.</p>
+                        <div class="treatment-features">
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Резкая боль между рёбрами</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Усиление при вдохе</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Боль при движении</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'contact' %}#contact-form" class="learn-more-btn">
+                            Записаться на консультацию
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Невролог: Нарушения движения -->
+                <div class="treatment-card fade-in" data-category="neurologist" data-keywords="нарушения движения двигательные расстройства тремор дистония">
+                    <div class="card-header">
+                        <div class="treatment-icon">🚶</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="treatment-title">Нарушения движения</h3>
+                        <p class="treatment-description">Двигательные расстройства, требующие профессиональной диагностики и лечения.</p>
+                        <div class="treatment-features">
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Двигательные расстройства</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Тремор</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Дистония</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'contact' %}#contact-form" class="learn-more-btn">
+                            Записаться на консультацию
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+    </div>
+
+                <!-- Невролог: Рассеянный склероз -->
+                <div class="treatment-card fade-in" data-category="neurologist" data-keywords="рассеянный склероз рс множественный склероз">
+                    <div class="card-header">
+                        <div class="treatment-icon">🔵</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="treatment-title">Рассеянный склероз</h3>
+                        <p class="treatment-description">Хроническое неврологическое расстройство, требующее профессиональной диагностики и лечения.</p>
+                        <div class="treatment-features">
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Рассеянный склероз (РС)</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Демиелинизирующие заболевания</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Хронические неврологические расстройства</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'contact' %}#contact-form" class="learn-more-btn">
+                            Записаться на консультацию
+                            <i class="fas fa-arrow-right"></i>
             </a>
         </div>
+                </div>
+                            
+                <!-- Невролог: Лицевые боли / Тригеминальная невралгия -->
+                <div class="treatment-card fade-in" data-category="neurologist" data-keywords="лицевые боли тригеминальная невралгия невралгия тройничного нерва боль в лице боль в челюсти боль в височно-нижнечелюстном суставе ВНЧС боль в нижней челюсти боль в верхней челюсти боль в области челюсти болит лицо болит челюсть стреляет в лицо стреляет в челюсть колет в лицо не могу жевать больно открыть рот болит зуб но не зуб болит скула">
+                    <div class="card-header">
+                        <div class="treatment-icon">😣</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="treatment-title">Лицевые боли (Тригеминальная невралгия)</h3>
+                        <p class="treatment-description">Сильная боль в области лица, вызванная поражением тройничного нерва.</p>
+                        <div class="treatment-features">
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Тригеминальная невралгия</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Невралгия тройничного нерва</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Боль в области лица</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'contact' %}#contact-form" class="learn-more-btn">
+                            Записаться на консультацию
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                </div>
+            </div>
+
+                <!-- Невролог: Судороги / Эпилепсия -->
+                <div class="treatment-card fade-in" data-category="neurologist" data-keywords="судороги эпилепсия припадки приступы судорожные приступы">
+                    <div class="card-header">
+                        <div class="treatment-icon">⚡</div>
+    </div>
+                    <div class="card-content">
+                        <h3 class="treatment-title">Судороги / Эпилепсия</h3>
+                        <p class="treatment-description">Судорожные расстройства и эпилепсия, требующие профессиональной диагностики и лечения.</p>
+                        <div class="treatment-features">
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Эпилепсия</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Судорожные приступы</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Припадки</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'contact' %}#contact-form" class="learn-more-btn">
+                            Записаться на консультацию
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+</div>
+
+                <!-- Невролог: Постинсультные симптомы -->
+                <div class="treatment-card fade-in" data-category="neurologist" data-keywords="после инсульта постинсультные симптомы последствия инсульта">
+                    <div class="card-header">
+                        <div class="treatment-icon">🔄</div>
+        </div>
+                    <div class="card-content">
+                        <h3 class="treatment-title">Постинсультные симптомы</h3>
+                        <p class="treatment-description">Симптомы и последствия после инсульта, требующие профессионального наблюдения и лечения.</p>
+                        <div class="treatment-features">
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Последствия инсульта</span>
+        </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Постинсультные нарушения</span>
+        </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Восстановление после инсульта</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'contact' %}#contact-form" class="learn-more-btn">
+                            Записаться на консультацию
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+    </div>
+</div>
+
+                <!-- Реабилитолог: Боль в спине/шее от мышц и суставов -->
+                <div class="treatment-card fade-in" data-category="rehabilitation" data-keywords="боль в спине боль в шее мышечная боль суставная боль боль в пояснице боль в левой пояснице боль в правой пояснице боль в нижней части спины боль в верхней части спины боль в руке боль в руках болит спина болит шея болит поясница ноет спина ноет шея тянет спину тянет шею зажало спину зажало шею не могу повернуться не могу наклониться скованность в спине скованность в шее">
+                    <div class="card-header">
+                        <div class="treatment-icon">🏋️</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="treatment-title">Боль в спине и шее</h3>
+                        <p class="treatment-description">Боль в спине и шее, вызванная мышечными или суставными проблемами, требующая профессиональной помощи.</p>
+                        <div class="treatment-features">
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Боль в спине от мышц или суставов</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Боль в шее</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Мышечная боль</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'contact' %}#contact-form" class="learn-more-btn">
+                            Записаться на консультацию
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                            
+                <!-- Реабилитолог: Боль, связанная с осанкой -->
+                <div class="treatment-card fade-in" data-category="rehabilitation" data-keywords="боль осанка неправильная осанка боль из-за осанки болит спина из-за осанки сутулость кривая спина неправильная осанка болит спина когда сижу болит спина когда стою ноет спина от осанки">
+                    <div class="card-header">
+                        <div class="treatment-icon">📐</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="treatment-title">Боль, связанная с осанкой</h3>
+                        <p class="treatment-description">Боль, вызванная неправильной осанкой и нарушениями опорно-двигательного аппарата.</p>
+                        <div class="treatment-features">
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Боль из-за неправильной осанки</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Нарушения осанки</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Постуральные проблемы</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'contact' %}#contact-form" class="learn-more-btn">
+                            Записаться на консультацию
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                            
+                <!-- Реабилитолог: Реабилитация после операции/травмы -->
+                <div class="treatment-card fade-in" data-category="rehabilitation" data-keywords="реабилитация после операции реабилитация после травмы восстановление после операции восстановление после травмы боль в руке боль в ноге боль в суставе боль в спине боль в шее боль в плече боль в колене после операции после травмы восстановление болит после операции не могу двигаться после операции не могу ходить после травмы нужно восстановиться">
+                    <div class="card-header">
+                        <div class="treatment-icon">🔄</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="treatment-title">Реабилитация после операции или травмы</h3>
+                        <p class="treatment-description">Восстановление функции и движения после операций и травм с профессиональной помощью.</p>
+                        <div class="treatment-features">
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Реабилитация после операции</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Реабилитация после травмы</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Восстановление функции</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'contact' %}#contact-form" class="learn-more-btn">
+                            Записаться на консультацию
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                            
+                <!-- Реабилитолог: Суставная боль -->
+                <div class="treatment-card fade-in" data-category="rehabilitation" data-keywords="суставная боль боль в суставах боль в суставе боль в плече боль в колене боль в бедре боль в ноге боль в ногах боль в руке боль в руках боль в локте боль в запястье боль в лодыжке боль в стопе боль в стопах болит сустав болит плечо болит колено болит рука болит нога ноет сустав ноет колено ноет плечо хрустит сустав хрустит колено не могу согнуть не могу разогнуть скованность в суставе не могу поднять руку не могу согнуть ногу">
+                    <div class="card-header">
+                        <div class="treatment-icon">🦴</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="treatment-title">Суставная боль</h3>
+                        <p class="treatment-description">Боль в суставах, требующая реабилитационного подхода для восстановления подвижности.</p>
+                        <div class="treatment-features">
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Боль в плечевом суставе</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Боль в коленном суставе</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Боль в тазобедренном суставе</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'contact' %}#contact-form" class="learn-more-btn">
+                            Записаться на консультацию
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                            
+                <!-- Реабилитолог: Артрит / Артроз суставов -->
+                <div class="treatment-card fade-in" data-category="rehabilitation joint" data-keywords="артрит артроз суставов артрит суставов артроз суставов скованность хруст ограничение движений боль в суставе боль в суставах боль в руке боль в локте боль в запястье боль в плече боль в колене боль в бедре боль в ноге боль в лодыжке болит сустав болит колено болит плечо хрустит сустав хрустит колено скованность утром не могу согнуть не могу разогнуть не могу двигаться утром скованность после сна">
+                    <div class="card-header">
+                        <div class="treatment-icon">🦴</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="treatment-title">Артрит / Артроз суставов</h3>
+                        <p class="treatment-description">Воспалительные и дегенеративные заболевания суставов, требующие профессиональной диагностики и лечения.</p>
+                        <div class="treatment-features">
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Скованность</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Хруст</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Ограничение движений</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'contact' %}#contact-form" class="learn-more-btn">
+                            Записаться на консультацию
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                            
+                <!-- Реабилитолог: Плечевой периартрит -->
+                <div class="treatment-card fade-in" data-category="rehabilitation joint" data-keywords="плечевой периартрит замороженное плечо боль в плече невозможно поднять руку боль в плече ночью боль в руке боль в руках боль в плечевом суставе боль в плечах болит плечо болит рука не могу поднять руку не могу завести руку за спину больно спать на боку ночью болит плечо стреляет в плечо ноет плечо замороженное плечо не двигается плечо">
+                    <div class="card-header">
+                        <div class="treatment-icon">🤲</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="treatment-title">Плечевой периартрит ("замороженное плечо")</h3>
+                        <p class="treatment-description">Воспаление тканей вокруг плечевого сустава, приводящее к сильной боли и ограничению движений.</p>
+                        <div class="treatment-features">
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Резкая боль в плече</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Невозможность поднять руку</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Боль ночью</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'contact' %}#contact-form" class="learn-more-btn">
+                            Записаться на консультацию
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                            
+                <!-- Реабилитолог: Коленный и тазобедренный остеоартроз -->
+                <div class="treatment-card fade-in" data-category="rehabilitation joint" data-keywords="коленный остеоартроз тазобедренный остеоартроз артроз колена артроз тазобедренного сустава болит колено болит тазобедренный сустав боль в ноге боль в ногах боль в бедре боль в колене боль в коленях боль в тазобедренном суставе боль в суставе боль в суставах болит нога болит бедро ноет колено ноет бедро хрустит колено больно ходить больно вставать больно садиться не могу ходить по лестнице не могу присесть">
+                    <div class="card-header">
+                        <div class="treatment-icon">🦵</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="treatment-title">Коленный и тазобедренный остеоартроз</h3>
+                        <p class="treatment-description">Дегенеративные изменения в коленных и тазобедренных суставах, требующие комплексного лечения.</p>
+                        <div class="treatment-features">
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Артроз коленного сустава</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Артроз тазобедренного сустава</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Боль и ограничение движений</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'contact' %}#contact-form" class="learn-more-btn">
+                            Записаться на консультацию
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                            
+                <!-- Реабилитолог: Спортивные травмы -->
+                <div class="treatment-card fade-in" data-category="rehabilitation" data-keywords="спортивные травмы травма при спорте спортивная травма боль в руке боль в ноге боль в суставе боль в суставах боль в плече боль в колене боль в локте боль в запястье боль в лодыжке болит после тренировки болит после спорта травма на тренировке ушиб растяжение не могу тренироваться болит рука болит нога болит плечо болит колено">
+                    <div class="card-header">
+                        <div class="treatment-icon">⚽</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="treatment-title">Спортивные травмы</h3>
+                        <p class="treatment-description">Травмы, полученные во время занятий спортом, требующие реабилитации и восстановления.</p>
+                        <div class="treatment-features">
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Спортивные травмы</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Травмы при занятиях спортом</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Восстановление после спортивных травм</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'contact' %}#contact-form" class="learn-more-btn">
+                            Записаться на консультацию
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                            
+                <!-- Реабилитолог: Мышечные спазмы и хроническое напряжение -->
+                <div class="treatment-card fade-in" data-category="rehabilitation" data-keywords="мышечные спазмы хроническое напряжение мышечное напряжение спазмы мышц боль в спине боль в шее боль в руке боль в ноге боль в плече боль в пояснице болит спина болит шея сводит мышцы спазм мышц зажало мышцы напряжены мышцы ноет спина ноет шея постоянно болит постоянно ноет не могу расслабиться">
+                    <div class="card-header">
+                        <div class="treatment-icon">💪</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="treatment-title">Мышечные спазмы и хроническое напряжение</h3>
+                        <p class="treatment-description">Постоянное мышечное напряжение и спазмы, требующие профессиональной помощи.</p>
+                        <div class="treatment-features">
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Мышечные спазмы</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Хроническое мышечное напряжение</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Миофасциальный болевой синдром</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'contact' %}#contact-form" class="learn-more-btn">
+                            Записаться на консультацию
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                            
+                <!-- Реабилитолог: Мышечно-тонический синдром -->
+                <div class="treatment-card fade-in" data-category="rehabilitation" data-keywords="мышечно-тонический синдром мышечные блоки мышцы в спазме переклинило мышечный блок боль в спине боль в шее боль в руке боль в ноге боль в плече боль в пояснице болит спина болит шея переклинило заклинило зажало мышцы блок в мышцах не могу двигаться скованность зажатость мышцы в тонусе постоянно напряжены мышцы">
+                    <div class="card-header">
+                        <div class="treatment-icon">🔒</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="treatment-title">Мышечно-тонический синдром (мышечные блоки)</h3>
+                        <p class="treatment-description">Хроническое напряжение мышц, приводящее к образованию болезненных мышечных блоков и ограничению движений.</p>
+                        <div class="treatment-features">
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Мышечные блоки</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Мышцы в спазме</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Хроническое мышечное напряжение</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'contact' %}#contact-form" class="learn-more-btn">
+                            Записаться на консультацию
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                            
+                <!-- Реабилитолог: Восстановление после инсульта/неврологических событий -->
+                <div class="treatment-card fade-in" data-category="rehabilitation neurologist" data-keywords="реабилитация после инсульта восстановление после инсульта восстановление после неврологических событий">
+                    <div class="card-header">
+                        <div class="treatment-icon">🔄</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="treatment-title">Восстановление после инсульта или неврологических событий</h3>
+                        <p class="treatment-description">Реабилитационная программа для восстановления движения и функции после инсульта и других неврологических событий.</p>
+                        <div class="treatment-features">
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Реабилитация после инсульта</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Восстановление движения</span>
+                            </div>
+                            <div class="feature">
+                                <span class="tick">✓</span>
+                                <span>Восстановление после неврологических событий</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'contact' %}#contact-form" class="learn-more-btn">
+                            Записаться на консультацию
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+    </div>
+
+    </div>
+
+            <!-- Call to Action -->
+            <div class="treatments-cta">
+                <div class="cta-content">
+                    <h3>Нашли свою боль?</h3>
+                    <p>Запишитесь на консультацию, чтобы получить профессиональную помощь и найти решение для вашей проблемы.</p>
+                    <div class="cta-buttons">
+                        <a href="{% url 'contact' %}#contact-form" class="treat-btn-primary">
+                            <i class="fas fa-calendar-check"></i>
+                            Записаться на консультацию
+                        </a>
+                    </div>
+                </div>
+            </div>
+
     </div>
 </section>
-{% endblock content %}
+</div>
 
-{% block extra_js %}
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Initialize fade-in animations
-        const fadeObserver = new IntersectionObserver((entries) => {
+(function() {
+    'use strict';
+    
+    if (!document.querySelector('.treatments-page-wrapper')) {
+        return;
+    }
+    
+    
+    // Initialize scroll animations
+    function initScrollAnimations() {
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('appear');
-                    fadeObserver.unobserve(entry.target);
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.fade-in').forEach(el => {
-            fadeObserver.observe(el);
+        }, observerOptions);
+        
+        document.querySelectorAll('.treatments-page-wrapper .fade-in').forEach(el => {
+            observer.observe(el);
         });
-
-        // Initialize Bootstrap tabs
-        const triggerTabList = [].slice.call(document.querySelectorAll('.treatment-tabs a'));
-        triggerTabList.forEach(function(triggerEl) {
-            const tabTrigger = new bootstrap.Tab(triggerEl);
-            triggerEl.addEventListener('click', function(event) {
-                event.preventDefault();
-                tabTrigger.show();
+    }
+    
+    // Filter functionality
+    function initTreatmentFilter() {
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const treatmentCards = document.querySelectorAll('.treatments-page-wrapper .treatment-card');
+        
+        // Map filter button values to card categories
+        const filterMap = {
+            'all': ['spine', 'neurosurgeon', 'neurologist', 'rehabilitation'],
+            'spine': ['spine'],
+            'head': ['neurologist'],
+            'nerve': ['neurologist', 'neurosurgeon'],
+            'joint': ['rehabilitation'],
+            'recovery': ['rehabilitation']
+        };
+        
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Update active state
+                filterButtons.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const filterValue = this.getAttribute('data-filter');
+                const allowedCategories = filterMap[filterValue] || [];
+                
+                // Filter cards
+                treatmentCards.forEach(card => {
+                    const cardCategories = (card.getAttribute('data-category') || '').split(' ');
+                    const matchesFilter = filterValue === 'all' || 
+                        cardCategories.some(cat => allowedCategories.includes(cat));
+                    
+                    if (matchesFilter) {
+                        card.style.display = '';
+                        card.style.opacity = '1';
+                        card.style.transform = 'scale(1)';
+                        card.style.pointerEvents = 'auto';
+                        card.classList.remove('hiding');
+                    } else {
+                        card.style.display = 'none';
+                        card.style.pointerEvents = 'none';
+                        card.classList.add('hiding');
+                    }
+                });
             });
         });
-    });
+    }
+    
+    // Search functionality
+    function initTreatmentSearch() {
+        const searchInput = document.getElementById('treatmentSearch');
+        const treatmentCards = document.querySelectorAll('.treatments-page-wrapper .treatment-card');
+        
+        if (!searchInput) return;
+        
+        const searchIndex = Array.from(treatmentCards).map(card => {
+            const titleEl = card.querySelector('.treatment-title');
+            const descEl = card.querySelector('.treatment-description');
+            const keywordsAttr = (card.getAttribute('data-keywords') || '').toLowerCase();
+            
+            const title = (titleEl ? titleEl.textContent : '').toLowerCase();
+            const description = (descEl ? descEl.textContent : '').toLowerCase();
+            const combined = [title, description, keywordsAttr].join(' ');
+            
+            return { card, combined };
+        });
+        
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase().trim();
+            
+            // Get active filter
+            const activeFilter = document.querySelector('.filter-btn.active');
+            const filterValue = activeFilter ? activeFilter.getAttribute('data-filter') : 'all';
+            const filterMap = {
+                'all': ['spine', 'neurosurgeon', 'neurologist', 'rehabilitation'],
+                'spine': ['spine'],
+                'head': ['neurologist'],
+                'nerve': ['neurologist', 'neurosurgeon'],
+                'joint': ['rehabilitation'],
+                'recovery': ['rehabilitation']
+            };
+            const allowedCategories = filterMap[filterValue] || [];
+            
+            searchIndex.forEach(({ card, combined }) => {
+                const cardCategories = (card.getAttribute('data-category') || '').split(' ');
+                const matchesFilter = filterValue === 'all' || 
+                    cardCategories.some(cat => allowedCategories.includes(cat));
+                const matchesSearch = searchTerm === '' || combined.includes(searchTerm);
+                
+                if (matchesSearch && matchesFilter) {
+                    if (card.style.display === 'none') card.style.display = '';
+                    card.style.opacity = '1';
+                    card.style.transform = 'scale(1)';
+                    card.style.pointerEvents = 'auto';
+                    card.classList.remove('hiding');
+                } else {
+                    if (card.style.display !== 'none') card.style.display = 'none';
+                    card.style.pointerEvents = 'none';
+                }
+            });
+            
+        });
+    }
+    
+    // Initialize all functionality
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+            initScrollAnimations();
+            initTreatmentFilter();
+            initTreatmentSearch();
+        });
+    } else {
+        initScrollAnimations();
+        initTreatmentFilter();
+        initTreatmentSearch();
+    }
+})();
 </script>
-{% endblock extra_js %}
+{% endblock content %}
