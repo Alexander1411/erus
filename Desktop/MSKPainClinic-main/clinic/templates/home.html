@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Эрус Центр лечения боли | Клиника Лечения Боли Москва{% endblock %}
 
@@ -2658,12 +2659,35 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
   }
 
   .hero-medical-content {
     max-width: 700px;
-    margin: 0 auto;
-    text-align: center;
+    text-align: left;
+  }
+
+  .hero-medical-image {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    z-index: 1;
+  }
+
+  .hero-medical-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 20px;
+    transition: transform 0.3s ease;
+  }
+
+  .hero-medical-image:hover img {
+    transform: scale(1.02);
   }
 
   .hero-medical-title {
@@ -3592,6 +3616,19 @@
       padding: 60px 0 70px;
     }
 
+    .hero-medical-container {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .hero-medical-content {
+      text-align: center;
+    }
+
+    .hero-medical-image {
+      order: -1;
+    }
+
     .hero-circle {
       opacity: 0.5;
     }
@@ -3829,6 +3866,9 @@
                     <span>Записаться</span>
                 </a>
             </div>
+        </div>
+        <div class="hero-medical-image">
+            <img src="{% static 'img/street.png' %}" alt="Наша клиника - Эрус Центр лечения боли" loading="lazy">
         </div>
     </div>
 </section>

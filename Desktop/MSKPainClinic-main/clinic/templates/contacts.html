@@ -5,120 +5,6 @@
 
 {% block extra_css %}
 <style>
-    /* Contact Methods Section */
-    .contact-methods {
-        padding: 80px 0;
-        background: var(--bg-white);
-    }
-
-    .contact-methods__container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-    }
-
-    .contact-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 30px;
-    }
-
-    .contact-card {
-        background: var(--bg-white);
-        padding: 40px 30px;
-        border-radius: 16px;
-        text-align: center;
-        transition: var(--transition);
-        border: 1px solid var(--border-color);
-        position: relative;
-        overflow: hidden;
-    }
-
-    .contact-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: linear-gradient(90deg, #59A1CE, #4A8FB8);
-        transform: scaleX(0);
-        transition: var(--transition);
-    }
-
-    .contact-card:hover {
-        transform: translateY(-8px);
-        box-shadow: var(--shadow-lg);
-        border-color: #6BB0DD;
-    }
-
-    .contact-card:hover::before {
-        transform: scaleX(1);
-    }
-
-    .contact-card__icon {
-        width: 80px;
-        height: 80px;
-        background: linear-gradient(135deg, #59A1CE, #4A8FB8);
-        border-radius: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto 24px;
-        font-size: 32px;
-        color: white;
-        transition: var(--transition);
-    }
-
-    .contact-card:hover .contact-card__icon {
-        transform: scale(1.1);
-    }
-
-    .contact-card__title {
-        font-size: 20px;
-        font-weight: 600;
-        color: var(--text-dark);
-        margin-bottom: 12px;
-    }
-
-    .contact-card__description {
-        font-size: 16px;
-        color: var(--text-muted);
-        margin-bottom: 24px;
-        line-height: 1.5;
-    }
-
-    .contact-card__action {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        color: #59A1CE;
-        text-decoration: none;
-        font-weight: 600;
-        font-size: 16px;
-        transition: var(--transition);
-        position: relative;
-    }
-
-    .contact-card__action::after {
-        content: '';
-        position: absolute;
-        bottom: -4px;
-        left: 0;
-        width: 0;
-        height: 2px;
-        background: #59A1CE;
-        transition: var(--transition);
-    }
-
-    .contact-card__action:hover {
-        color: #4A8FB8;
-    }
-
-    .contact-card__action:hover::after {
-        width: calc(100% - 20px);
-    }
-
     /* Clinic Location Section */
     .clinic-location {
         padding: 80px 0;
@@ -543,11 +429,6 @@
 
     /* Responsive Styles */
     @media (max-width: 992px) {
-        .contact-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-
         .location-grid {
             grid-template-columns: 1fr;
             gap: 40px;
@@ -566,7 +447,6 @@
     }
 
     @media (max-width: 768px) {
-        .contact-methods,
         .clinic-location,
         .how-we-work-section,
         .faq-section {
@@ -577,17 +457,6 @@
             grid-template-columns: 1fr;
             max-width: 400px;
             margin: 0 auto;
-        }
-
-        .contact-grid {
-            grid-template-columns: 1fr;
-            max-width: 400px;
-            margin: 0 auto;
-            gap: 20px;
-        }
-
-        .contact-card {
-            padding: 32px 24px;
         }
 
         .location-actions {
@@ -627,66 +496,11 @@
 {% endblock extra_css %}
 
 {% block content %}
-<!-- Contact Methods Section -->
-<section class="contact-methods">
-    <div class="contact-methods__container">
-        <div class="contact-grid">
-            <div class="contact-card">
-                <div class="contact-card__icon">
-                    <i class="fas fa-calendar-check"></i>
-                </div>
-                <h3 class="contact-card__title">Онлайн запись</h3>
-                <p class="contact-card__description">Записаться на консультацию</p>
-                <a href="{% url 'contact' %}" class="contact-card__action">
-                    Записаться
-                    <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-            
-            <div class="contact-card">
-                <div class="contact-card__icon">
-                    <i class="fas fa-phone"></i>
-                </div>
-                <h3 class="contact-card__title">Телефон</h3>
-                <p class="contact-card__description">Свяжитесь с нами по телефону</p>
-                <a href="tel:+7XXXXXXXXXX" class="contact-card__action">
-                    Позвонить
-                    <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-            
-            <div class="contact-card">
-                <div class="contact-card__icon">
-                    <i class="fas fa-envelope"></i>
-                </div>
-                <h3 class="contact-card__title">Email</h3>
-                <p class="contact-card__description">Напишите нам на почту</p>
-                <a href="mailto:info@erusmedical.ru" class="contact-card__action">
-                    info@erusmedical.ru
-                    <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-            
-            <div class="contact-card">
-                <div class="contact-card__icon">
-                    <i class="fas fa-map-marker-alt"></i>
-                </div>
-                <h3 class="contact-card__title">Адрес</h3>
-                <p class="contact-card__description">Наш офис в Москве</p>
-                <a href="https://www.google.com/maps/search/3-я+Тверская-Ямская+улица+44,+Москва" target="_blank" rel="noopener" class="contact-card__action">
-                    Открыть карту
-                    <i class="fas fa-external-link-alt"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
-
 <!-- Clinic Location Section -->
 <section class="clinic-location">
     <div class="clinic-location__container">
         <div class="section-header">
-            <h2 class="section-header__title">Наш офис</h2>
+            <h2 class="section-header__title">Наша клиника</h2>
             <p class="section-header__subtitle">Современная клиника лечения боли в Москве</p>
         </div>
         
@@ -799,14 +613,14 @@
             
             <div class="work-step-card">
                 <i class="fas fa-user-md"></i>
-                <h4>Шаг 3: Подбор специалиста</h4>
-                <p>Мы подберем оптимального специалиста по лечению вашего типа боли</p>
+                <h4>Шаг 3: Первичный прием и оценка</h4>
+                <p>Проведем первичный прием, комплексную оценку состояния и определим план дальнейших действий</p>
             </div>
             
             <div class="work-step-card">
                 <i class="fas fa-calendar-check"></i>
-                <h4>Шаг 4: Запись на прием</h4>
-                <p>Организуем запись к выбранному специалисту в удобное для вас время</p>
+                <h4>Шаг 4: План лечения и контроль</h4>
+                <p>Разработаем индивидуальный план лечения хронической боли и проведем необходимые контрольные осмотры</p>
             </div>
         </div>
     </div>
