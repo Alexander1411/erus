@@ -40,7 +40,7 @@ if SECRET_KEY.startswith('django-insecure-'):
 DEBUG = os.getenv('DEBUG', 'True').lower() in ('true', '1', 'yes')
 
 # Get ALLOWED_HOSTS from environment variable, with fallback
-ALLOWED_HOSTS_STR = os.getenv('ALLOWED_HOSTS', '127.0.0.1,localhost,erus.onrender.com,*.onrender.com')
+ALLOWED_HOSTS_STR = os.getenv('ALLOWED_HOSTS', '127.0.0.1,localhost,erus.onrender.com')
 ALLOWED_HOSTS = [host.strip() for host in ALLOWED_HOSTS_STR.split(',') if host.strip()]
 
 
