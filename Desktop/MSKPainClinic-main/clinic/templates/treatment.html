@@ -291,35 +291,37 @@
 
 .filter-tabs {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 0.75rem;
     width: 100%;
     max-width: 700px;
 }
 
 .filter-btn {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
-    padding: 1.25rem 1rem;
+    padding: 0.75rem 1rem;
     border: 2px solid #e2e8f0;
     background: #ffffff;
     color: #64748b;
-    border-radius: 16px;
+    border-radius: 12px;
     font-weight: 600;
-    font-size: 0.9375rem;
+    font-size: 0.875rem;
     transition: all 0.3s ease;
     cursor: pointer;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-    min-height: 90px;
-    justify-content: center;
+    min-height: auto;
+    height: auto;
 }
 
 .filter-btn i {
-    font-size: 1.5rem;
+    font-size: 1.125rem;
     transition: all 0.3s ease;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0;
+    flex-shrink: 0;
 }
 
 .filter-btn:hover {
@@ -580,6 +582,19 @@
     .treat-section-title { font-size: 1.75rem; }
     .treatments-cta { padding: 2rem 1.5rem; }
     .cta-content h3 { font-size: 1.5rem; }
+    .filter-tabs {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+        max-width: 100%;
+    }
+    .filter-btn {
+        padding: 0.625rem 0.5rem;
+        font-size: 0.8125rem;
+        white-space: nowrap;
+    }
+    .filter-btn i {
+        font-size: 1rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -587,7 +602,20 @@
     .card-header { padding: 1.5rem 1.5rem 1rem; }
     .card-content { padding: 0 1.5rem; }
     .card-footer { padding: 1rem 1.5rem 1.5rem; }
+    .filter-tabs {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
     }
+    .filter-btn {
+        padding: 0.75rem 1rem;
+        font-size: 0.875rem;
+        justify-content: flex-start;
+    }
+    .filter-btn i {
+        font-size: 1.125rem;
+    }
+}
+
 </style>
 {% endblock extra_css %}
 
